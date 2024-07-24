@@ -1,3 +1,169 @@
+
+/* Styles par défaut */
+@font-face {
+    font-family: 'Mono';
+    src: url('/public/fonts/DM_Mono/DMMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'serifDisplay';
+    src: url('/public/fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf') format('truetype');
+}
+
+
+/* Variables */
+:root {
+    --main-color: #444444;
+}
+/* -------------------------------------------------------------------- */
+
+/* Raccourcis */
+.FlexCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.FlexRow {
+    display: flex;
+    flex-direction: row;
+}
+.FlexAround {
+    display: flex;
+    justify-content: space-around;
+}
+
+.AlignCenter {
+    align-content: center;
+}
+
+.JustifyCenter {
+    justify-content: center;
+}
+
+/* -------------------------------------------------------------------- */
+
+
+/* Utiliser pour tous */
 body {
-    background-color: skyblue;
+    background-color: #F6EDD2;
+    height: 900px;
+    font-family: 'Mono';
+    font-size: 18px;
+    color: var(--main-color);
+}
+
+h3 {
+    font-size: 24px;
+    font-family: 'Mono';
+    font-style: normal;
+    font-weight: normal;
+    color: var(--main-color);
+}
+
+
+/* -------------------------------------------------------------------- */
+
+/* Version mobile */
+@media (max-width: 767px) {
+    article {
+        padding: 30px;
+    }
+
+    /* START HEADER */
+    header {
+        height: 93px;
+        width: 100%;
+        background-color: #3b3010;
+    }
+    /* END HEADER */
+    /* START FOOTER */
+    footer {
+        height: 945px;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .containerFooterOne, 
+    .containerFootertwo, 
+    .containerFooterthree, 
+    .containerFooterfour, 
+    .containerFooterfive, 
+    .containerFootersix, 
+    .containerFooterseven {
+        height: 80px;
+        border-top: 1px solid #b6b5b9;
+        background-color: rgb(165, 84, 84);
+    }
+
+    .containerFooterOne {
+        height: 250px;
+
+    }
+    .containerFootersix, .containerFooterseven{
+        height: 150px;
+
+    }
+    /* END FOOTER */
+}
+/* -------------------------------------------------------------------- */
+
+/* Version tablette */
+@media (min-width: 768px) and (max-width: 1023px) {
+    header {
+        height: 120px;
+        background-color: #123a4a;
+    }
+
+    /* START FOOTER */
+    footer {
+        height: 500px;
+        width: 100%;
+        background-color: rgb(240, 240, 240);
+    }
+
+    .containerFooterOne, 
+    .containerFootertwo, 
+    .containerFooterthree, 
+    .containerFooterfour, 
+    .containerFooterfive, 
+    .containerFootersix, 
+    .containerFooterseven {
+        height: 100px;
+        background-color: rgb(74, 2, 2);
+    }
+
+    .containerFooterOne {
+        height: 150px;
+    }
+}
+
+/* -------------------------------------------------------------------- */
+
+/* Version desktop */
+@media (min-width: 1024px) {
+    header {
+        height: 150px;
+        background-color: #5c4b07;
+    }
+
+    /* START FOOTER */
+    footer {
+        height: 300px;
+        background-color: rgb(225, 225, 225);
+    }
+
+    .containerFooterOne, 
+    .containerFootertwo, 
+    .containerFooterthree, 
+    .containerFooterfour, 
+    .containerFooterfive, 
+    .containerFootersix, 
+    .containerFooterseven {
+        height: 50px;
+        background-color: rgb(159, 27, 27);
+    }
+
+    .containerFooterOne {
+        height: 100px;
+    }
 }
