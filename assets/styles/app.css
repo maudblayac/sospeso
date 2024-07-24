@@ -2,22 +2,21 @@
 /* Styles par défaut */
 @font-face {
     font-family: 'Mono';
-    src: url('/public/fonts/DM_Mono/DMMono-Regular.ttf') format('truetype');
+    src: url('public/fonts/DM_Mono/DMMono-Regular.ttf');
 }
 
 @font-face {
     font-family: 'serifDisplay';
-    src: url('/public/fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf') format('truetype');
+    src: url('public/fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf');
 }
 
 
-/* Variables */
+/* ---------------------------------Variables----------------------------------- */
+
 :root {
     --main-color: #444444;
 }
-/* -------------------------------------------------------------------- */
-
-/* Raccourcis */
+/* ---------------------------------Raccourcis----------------------------------- */
 .FlexCol {
     display: flex;
     flex-direction: column;
@@ -29,31 +28,32 @@
 }
 .FlexAround {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .AlignCenter {
-    align-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .JustifyCenter {
+    display: flex;
     justify-content: center;
 }
 
-/* -------------------------------------------------------------------- */
-
-
-/* Utiliser pour tous */
+/* ---------------------------- Utiliser pour tous ----------------------------- */
 body {
     background-color: #F6EDD2;
-    height: 900px;
+    margin:0;
+    /* height: 900px; */
     font-family: 'Mono';
-    font-size: 18px;
+    font-size: 16px;
     color: var(--main-color);
 }
 
 h3 {
     font-size: 24px;
+    letter-spacing: 0.5px;
     font-family: 'Mono';
     font-style: normal;
     font-weight: normal;
@@ -65,21 +65,41 @@ h3 {
 
 /* Version mobile */
 @media (max-width: 767px) {
-    article {
-        padding: 30px;
+
+   footer section {
+        padding: 10px;
+        box-sizing: border-box;
     }
 
-    /* START HEADER */
+    /********************************* START HEADER */
     header {
-        height: 93px;
+        height: 110px;
+        display: flex;
+        align-items: center;
+
+
+    }
+    nav{
         width: 100%;
-        background-color: #3b3010;
+        padding: 5px;
+       
+    }
+    nav article{
+        display: flex;
+        width: 125px;
+        justify-content: space-around;
+    }
+    .containerNavOne, .containerNavTwo, .containerNavThree{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
     /* END HEADER */
-    /* START FOOTER */
+    /********************** START FOOTER */
     footer {
-        height: 945px;
+        /* height: 945px; */
         width: 100%;
+        margin: 0%;
         background-color: rgb(255, 255, 255);
     }
 
@@ -92,7 +112,8 @@ h3 {
     .containerFooterseven {
         height: 80px;
         border-top: 1px solid #b6b5b9;
-        background-color: rgb(165, 84, 84);
+        background-color: rgb(255, 255, 255);
+        
     }
 
     .containerFooterOne {
@@ -100,7 +121,9 @@ h3 {
 
     }
     .containerFootersix, .containerFooterseven{
-        height: 150px;
+        height: 200px;
+        background-color: #F6EDD2;
+
 
     }
     /* END FOOTER */
