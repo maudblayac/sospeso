@@ -2,12 +2,12 @@
 /* Styles par défaut */
 @font-face {
     font-family: 'Mono';
-    src: url('public/fonts/DM_Mono/DMMono-Regular.ttf');
+    src: url('../fonts/DM_Mono/DMMono-Regular.ttf');
 }
 
 @font-face {
     font-family: 'serifDisplay';
-    src: url('public/fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf');
+    src: url('../fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf');
 }
 
 
