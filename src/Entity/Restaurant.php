@@ -33,10 +33,6 @@ class Restaurant
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'restaurants')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Tag $tags = null;
-
     /**
      * @var Collection<int, Product>
      */
@@ -53,10 +49,20 @@ class Restaurant
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'Tag')]
+    private Collection $tags;
+
+    #[ORM\Column(length: 100)]
+    private ?string $title = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,17 +142,7 @@ class Restaurant
         return $this;
     }
 
-    public function getTags(): ?Tag
-    {
-        return $this->tags;
-    }
 
-    public function setTags(?Tag $tags): static
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Product>
@@ -216,6 +212,45 @@ class Restaurant
     public function setUser(User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): static
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+            $tag->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): static
+    {
+        if ($this->tags->removeElement($tag)) {
+            $tag->removeTag($this);
+        }
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
 
         return $this;
     }

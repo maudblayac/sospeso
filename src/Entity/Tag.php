@@ -19,15 +19,16 @@ class Tag
     private ?string $name = null;
 
     /**
-     * @var Collection<int, Restaurant>
+     * @var Collection<int, restaurant>
      */
-    #[ORM\OneToMany(targetEntity: Restaurant::class, mappedBy: 'Tags')]
-    private Collection $restaurants;
+    #[ORM\ManyToMany(targetEntity: restaurant::class, inversedBy: 'tags')]
+    private Collection $Tag;
 
     public function __construct()
     {
-        $this->restaurants = new ArrayCollection();
+        $this->Tag = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -47,32 +48,28 @@ class Tag
     }
 
     /**
-     * @return Collection<int, Restaurant>
+     * @return Collection<int, restaurant>
      */
-    public function getRestaurants(): Collection
+    public function getTag(): Collection
     {
-        return $this->restaurants;
+        return $this->Tag;
     }
 
-    public function addRestaurant(Restaurant $restaurant): static
+    public function addTag(restaurant $tag): static
     {
-        if (!$this->restaurants->contains($restaurant)) {
-            $this->restaurants->add($restaurant);
-            $restaurant->setTags($this);
+        if (!$this->Tag->contains($tag)) {
+            $this->Tag->add($tag);
         }
 
         return $this;
     }
 
-    public function removeRestaurant(Restaurant $restaurant): static
+    public function removeTag(restaurant $tag): static
     {
-        if ($this->restaurants->removeElement($restaurant)) {
-            // set the owning side to null (unless already changed)
-            if ($restaurant->getTags() === $this) {
-                $restaurant->setTags(null);
-            }
-        }
+        $this->Tag->removeElement($tag);
 
         return $this;
     }
+
+
 }
