@@ -1,0 +1,149 @@
+
+/* ---------------------------------Variables----------------------------------- */
+
+
+
+/* ---------------------------------Raccourcis----------------------------------- */
+  h1{
+        font-family: 'rowdies';
+        color: var(--main-color);    
+    }
+h2{
+        font-family: 'rowdies';
+        color: white;
+    }
+/* ----------------------------/Version mobile/--------------------------------- */
+
+@media (max-width: 767px) {
+    h2{
+        font-size: 25px;
+    }
+    h1{
+    font-family: 'rowdies';
+    font-size: 40px;
+    }
+    /* FILTRE */
+    .Filter{
+        background-color: antiquewhite;
+        width: 100%;
+
+    }
+    .containerFilter{
+        background-color:white;
+        width: 60px;
+        height: 30px;
+        border-radius: 15px;
+    }
+
+    /************* ANNONCES ********/
+    .containerListings{
+        width: 100%;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+
+    }
+    .Listings{
+        height: 500px;
+        width: 75%;
+        background-color: rgb(34, 32, 32);
+        border-radius: 10px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+       
+    }
+        /* PICTURE */
+        .containerPicture {
+            height: 250px;
+            width: 100%;
+            position: relative;
+            overflow: hidden; 
+            border-radius: 10px; 
+        }
+        
+        .containerPicture > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit; 
+        }
+
+        /* TAG */
+        .tag{
+            height: 25px;
+            display: flex;
+            width: 100%;
+        }
+        .containerTagOne, .containerTagTwo{
+            width: 50px;
+            height: 100%;
+            
+            
+        }
+        .containerTagOne{
+            background-color:rgb(62, 83, 115) ;
+        }
+        .containerTagTwo{
+            background-color:rgb(75, 118, 98) ;
+        }
+        /* INFO */
+        .info{
+            width: 100%;
+            /* background-color: aqua; */
+            height: 30px;
+            color: rgb(255, 255, 255);
+        }
+        .location{
+            width:30%;
+            height: 30px;
+            /* background-color: rgb(22, 105, 177); */
+        }
+        .notation{
+            width:40%;
+            height: 30px;
+            /* background-color: rgb(202, 31, 111); */
+
+        }
+        .price{
+            width: 30%;
+            height: 30px;
+            /* background-color: rgb(70, 177, 77); */
+        }
+        /* Product Section */
+        .containerBoxProduct{
+            margin-top: 5%;
+            width: 50%;
+            height: 80px;
+            background-color: aliceblue;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .containerPictureProduct{
+            height: 100%;
+            width: 50%;
+            position: relative;
+            overflow: hidden;                 border-radius: 10px; 
+        }
+            
+        .containerPictureProduct > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit; 
+        }
+        
+        .containerInfoProduct{
+            width: 50%;
+            height: 100%;
+        }
+}
+
+
+/* Version tablette */
+@media (min-width: 768px) and (max-width: 1023px) {
+}
+
+/* Version desktop */
+@media (min-width: 1024px) {
+}
