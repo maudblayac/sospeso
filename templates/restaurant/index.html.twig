@@ -17,7 +17,10 @@
 {# END filtre #}
 {# INCLUDE _Card #}
 <section class="">
-    {% for restaurant in restaurants %}
+    {% for restaurantData in restaurants %}
+        {% set restaurant = restaurantData.restaurant %}
+        {% set minPrice = restaurantData.minPrice %}
+        {% set maxPrice = restaurantData.maxPrice %}
         {% include'/_partials/_card.html.twig' %}
     {% endfor %}
 </section>

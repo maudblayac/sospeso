@@ -12,10 +12,25 @@ class RestaurantController extends AbstractController
     #[Route('/restaurant', name: 'app_restaurant')]
     public function index(RestaurantRepository $restaurantRepository): Response
     {
-        $restaurants = $restaurantRepository->findall();
+        // Récupérer tous les restaurants
+        $restaurants = $restaurantRepository->findAll();
+
+        // Pour chaque restaurant, on va ajouter les prix min et max
+        $restaurantData = [];
+        foreach ($restaurants as $restaurant) {
+            // Récupère les prix min et max pour chaque restaurant
+            $prices = $restaurantRepository->findMinMaxPriceByRestaurant($restaurant->getId());
+
+            // Ajouter les données du restaurant avec les prix
+            $restaurantData[] = [
+                'restaurant' => $restaurant,
+                'minPrice' => $prices['minPrice'],
+                'maxPrice' => $prices['maxPrice']
+            ];
+        }
 
         return $this->render('restaurant/index.html.twig', [
-            'restaurants' => $restaurants,
+            'restaurants' => $restaurantData,
         ]);
     }
 }

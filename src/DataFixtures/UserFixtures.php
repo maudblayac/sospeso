@@ -1,5 +1,4 @@
 <?php
-
 namespace App\DataFixtures;
 
 use App\Entity\User;
@@ -12,15 +11,20 @@ class UserFixtures extends Fixture
 {
     private UserPasswordHasherInterface $userPasswordHasher;
 
-    public function __construct(UserPasswordHasherInterface $userPasswordHasher) {
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
         $this->userPasswordHasher = $userPasswordHasher;
     }
 
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create();
+        $this->createAdmin($manager);
+        $this->createRestaurants($manager); 
+        $this->createUsers($manager);
+    }
 
-        // Création de l'utilisateur Admin
+    private function createAdmin(ObjectManager $manager): void
+    {
         $admin = new User();
         $admin
             ->setEmail('admin@mail.com')
@@ -32,23 +36,40 @@ class UserFixtures extends Fixture
             ->setCreatedAt(new \DateTimeImmutable())
             ->setIsActive(true)
             ->setIsVerified(true);
+
+        $this->addReference('admin_user', $admin);
+
         $manager->persist($admin);
+    }
 
-        // Création de l'utilisateur Restaurant
-        $restaurant = new User();
-        $restaurant
-            ->setEmail('restaurant@mail.com')
-            ->setRoles(['ROLE_RESTAURANT'])
-            ->setPassword($this->userPasswordHasher->hashPassword(
-                $restaurant,
-                'password'
-            ))
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->setIsActive(true)
-            ->setIsVerified(true);
-        $manager->persist($restaurant);
+    private function createRestaurants(ObjectManager $manager): void
+    {
+        $faker = Factory::create();
 
-        // Création de l'utilisateur Classique
+        
+        for ($i = 1; $i <= 5; $i++) {
+            $restaurant = new User();
+            $restaurant
+                ->setEmail('restaurant' . $i . '@mail.com')
+                ->setRoles(['ROLE_RESTAURANT'])
+                ->setPassword($this->userPasswordHasher->hashPassword(
+                    $restaurant,
+                    'password'
+                ))
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->setIsActive(true)
+                ->setIsVerified(true);
+
+            $this->addReference('restaurant_user_' . $i, $restaurant);
+
+            $manager->persist($restaurant);
+        }
+    }
+
+    private function createUsers(ObjectManager $manager): void
+    {
+        $faker = Factory::create();
+
         $user = new User();
         $user
             ->setEmail('user@mail.com')
@@ -60,14 +81,15 @@ class UserFixtures extends Fixture
             ->setCreatedAt(new \DateTimeImmutable('2020-10-20'))
             ->setIsActive(true)
             ->setIsVerified(false);
+
+        $this->addReference('specific_user', $user);
         $manager->persist($user);
 
-        // Création de 10 utilisateurs avec Faker
         for ($i = 0; $i < 9; $i++) {
             $additionalUser = new User();
             $additionalUser
                 ->setEmail($faker->email())
-                ->setRoles(['ROLE_USER']) 
+                ->setRoles(['ROLE_USER'])
                 ->setPassword($this->userPasswordHasher->hashPassword(
                     $additionalUser,
                     'password'
@@ -75,6 +97,7 @@ class UserFixtures extends Fixture
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setIsActive(true)
                 ->setIsVerified(false);
+
             $this->addReference('user_' . $i, $additionalUser);
             $manager->persist($additionalUser);
         }

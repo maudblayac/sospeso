@@ -15,7 +15,26 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Restaurant::class);
     }
-
+        /**
+         * Récupère le prix minimum et maximum des produits d'un restaurant
+         *
+         * @param int $restaurantId
+         * @return array
+         */
+        public function findMinMaxPriceByRestaurant(int $restaurantId): array
+        {
+            $qb = $this->createQueryBuilder('r')
+                ->select('MIN(p.price) AS minPrice, MAX(p.price) AS maxPrice')
+                ->innerJoin('r.products', 'p')
+                ->where('r.id = :restaurantId')
+                ->setParameter('restaurantId', $restaurantId)
+                ->getQuery();
+    
+            return $qb->getSingleResult();
+        }
+    
+}
+    
     //    /**
     //     * @return Restaurant[] Returns an array of Restaurant objects
     //     */
@@ -40,4 +59,4 @@ class RestaurantRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}
+

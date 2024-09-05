@@ -107,7 +107,7 @@ h2{
 
         }
         .price{
-            width: 30%;
+            width: 50%;
             height: 30px;
             /* background-color: rgb(70, 177, 77); */
         }
@@ -137,6 +137,7 @@ h2{
         .containerInfoProduct{
             width: 50%;
             height: 100%;
+            padding: 2px;
         }
 }
 

@@ -1,5 +1,5 @@
 
-{# Annonces STYLE EXEMPLE#}
+{# Annonces STYLE#}
 <section class="containerListings">
     <article class="Listings">
         <div class="containerPicture">
@@ -11,27 +11,33 @@
             {# <div class="containerTagTwo"></div> #}
         </article>
         <article class="info AlignCenter FlexRow">
-            <div class="location FlexAround AlignCenter FlexRow">
+            {# <div class="location FlexAround AlignCenter FlexRow">
                 <img class="" alt="more" src="{{ asset('/images/restaurant/location.svg') }}">
                 <div>0.7 km</div>
-            </div>
+            </div> #}
             <div class="notation FlexAround AlignCenter FlexRow">
                 <img class="" alt="more" src="{{ asset('/images/restaurant/star.svg') }}">
                 <div>5.0<span>(876+)</span></div>
             </div>
             <div class="price AlignCenter">
-                <div>• €4-15</div>
+                <div>• €{{minPrice}}-{{maxPrice}}</div>
             </div>
         </article>
-        <article class="containerBoxProduct FlexRow">
-            <article class="containerPictureProduct">
-                <img class="" alt="product" src="{{ asset('/images/restaurant/food.jpg') }}">
-            </article>
-            <article class="containerInfoProduct">
-                <p></p>
-                <p></p>
-            </article>
-        </article>
+        {# Product #}
+        <section class="FlexRow">
+            {% set products = restaurant.products|slice(0, 2) %}
+            {% for product in products %}
+                <article class="containerBoxProduct FlexRow">
+                    <article class="containerPictureProduct">
+                        <img class="" alt="product" src="{{ asset(product.picture) }}">
+                    </article>
+                    <article class="AlignCenter FlexCol JustifyCenter containerInfoProduct">
+                        <p>{{ product.name }}</p>
+                        <p>{{ product.price }}€</p>
+                    </article>
+                </article>
+            {% endfor %}
+        </section>
     </article>
 </section>
 {# END Annonces #}
