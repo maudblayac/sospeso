@@ -33,6 +33,7 @@ class RestaurantRepository extends ServiceEntityRepository
             return $qb->getSingleResult();
         }
     
+         
 }
     
     //    /**

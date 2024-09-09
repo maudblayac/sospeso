@@ -20,8 +20,7 @@ class Review
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reviews')]
-    private ?Restaurant $restaurant = null;
+    
 
     public function getId(): ?int
     {
@@ -52,15 +51,4 @@ class Review
         return $this;
     }
 
-    public function getRestaurant(): ?Restaurant
-    {
-        return $this->restaurant;
-    }
-
-    public function setRestaurant(?Restaurant $restaurant): static
-    {
-        $this->restaurant = $restaurant;
-
-        return $this;
-    }
 }

@@ -58,18 +58,11 @@ class Restaurant
     #[ORM\Column(length: 100)]
     private ?string $title = null;
 
-    /**
-     * @var Collection<int, Review>
-     */
-    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'restaurant')]
-    private Collection $reviews;
-
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->favorites = new ArrayCollection();
         $this->tags = new ArrayCollection();
-        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -262,33 +255,7 @@ class Restaurant
         return $this;
     }
 
-    /**
-     * @return Collection<int, Review>
-     */
-    public function getReviews(): Collection
-    {
-        return $this->reviews;
-    }
+  
 
-    public function addReview(Review $review): static
-    {
-        if (!$this->reviews->contains($review)) {
-            $this->reviews->add($review);
-            $review->setRestaurant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReview(Review $review): static
-    {
-        if ($this->reviews->removeElement($review)) {
-            // set the owning side to null (unless already changed)
-            if ($review->getRestaurant() === $this) {
-                $review->setRestaurant(null);
-            }
-        }
-
-        return $this;
-    }
+  
 }
