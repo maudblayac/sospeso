@@ -59,6 +59,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?UserProfile $userProfile = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Restaurant $restaurant = null;
+
     public function __construct()
     {
         $this->commands = new ArrayCollection();
@@ -256,4 +259,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($restaurant === null && $this->restaurant !== null) {
+            $this->restaurant->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($restaurant !== null && $restaurant->getUser() !== $this) {
+            $restaurant->setUser($this);
+        }
+
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
 }

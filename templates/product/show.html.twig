@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}{{ product.title }}{% endblock %}
+
+{% block importmap %}{{ importmap(['app', 'product']) }}{% endblock %} #}
+
+{% block body %}
+<div class="">
+    {% include '_partials/listingProduct/_card.html.twig' %}
+</div>
+{% endblock %}

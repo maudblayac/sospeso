@@ -1,0 +1,13 @@
+  <section class="FlexRow">
+    <article class="containerBoxProduct FlexRow">
+        <article class="containerPictureProduct">
+            {# <img class="" alt="product" src="{{ asset(product.picture) }}"> #}
+            <img class="" alt="product" src="{{ asset('/images/restaurant/cafe.jpg') }}">
+        </article>
+        <article class="AlignCenter FlexCol JustifyCenter containerInfoProduct">
+            <p>{{ product.name }}</p>
+            <p>{{ product.description }}</p>
+            <p>{{ product.price }}€</p>
+        </article>
+    </article>
+</section>

@@ -29,7 +29,7 @@ class RestaurantController extends AbstractController
             ];
         }
 
-        return $this->render('restaurant/index.html.twig', [
+        return $this->render('_partials/listingRestaurant/_card.html.twig', [
             'restaurants' => $restaurantData,
         ]);
     }

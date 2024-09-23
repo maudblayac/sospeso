@@ -45,9 +45,6 @@ class Restaurant
     #[ORM\OneToMany(targetEntity: Favorite::class, mappedBy: 'restaurant')]
     private Collection $favorites;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
 
     /**
      * @var Collection<int, Tag>
@@ -57,6 +54,9 @@ class Restaurant
 
     #[ORM\Column(length: 100)]
     private ?string $title = null;
+
+    #[ORM\OneToOne(inversedBy: 'restaurant', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -204,18 +204,6 @@ class Restaurant
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Tag>
      */
@@ -255,7 +243,17 @@ class Restaurant
         return $this;
     }
 
-  
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 
   
 }
