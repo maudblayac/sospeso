@@ -159,11 +159,11 @@ class Product
     {
         return $this->picture;
     }
-
+//temporairement le temps de créer l'upload
     public function setPicture(string $picture): static
     {
-        $this->picture = $picture;
-
+        // $this->picture = $picture;
+        $this->picture = $picture ?: '/images/restaurant/cafe.jpg'; 
         return $this;
     }
 

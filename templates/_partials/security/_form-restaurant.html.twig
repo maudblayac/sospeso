@@ -1,0 +1,24 @@
+
+    <div>
+        <a href="{{ path('app_register') }}" >Utilisateur</a>
+        <a href="{{ path('app_register_restaurant') }}" >Restaurateur</a>
+    </div>    
+    <h1>Inscription Restaurateur</h1>
+    {{ form_start(registrationFormRestaurant) }}
+        <div>
+            {{ form_label(registrationFormRestaurant.email) }}
+            {{ form_widget(registrationFormRestaurant.email) }}
+        </div>       
+        <div>
+            {{ form_label(registrationFormRestaurant.password.first) }}
+            {{ form_widget(registrationFormRestaurant.password.first) }}
+
+            {{ form_label(registrationFormRestaurant.password.second) }}
+            {{ form_widget(registrationFormRestaurant.password.second) }}
+        </div>
+        {{ form_row(registrationFormRestaurant.agreeTerms) }}
+    <div>
+        <button type="submit" class="btn">S'inscire</button>
+        <a href="{{ path('app_home') }}" class="btn" type="submit">Retour</a>
+    </div>
+    {{ form_end(registrationFormRestaurant) }}

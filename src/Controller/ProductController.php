@@ -23,7 +23,7 @@ class ProductController extends AbstractController
     #[Route('/', name:'index', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
-        // chercher user qui est relié a son restaurant-> product
+        // chercher user qui est relié a son restaurant puis product
         /** @var User $user */
         $user = $this->getUser();
         $restaurant = $user->getRestaurant();
@@ -37,7 +37,7 @@ class ProductController extends AbstractController
     // Méthode New
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    #[IsGranted("ROLE_RESTAURANT")]
+    #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
     public function new(
         Request $request,
         EntityManagerInterface $entityManager
@@ -46,6 +46,7 @@ class ProductController extends AbstractController
         $form = $this->createForm(ProductType::class, $product);
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 // Récupération de l'utilisateur connecté et assignation du restaurant
@@ -54,7 +55,7 @@ class ProductController extends AbstractController
                 $restaurant = $user->getRestaurant();
                 $product->setRestaurant($restaurant);
 
-                // Persister le produit dans la base de données
+                // Persister le produit dans la base de donnée :)
                 $entityManager->persist($product);
                 $entityManager->flush();
 
@@ -64,9 +65,9 @@ class ProductController extends AbstractController
                     'message' => "Votre produit a été créé avec succès !",
                 ]);
 
-                return $this->redirectToRoute('app_product_index');
+                return $this->redirectToRoute('app_product_index');            
             } catch (\Exception $e) {
-                // Gestion des erreurs
+                // Gestion des erreurs à revoir 
                 $this->addFlash('error', 'Une erreur est survenue: ' . $e->getMessage());
             }
         }
@@ -79,38 +80,39 @@ class ProductController extends AbstractController
     // Méthode Update 
 
     #[Route('/update/{id}', name: 'update', methods: ['GET', 'POST'])]
-#[IsGranted(
-    attribute: new Expression(
-        'user === subject.getRestaurant().getUser() or is_granted("ROLE_ADMIN")'
-    ),
-    subject: 'product'
-)]
-public function update(
-    Product $product,
-    Request $request,
-    EntityManagerInterface $entityManager
-): Response {
-    // Créer le formulaire 
-    $form = $this->createForm(ProductType::class, $product);
+        // ici je récupère spécifiquement le user qui est assigné à son restaurant -> product
+    #[IsGranted(
+        attribute: new Expression(
+            'user === subject.getRestaurant().getUser() or is_granted("ROLE_ADMIN")'
+        ),
+        subject: 'product'
+    )]
+    public function update(
+        Product $product,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+        // Créer le formulaire 
+        $form = $this->createForm(ProductType::class, $product);
 
-    $form->handleRequest($request);
+        $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-        $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
 
-        $this->addFlash('success', [
-            'title' => 'Produit mis à jour',
-            'message' => "Votre produit a été mis à jour avec succès !",
+            $this->addFlash('success', [
+                'title' => 'Produit mis à jour',
+                'message' => "Votre produit a été mis à jour avec succès !",
+            ]);
+
+            return $this->redirectToRoute('app_product_index');
+        }
+
+        return $this->render('product/update.html.twig', [
+            'form' => $form,
+            'product' => $product,
         ]);
-
-        return $this->redirectToRoute('app_product_index');
     }
-
-    return $this->render('product/update.html.twig', [
-        'form' => $form,
-        'product' => $product,
-    ]);
-}
 
 
     //Méthode Show
@@ -126,6 +128,7 @@ public function update(
     //Méthode delete
 
     #[Route("/remove/{id}", name: 'delete', methods: ['POST'])]
+    // ici je récupère spécifiquement le user qui est assigné à son restaurant -> product
     #[IsGranted(
         attribute: new Expression(
           'user === subject.getRestaurant().getUser() or is_granted("ROLE_ADMIN")'
