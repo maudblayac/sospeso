@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Restaurant;
+use App\Entity\UserProfile;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationRestaurantFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +33,12 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            // Création d'un new UserPorfile qu'on associe directement à son utilisateur 
+            $userProfile = new UserProfile();
+            $userProfile->setUser($user);
+
             $entityManager->persist($user);
+            $entityManager->persist($userProfile);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_login');

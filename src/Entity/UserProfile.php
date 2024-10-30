@@ -14,28 +14,28 @@ class UserProfile
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50,nullable: true)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 60)]
+    #[ORM\Column(length: 60,nullable: true)]
     private ?string $lastname = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE,nullable: true)]
     private ?\DateTimeInterface $dateOfBirth = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 20,nullable: true)]
     private ?string $phoneNumber = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100,nullable: true)]
     private ?string $address = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50,nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100,nullable: true)]
     private ?string $country = null;
 
-    #[ORM\Column(length: 8)]
+    #[ORM\Column(length: 8,nullable: true)]
     private ?string $postalCode = null;
 
     #[ORM\Column]
@@ -44,7 +44,7 @@ class UserProfile
     #[ORM\OneToOne(inversedBy: 'userProfile', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -145,7 +145,11 @@ class UserProfile
 
         return $this;
     }
-
+    //j'initialise la date lors de sa creation
+    public function __construct()
+    {
+        $this->updateAt = new \DateTimeImmutable();
+    }
     public function getUpdateAt(): ?\DateTimeImmutable
     {
         return $this->updateAt;

@@ -54,6 +54,7 @@
 body {
     background-color: #F6EDD2;
     margin:0;
+    padding: 0;
     /* height: 900px; */
     font-family: 'Mono';
     font-size: 16px;

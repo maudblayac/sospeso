@@ -8,10 +8,13 @@
 </article>
 
 <article>
-    <img class="" alt="logo" src="{{ asset('/images/navbar/logo.svg') }}">
+    <a href="{{ path('app_home') }}"> 
+        <img class="" alt="logo" src="{{ asset('/images/navbar/logo.svg') }}">
+    </a>
 </article>
 
 <article>
+{# a modifier #}
     {% if is_granted("ROLE_ADMIN") %}
         <li>
             <a href="{{ path('app_admin') }}" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700">
@@ -21,10 +24,18 @@
        {% if is_granted("ROLE_RESTAURANT") %}
         <li>
             <a href="{{ path('app_dashboard_restaurant') }}" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700">
-            <i class="fa-solid fa-gear mr-1"></i>Dashboard                                </a>
+            <i class="fa-solid fa-gear mr-1"></i>Dashboard Restaurant                                </a>
         </li>
     {% endif %}
-    <img class="" alt="profile" src="{{ asset('/images/navbar/profile.svg') }}">
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('app_user_profile_index') }}"> 
+            <img class="" alt="profile" src="{{ asset('/images/navbar/profile.svg') }}">
+        </a>
+    {% else %}
+        <a href="{{ path('app_login') }}"> 
+            <img class="" alt="profile" src="{{ asset('/images/navbar/profile.svg') }}">
+        </a>
+    {% endif %}    
     <img class="" alt="cart" src="{{ asset('/images/navbar/cart.svg') }}">
 </article>
 
