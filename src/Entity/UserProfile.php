@@ -20,9 +20,6 @@ class UserProfile
     #[ORM\Column(length: 60,nullable: true)]
     private ?string $lastname = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE,nullable: true)]
-    private ?\DateTimeInterface $dateOfBirth = null;
-
     #[ORM\Column(length: 20,nullable: true)]
     private ?string $phoneNumber = null;
 
@@ -44,6 +41,9 @@ class UserProfile
     #[ORM\OneToOne(inversedBy: 'userProfile', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateOfBirth = null;
     
     public function getId(): ?int
     {
@@ -70,18 +70,6 @@ class UserProfile
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getDateOfBirth(): ?\DateTimeInterface
-    {
-        return $this->dateOfBirth;
-    }
-
-    public function setDateOfBirth(\DateTimeInterface $dateOfBirth): static
-    {
-        $this->dateOfBirth = $dateOfBirth;
 
         return $this;
     }
@@ -170,6 +158,18 @@ class UserProfile
     public function setUser(User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDateOfBirth(): ?\DateTimeInterface
+    {
+        return $this->dateOfBirth;
+    }
+
+    public function setDateOfBirth(?\DateTimeInterface $dateOfBirth): static
+    {
+        $this->dateOfBirth = $dateOfBirth;
 
         return $this;
     }

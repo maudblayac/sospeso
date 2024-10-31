@@ -23,12 +23,12 @@ class UserProfileType extends AbstractType
                 'label' => 'Last Name',
                 'required' => false,
             ])
-            ->add('dateOfBirth', DateType::class, [
+            ->add('dateOfBirth',DateType::class, [
                 'label' => 'Date of Birth',
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('phoneNumber', TelType::class, [
+            ->add('phoneNumber', TextType::class, [
                 'label' => 'Phone Number',
                 'required' => false,
             ])

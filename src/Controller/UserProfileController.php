@@ -40,6 +40,7 @@ class UserProfileController extends AbstractController
         // Si le formulaire est soumis et valide, on met à jour le profil
         if ($form->isSubmitted() && $form->isValid()) {
             $userProfile->setUpdateAt(new \DateTimeImmutable()); 
+            $entityManager->flush();
             $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
         }
 
