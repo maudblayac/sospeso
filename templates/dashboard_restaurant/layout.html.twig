@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ asset('styles/dashboardRestaurant.css') }}">
+</head>
+<body>
+{# nav bar #}
+    <nav class="dashboardSidebar">
+        <div class="logo">
+            <img src="{{ asset('images/navbar/logo.svg') }}" alt="Logo">
+        </div>
+        <ul>
+            <li><a href="{{ path('app_dashboard_restaurant_home') }}" class="active"><img class="icon" src="{{ asset('images/dashboardRestaurant/dashboard.svg') }}" alt="Dashboard Icon"> Dashboard</a></li>
+            <li><a href="{{ path('app_dashboard_restaurant_profile') }}"><img class="icon" src="{{ asset('images/dashboardRestaurant/profile.svg') }}" alt="Profile Icon"> Profil</a></li>
+            <li><a href="{{ path('app_dashboard_restaurant_products') }}"><img class="icon" src="{{ asset('images/dashboardRestaurant/fork.svg') }}" alt="Products Icon"> Mes produits</a></li>
+            <li><a href="{{ path('app_dashboard_restaurant_restaurant') }}"><img class="icon" src="{{ asset('images/dashboardRestaurant/chef.svg') }}" alt="Restaurant Icon"> Mon restaurant</a></li>
+            <li><a href="{{ path('app_logout') }}"><img class="icon" src="{{ asset('images/dashboardRestaurant/logout.svg') }}" alt="Logout Icon"> Se déconnecter</a></li>
+        </ul>
+    </nav>
+{# end nav bar #}
+    <div class="dashboardContent">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

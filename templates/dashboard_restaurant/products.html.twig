@@ -1,0 +1,21 @@
+{% extends 'dashboard_restaurant/layout.html.twig' %}
+
+{% block content %}
+<h2>Mes Produits</h2>
+
+{% if products is empty %}
+    <p>Vous n'avez encore aucun produit. <a href="{{ path('app_product_new') }}">Créez un produit</a> pour votre restaurant !</p>
+{% else %}
+    <a href="{{ path('app_product_new') }}" class="btn">Ajouter un produit</a>
+    <ul class="productList">
+        {% for product in products %}
+            <li>
+                {{ product.name }} - {{ product.price }}€
+                <a href="{{ path('app_product_update', { id: product.id }) }}">Modifier</a>
+                <a href="{{ path('app_product_delete', { id: product.id }) }}" 
+                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

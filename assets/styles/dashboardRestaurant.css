@@ -1,0 +1,164 @@
+/* Variables de couleurs */
+:root {
+    --background-color: #FFFFFF;
+    --sidebar-bg-color: #FAF3E0;
+    --sidebar-text-color: #333;
+    --accent-color: #EB8072;
+    --accent-hover-color: #FF866F;
+    --primary-text-color: #282F4B;
+    --border-color: #ccc;
+}
+
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+}
+
+/* Sidebar du dashboard */
+.dashboardSidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg-color);
+    height: 100vh;
+    position: fixed;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: width 0.3s ease;
+}
+
+.dashboardSidebar .logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboardSidebar .logo img {
+    width: 100px;
+    height: auto;
+}
+
+.dashboardSidebar ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.dashboardSidebar ul li {
+    margin: 15px 0;
+}
+
+.dashboardSidebar ul li a {
+    text-decoration: none;
+    color: var(--sidebar-text-color);
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.dashboardSidebar ul li a:hover {
+    color: var(--accent-hover-color);
+}
+
+.dashboardSidebar ul li a.active {
+    color: var(--accent-color);
+}
+
+/* Icônes de la sidebar */
+.dashboardSidebar ul li a .icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    fill: var(--sidebar-text-color);
+}
+
+.dashboardSidebar ul li a.active .icon {
+    fill: var(--accent-color);
+}
+
+/* Responsive Sidebar - Format téléphone */
+@media (max-width: 768px) {
+    .dashboardSidebar {
+        width: 80px;
+        padding-top: 10px;
+    }
+
+    .dashboardSidebar ul li a {
+        font-size: 0;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dashboardSidebar ul li a .icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 0;
+    }
+}
+
+/* Contenu du dashboard */
+.dashboardContent {
+    margin-left: 260px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .dashboardContent {
+        margin-left: 90px;
+    }
+}
+
+/* Accueil du dashboard */
+.dashboardWelcome h1 {
+    color: var(--accent-color);
+}
+
+.dashboardWelcome p {
+    color: var(--primary-text-color);
+}
+
+/* Liste des produits */
+.productList {
+    list-style: none;
+    padding: 0;
+}
+
+.productList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.productList li a {
+    margin-left: 10px;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.productList li a:hover {
+    text-decoration: underline;
+}
+
+/* Boutons */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--accent-hover-color);
+}
