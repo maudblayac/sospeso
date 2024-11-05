@@ -48,6 +48,7 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             try {
                 // Récupération de l'utilisateur connecté et assignation du restaurant
                 /** @var User $user */

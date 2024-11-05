@@ -49,6 +49,7 @@ body {
     margin: 15px 0;
 }
 
+/* Style des liens de la sidebar */
 .dashboardSidebar ul li a {
     text-decoration: none;
     color: var(--sidebar-text-color);
@@ -59,12 +60,19 @@ body {
     transition: color 0.3s ease;
 }
 
-.dashboardSidebar ul li a:hover {
-    color: var(--accent-hover-color);
-}
-
+/* Hover et lien actif */
+.dashboardSidebar ul li a:hover,
 .dashboardSidebar ul li a.active {
     color: var(--accent-color);
+}
+
+/* Dashboard spécifique */
+.dashboardSidebar ul li a.dashboard-link {
+    color: var(--sidebar-text-color); /* Couleur par défaut */
+}
+
+.dashboardSidebar ul li a.dashboard-link.active {
+    color: var(--accent-color); /* Orange uniquement si actif */
 }
 
 /* Icônes de la sidebar */

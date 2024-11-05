@@ -15,9 +15,22 @@
     <body>
         {% block header %}{% include '_partials/_header.html.twig' %}{% endblock %}
 
+         {% for message in app.flashes %}
+            <div class="alert alert-success">
+            {% if message is iterable %}
+                {% for item in message %}
+                    {{ item }}
+                {% endfor %}
+            {% else %}
+              {{ message }}
+            {% endif %}
+            </div>
+        {% endfor %}
+
 
         {% block body %}{% endblock %}
 
         {% block footer %}{% include '_partials/_footer.html.twig' %}{% endblock %}
     </body>
+    <script src="{{ asset('js/footerToggle.js') }}"></script>
 </html>

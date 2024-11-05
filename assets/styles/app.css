@@ -1,4 +1,3 @@
-
 /* Styles par défaut */
 @font-face {
     font-family: 'Mono';
@@ -15,12 +14,15 @@
     src: url('../fonts/Rowdies/Rowdies-Regular.ttf');
 }
 
-
 /* ---------------------------------Variables----------------------------------- */
-
 :root {
     --main-color: #444444;
+    --footerBgColor: #F6EDD2;
+    --footerBottomBg: #ffffff;
+    --footerTextColor: #444444;
+    --footerBorderColor: #b6b5b9;
 }
+
 /* ---------------------------------Raccourcis----------------------------------- */
 .FlexCol {
     display: flex;
@@ -31,10 +33,12 @@
     display: flex;
     flex-direction: row;
 }
+
 .FlexBetween {
     display: flex;
     justify-content: space-between;
 }
+
 .FlexAround {
     display: flex;
     justify-content: space-around;
@@ -53,9 +57,8 @@
 /* ---------------------------- Utiliser pour tous ----------------------------- */
 body {
     background-color: #F6EDD2;
-    margin:0;
+    margin: 0;
     padding: 0;
-    /* height: 900px; */
     font-family: 'Mono';
     font-size: 16px;
     color: var(--main-color);
@@ -65,140 +68,196 @@ h3 {
     font-size: 24px;
     letter-spacing: 0.5px;
     font-family: 'Mono';
-    font-style: normal;
     font-weight: normal;
     color: var(--main-color);
 }
 
+/* ---------------------------- Footer Styles ---------------------------- */
+.footer .content {
+    display: none;
+    padding-left: 10px;
+    font-size: 0.9em;
+}
 
-/* ----------------------------/Version mobile/--------------------------------- */
+.footer .toggleTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
 
+.footer .toggleIcon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
 
+.footer .content.active {
+    display: block; 
+}
+
+.footer .toggleIcon.rotate {
+    transform: rotate(180deg); 
+}
+
+/* ---------------------------- Design Mobile ---------------------------- */
 @media (max-width: 767px) {
+    /* Masquer les éléments desktop/tablette */
+    .desktopOnly {
+        display: none;
+    }
+
+    .mobileOnly {
+        display: block;
+    }
 
     section {
         padding: 10px;
         box-sizing: border-box;
     }
 
-    /********************************* START HEADER */
     header {
         height: 110px;
         display: flex;
         align-items: center;
         background-color: #F6EDD2;
-
-
     }
-    nav{
+
+    nav {
         width: 100%;
         padding: 5px;
-       
     }
-    nav article{
+
+    nav article {
         display: flex;
         width: 125px;
         justify-content: space-around;
     }
-    .containerNavOne, .containerNavTwo, .containerNavThree{
+
+    .navLeft .mobileOnly {
+        justify-content: space-around; 
+    }
+
+    .accountCart {
+        justify-content: space-around;
+    }
+
+    .containerNavOne, .containerNavTwo, .containerNavThree {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
-    /* END HEADER */
-    
-    /********************** START FOOTER */
+
     footer {
-        /* height: 945px; */
         width: 100%;
-        margin: 0%;
+        margin: 0;
         background-color: rgb(255, 255, 255);
     }
 
-    .containerFooterOne, 
-    .containerFootertwo, 
-    .containerFooterthree, 
-    .containerFooterfour, 
-    .containerFooterfive, 
-    .containerFootersix, 
-    .containerFooterseven {
+    .containerFooterOne,
+    .containerFooterTwo,
+    .containerFooterThree,
+    .containerFooterFour,
+    .containerFooterFive,
+    .containerFooterSix,
+    .containerFooterSeven {
         height: 80px;
         border-top: 1px solid #b6b5b9;
         background-color: rgb(255, 255, 255);
-        
     }
 
     .containerFooterOne {
         height: 250px;
-
     }
-    .containerFootersix, .containerFooterseven{
+
+    .containerFooterSix, .containerFooterSeven {
         height: 200px;
         background-color: #F6EDD2;
-
-
     }
-    /* END FOOTER */
 }
-/* -------------------------------------------------------------------- */
 
-/* Version tablette */
-@media (min-width: 768px) and (max-width: 1023px) {
+/* ---------------------------- Design Tablette et Desktop ---------------------------- */
+@media (min-width: 768px) {
+    /* Masquer les éléments mobiles */
+    .mobileOnly {
+        display: none;
+    }
+
+    .desktopOnly {
+        display: block;
+    }
+
     header {
         height: 120px;
-        background-color: #123a4a;
+        background-color: #f6edd2;
     }
 
-    /* START FOOTER */
     footer {
-        height: 500px;
-        width: 100%;
-        background-color: rgb(240, 240, 240);
+        background-color: var(--footerBgColor);
+        padding: 40px 60px;
     }
 
-    .containerFooterOne, 
-    .containerFootertwo, 
-    .containerFooterthree, 
-    .containerFooterfour, 
-    .containerFooterfive, 
-    .containerFootersix, 
-    .containerFooterseven {
-        height: 100px;
-        background-color: rgb(74, 2, 2);
+    /* Première Ligne : Titres des catégories */
+    .footerCategories {
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Mono';
+        font-size: 16px;
+        color: var(--main-color);
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--footerBorderColor);
+        margin-bottom: 20px;
     }
 
-    .containerFooterOne {
-        height: 150px;
-    }
-}
-
-/* -------------------------------------------------------------------- */
-
-/* Version desktop */
-@media (min-width: 1024px) {
-    header {
-        height: 150px;
-        background-color: #5c4b07;
+    /* Deuxième Ligne : Grand container avec trois blocs */
+    .footerContent {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0;
     }
 
-    /* START FOOTER */
-    footer {
-        height: 300px;
-        background-color: rgb(225, 225, 225);
+    .footerBlock {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
-    .containerFooterOne, 
-    .containerFootertwo, 
-    .containerFooterthree, 
-    .containerFooterfour, 
-    .containerFooterfive, 
-    .containerFootersix, 
-    .containerFooterseven {
-        height: 50px;
-        background-color: rgb(159, 27, 27);
+    .footerTitle {
+        font-size: 20px;
+        color: var(--main-color);
+        margin-bottom: 10px;
     }
 
-    .containerFooterOne {
-        height: 100px;
+    .serviceClient p, .sospesoCenter p, .followUs p {
+        font-size: 14px;
+        color: var(--footerTextColor);
+        margin: 5px 0;
+    }
+
+    .sospesoCenter img {
+        margin-bottom: 10px;
+    }
+
+    /* Social Icons */
+    .socialIcons {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    .socialIcons img {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* Troisième Ligne : Bas de page */
+    .footerBottom {
+        background-color: var(--footerBottomBg);
+        padding: 20px 0;
+        text-align: center;
+        font-size: 12px;
+        margin-top: 20px;
     }
 }

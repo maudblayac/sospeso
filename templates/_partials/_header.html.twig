@@ -1,44 +1,62 @@
+<header class="headerNav">
+    <nav class="FlexRow AlignCenter FlexBetween">
+        
+        <!-- Bloc gauche : Menu et recherche -->
+        <article class="navLeft ">
+            <!-- Mobile Only: Icônes menu et recherche -->
+            <div class="FlexAround mobileOnly FlexRow AlignCenter">
+                <img class="menuIcon" alt="menu" src="{{ asset('/images/navbar/filtre.svg') }}">
+                <img class="searchIcon" alt="search" src="{{ asset('/images/navbar/search.svg') }}">
+            </div>
+            <!-- Desktop Only: Texte "Menu" et barre de recherche -->
+            <div class="desktopOnly FlexRow AlignCenter">
+                <span class="menuText">Menu</span>
+                <form class="searchContainer FlexRow AlignCenter">
+                    <img class="searchIcon" alt="search" src="{{ asset('/images/navbar/search.svg') }}">
+                    <input type="text" class="searchInput" placeholder="recherche">
+                </form>
+            </div>
+        </article>
 
-<header class="">
-<!-- header -->
-<nav class="FlexRow AlignCenter FlexBetween ">
-<article>
-    <img class="" alt="filter" src="{{ asset('/images/navbar/filtre.svg') }}">
-    <img class="" alt="search" src="{{ asset('/images/navbar/search.svg') }}">
-</article>
+        <!-- Bloc central : Logo -->
+        <article class="navCenter">
+            <a href="{{ path('app_home') }}">
+                <img class="logo" alt="logo" src="{{ asset('/images/navbar/logo.svg') }}">
+            </a>
+        </article>
 
-<article>
-    <a href="{{ path('app_home') }}"> 
-        <img class="" alt="logo" src="{{ asset('/images/navbar/logo.svg') }}">
-    </a>
-</article>
-
-<article>
-{# a modifier #}
-    {% if is_granted("ROLE_ADMIN") %}
-        <li>
-            <a href="{{ path('app_admin') }}" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700">
-            <i class="fa-solid fa-gear mr-1"></i>Administration                                </a>
-        </li>
-    {% endif %}
-       {% if is_granted("ROLE_RESTAURANT") %}
-        <li>
-            <a href="{{ path('app_dashboard_restaurant') }}" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700">
-            <i class="fa-solid fa-gear mr-1"></i>Dashboard Restaurant                                </a>
-        </li>
-    {% endif %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('app_user_profile_index') }}"> 
-            <img class="" alt="profile" src="{{ asset('/images/navbar/profile.svg') }}">
-        </a>
-    {% else %}
-        <a href="{{ path('app_login') }}"> 
-            <img class="" alt="profile" src="{{ asset('/images/navbar/profile.svg') }}">
-        </a>
-    {% endif %}    
-    <img class="" alt="cart" src="{{ asset('/images/navbar/cart.svg') }}">
-</article>
-
-</nav>
-
+        <!-- Bloc droit : Liens et icônes de compte/panier -->
+        <article class="navRight FlexCol">
+            <!-- Desktop Only: Liens supplémentaires -->
+            <div class="desktopOnly topLinks FlexRow JustifyCenter">
+                <a href="#">Trouver un restaurant</a>
+                <a href="#">Faire un don</a>
+                <a href="#">Nous contacter</a>
+            </div>
+            <!-- Compte et panier en flex row en desktop -->
+            <div class="accountCart FlexRow JustifyAround FlexAround">
+                {% if is_granted("ROLE_ADMIN") %}
+                    <a href="{{ path('app_admin') }}" class="account FlexRow AlignCenter">
+                        <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="admin">
+                        <span class="desktopOnly">Admin</span>
+                    </a>
+                {% elseif is_granted("ROLE_RESTAURANT") %}
+                    <a href="{{ path('app_dashboard_restaurant_home') }}" class="account FlexRow AlignCenter">
+                        <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="restaurant">
+                        <span class="desktopOnly">Dashboard</span>
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="account FlexRow AlignCenter">
+                        <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="profile">
+                        <span class="desktopOnly">Compte</span>
+                    </a>
+                {% endif %}
+                <a href="" class="cart FlexRow AlignCenter">
+                    <img src="{{ asset('/images/navbar/cart.svg') }}" class="icon" alt="cart">
+                    <span class="desktopOnly">Panier</span>
+                </a>
+            </div>
+        </article>
+        
+    </nav>
 </header>
