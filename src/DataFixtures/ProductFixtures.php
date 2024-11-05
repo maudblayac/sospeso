@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
+use App\Entity\Image;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -50,16 +51,20 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                 ->setName($data['name'])
                 ->setDescription($data['description'])
                 ->setPrice($data['price'])
-                // ->setImage($this->getReference($data['image'])) 
                 ->setCategories($this->getReference($data['categories']))
-                ->setRestaurant($this->getReference('restaurant_' . rand(0, 4))); 
+                ->setRestaurant($this->getReference('restaurant_' . rand(0, 4)));
 
-            // Associer l'image en récupérant la référence depuis ImageFixtures
-            $image = $this->getReference($data['image']);
-            $product->setImage($image);
+            // Créer une nouvelle image en se basant sur le modèle
+            $originalImage = $this->getReference($data['image']);
+            $image = new Image();
+            $image->setName($originalImage->getName());
+            $image->setUpdatedAt(new \DateTimeImmutable());
             $image->setProduct($product);
 
+            $product->setImage($image);
+
             $this->addReference('product_' . $i, $product);
+            $manager->persist($image);  
             $manager->persist($product);
         }
 
