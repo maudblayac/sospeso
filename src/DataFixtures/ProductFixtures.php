@@ -14,28 +14,28 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             'name' => 'Café',
             'description'=> 'Un bon café qui réchauffe et réveille.',
             'price' => 1.80,
-            'picture' => '/images/restaurant/cafe.jpg',
+            'image' => 'cafe_image',
             'categories' => 'categories_1',
         ],
         [
             'name' => 'Cookie',
             'description'=> 'Un excellent cookie qui donnera de la force.',
             'price' => 2.50,
-            'picture' => '/images/restaurant/cookie.jpg',
+            'image' => 'cookie_image',
             'categories' => 'categories_2',
         ],
         [
             'name' => 'Sandwich',
             'description'=> 'Un sandwich croustillant, garni de viande tendre, fromage fondant, légumes frais et une sauce onctueuse.',
             'price' => 4.80,
-            'picture' => '/images/restaurant/sandwich.jpg',
+            'image' => 'sandwich_image',
             'categories' => 'categories_3',
         ],
         [
             'name' => 'Bagel',
             'description'=> 'Un bagel croustillant, garni de saumon tendre, fromage fondant, légumes frais et une sauce blanche.',
             'price' => 8.00,
-            'picture' => '/images/restaurant/bagel.jpg',
+            'image' => 'bagel_image',
             'categories' => 'categories_3',
         ],
     ];
@@ -50,9 +50,15 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                 ->setName($data['name'])
                 ->setDescription($data['description'])
                 ->setPrice($data['price'])
-                ->setPicture($data['picture'])
+                // ->setImage($this->getReference($data['image'])) 
                 ->setCategories($this->getReference($data['categories']))
                 ->setRestaurant($this->getReference('restaurant_' . rand(0, 4))); 
+
+            // Associer l'image en récupérant la référence depuis ImageFixtures
+            $image = $this->getReference($data['image']);
+            $product->setImage($image);
+            $image->setProduct($product);
+
             $this->addReference('product_' . $i, $product);
             $manager->persist($product);
         }
@@ -63,6 +69,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
+            ImageFixtures::class,
             RestaurantFixtures::class, 
         ];
     }

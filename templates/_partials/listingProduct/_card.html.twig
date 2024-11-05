@@ -1,8 +1,11 @@
   <section class="FlexRow">
     <article class="containerBoxProduct FlexRow">
         <article class="containerPictureProduct">
-            {# <img class="" alt="product" src="{{ asset(product.picture) }}"> #}
-            <img class="" alt="product" src="{{ asset('/images/restaurant/cafe.jpg') }}">
+            {% if product.image %}
+                <img src="{{ vich_uploader_asset(product.image) }}" alt="{{ product.name }}">
+            {% else %}
+                <img src="https://placehold.co/600x400" alt="{{ product.name }}">
+            {% endif %}
         </article>
         <article class="AlignCenter FlexCol JustifyCenter containerInfoProduct">
             <p>{{ product.name }}</p>

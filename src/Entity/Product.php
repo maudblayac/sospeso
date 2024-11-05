@@ -5,10 +5,14 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\DBAL\Types\Types;
+use App\Entity\Image;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[Vich\Uploadable]
+
 class Product
 {
     #[ORM\Id]
@@ -39,21 +43,37 @@ class Product
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
 
-    #[ORM\Column(length: 280)]
-    private ?string $picture = null;
-
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
+    
+    #[ORM\OneToOne(mappedBy: 'product', cascade: ['persist', 'remove'])]
+    private ?Image $image = null;
 
+  
     public function __construct()
     {
         $this->commandLines = new ArrayCollection();
         $this->productSuspendeds = new ArrayCollection();
     }
-
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+    
+    public function setImage(?Image $image): static
+    {
+        // Si une image est définie pour un produit, alors on s'assure de la liaison bi-directionnelle
+        if ($image && $image->getProduct() !== $this) {
+            $image->setProduct($this);
+        }
+    
+        $this->image = $image;
+    
+        return $this;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -155,17 +175,6 @@ class Product
         return $this;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-//temporairement le temps de créer l'upload
-    public function setPicture(string $picture): static
-    {
-        // $this->picture = $picture;
-        $this->picture = $picture ?: '/images/restaurant/cafe.jpg'; 
-        return $this;
-    }
 
     public function getName(): ?string
     {

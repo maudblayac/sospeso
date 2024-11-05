@@ -66,7 +66,7 @@ class RestaurantFixtures extends Fixture implements DependentFixtureInterface
         foreach ($restaurantsData as $key => $data) {
             $restaurant = new Restaurant();
             $restaurant
-                ->setName($data['name'])
+                ->setFirstName($data['name'])
                 ->setPhoneNumber($data['phoneNumber'])
                 ->setAddress($data['address'])
                 ->setEmail($data['email'])

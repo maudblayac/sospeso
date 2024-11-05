@@ -24,12 +24,19 @@
         {{ form_widget(form.price) }}
         {{ form_errors(form.price) }}
     </div>
-
     {# <div>
-        {{ form_label(form.picture) }}
-        {{ form_widget(form.picture) }}
-        {{ form_errors(form.picture) }}
+        <label>Image actuelle :</label>
+        {% if currentPicture %}
+            <img src="{{ asset('uploads/images/' ~ currentPicture) }}" alt="Image actuelle" width="150">
+        {% else %}
+            <p>Aucune image actuelle</p>
+        {% endif %}
     </div> #}
+    <div>
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image) }}
+        {{ form_errors(form.image) }}
+    </div>
 
     <div>
         {{ form_label(form.categories) }}
@@ -37,18 +44,12 @@
         {{ form_errors(form.categories) }}
     </div>
 
-    {# <div>
-        {{ form_label(form.restaurant) }}
-        {{ form_widget(form.restaurant) }}
-        {{ form_errors(form.restaurant) }}
-    </div> #}
-
     <div>
         <button type="submit">
             {% if product is defined %}
-                Update
+                Enregistrer les modifications
             {% else %}
-                Add
+                Ajouter le produit
             {% endif %}
         </button>
     </div>
