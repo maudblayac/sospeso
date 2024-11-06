@@ -28,10 +28,16 @@ class Image
 
     // Relation OneToOne avec Product
     #[ORM\OneToOne(inversedBy: 'image', targetEntity: Product::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Product $product = null;
 
+    // Relation OneToOne avec Restaurant
+    #[ORM\OneToOne(inversedBy: 'image', targetEntity: Restaurant::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Restaurant $restaurant = null;
+
     public function getId(): ?int
+    
     {
         return $this->id;
     }
@@ -44,7 +50,6 @@ class Image
     public function setName(?string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -56,7 +61,6 @@ class Image
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 
@@ -81,10 +85,20 @@ class Image
         return $this->product;
     }
 
-    public function setProduct(Product $product): static
+    public function setProduct(?Product $product): static
     {
         $this->product = $product;
+        return $this;
+    }
 
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): static
+    {
+        $this->restaurant = $restaurant;
         return $this;
     }
 }

@@ -7,8 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
+#[Vich\Uploadable]
 class Restaurant
 {
     #[ORM\Id]
@@ -72,6 +75,9 @@ class Restaurant
 
     #[ORM\OneToOne(inversedBy: 'restaurant', cascade: ['persist', 'remove'])]
     private ?User $user = null;
+
+    #[ORM\OneToOne(mappedBy: 'restaurant', cascade: ['persist', 'remove'])]
+    private ?Image $image = null;
 
     public function __construct()
     {
@@ -218,7 +224,8 @@ class Restaurant
         $this->website = $website;
         return $this;
     }
-  public function getUser(): ?User
+
+    public function getUser(): ?User
     {
         return $this->user;
     }
@@ -226,7 +233,23 @@ class Restaurant
     public function setUser(?User $user): static
     {
         $this->user = $user;
+        return $this;
+    }
 
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+    
+    public function setImage(?Image $image): static
+    {
+        // Si une image est définie pour un produit, alors on s'assure de la liaison bi-directionnelle
+        if ($image && $image->getRestaurant() !== $this) {
+            $image->setRestaurant($this);
+        }
+    
+        $this->image = $image;
+    
         return $this;
     }
 
@@ -279,7 +302,6 @@ class Restaurant
     public function removeProduct(Product $product): static
     {
         if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
             if ($product->getRestaurant() === $this) {
                 $product->setRestaurant(null);
             }
@@ -309,7 +331,6 @@ class Restaurant
     public function removeFavorite(Favorite $favorite): static
     {
         if ($this->favorites->removeElement($favorite)) {
-            // set the owning side to null (unless already changed)
             if ($favorite->getRestaurant() === $this) {
                 $favorite->setRestaurant(null);
             }

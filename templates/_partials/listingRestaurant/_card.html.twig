@@ -3,7 +3,7 @@
 <section class="containerListings">
     <article class="Listings">
         <div class="containerPicture">
-            <img class="" alt="more" src="{{ asset('/images/restaurant/space.jpg') }}">
+            <img src="{{ vich_uploader_asset(restaurant.image) }}" alt="{{ restaurant.title }}">
         </div>
         <h2>{{ restaurant.title }}</h2>
         <article class="tag">
@@ -11,10 +11,10 @@
             {# <div class="containerTagTwo"></div> #}
         </article>
         <article class="info AlignCenter FlexRow">
-            {# <div class="location FlexAround AlignCenter FlexRow">
+            <div class="location FlexAround AlignCenter FlexRow">
                 <img class="" alt="more" src="{{ asset('/images/restaurant/location.svg') }}">
-                <div>0.7 km</div>
-            </div> #}
+                <div>{{restaurant.city}}</div>
+            </div>
             <div class="notation FlexAround AlignCenter FlexRow">
                 <img class="" alt="more" src="{{ asset('/images/restaurant/star.svg') }}">
                 <div>5.0<span>(876+)</span></div>
@@ -29,8 +29,7 @@
             {% for product in products %}
                 <article class="containerBoxProduct FlexRow">
                     <article class="containerPictureProduct">
-                        <img class="" alt="product" src="{{ asset(product.image) }}">
-                        {# <img class="" alt="product" src="{{ asset('/images/restaurant/cafe.jpg') }}"> #}
+                        <img src="{{ vich_uploader_asset(product.image) }}" alt="{{ product.name }}">
                     </article>
                     <article class="AlignCenter FlexCol JustifyCenter containerInfoProduct">
                         <p>{{ product.name }}</p>

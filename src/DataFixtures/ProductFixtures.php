@@ -52,9 +52,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                 ->setDescription($data['description'])
                 ->setPrice($data['price'])
                 ->setCategories($this->getReference($data['categories']))
-                ->setRestaurant($this->getReference('restaurant_' . rand(0, 4)));
+                ->setRestaurant($this->getReference('restaurant_' . rand(0, 3))); // Associe un restaurant aléatoire existant
 
-            // Créer une nouvelle image en se basant sur le modèle
+            // Associer une image au produit
             $originalImage = $this->getReference($data['image']);
             $image = new Image();
             $image->setName($originalImage->getName());
@@ -64,7 +64,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setImage($image);
 
             $this->addReference('product_' . $i, $product);
-            $manager->persist($image);  
+            $manager->persist($image);
             $manager->persist($product);
         }
 
@@ -75,7 +75,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             ImageFixtures::class,
-            RestaurantFixtures::class, 
+            RestaurantFixtures::class,
         ];
     }
 }

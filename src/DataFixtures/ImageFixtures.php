@@ -14,6 +14,11 @@ class ImageFixtures extends Fixture
         'cookie.jpg' => 'cookie_image',
         'sandwich.jpg' => 'sandwich_image',
         'bagel.jpg' => 'bagel_image',
+        'cafeshop.jpg' => 'cafeshop_image',
+        'restaurant.jpg' => 'restaurant_image',
+        'space.jpg' => 'space_image',
+        'space2.jpg' => 'space2_image',
+        'restaurant2.jpg' => 'restaurant2_image',
     ];
 
     public function load(ObjectManager $manager): void
@@ -48,6 +53,6 @@ class ImageFixtures extends Fixture
             }
         }
 
-        // $manager->flush();
+        $manager->flush();
     }
 }
