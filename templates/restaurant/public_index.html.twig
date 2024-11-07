@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RestaurantController{% endblock %}
+
+{% block body %}
+
+<article>
+    <h1 class="title JustifyCenter">Restaurants</h1>
+</article>
+{# filtre #}
+{# <section class="FlexRow Filter FlexAround">
+    <article class="containerFilter AlignCenter JustifyCenter">
+        <img alt="filter" src="{{ asset('/images/restaurant/filter.svg') }}">
+    </article>
+    <article class="containerFilter AlignCenter JustifyCenter">15€</article>
+    <article class="containerFilter AlignCenter JustifyCenter">Lyon</article>
+    <article class="containerFilter AlignCenter JustifyCenter">Autre</article>
+</section> #}
+<section class="FlexRow Filter FlexAround">
+    {{ form_start(form) }}
+        <article class="containerFilter AlignCenter JustifyCenter">
+            {{ form_widget(form.categories, {'attr': {'class': 'filterBubble'}}) }}
+        </article>
+        <article class="containerFilter AlignCenter JustifyCenter">
+            {{ form_widget(form.city, {'attr': {'class': 'filterBubble', 'placeholder': 'Ville'}}) }}
+        </article>
+        <article class="containerFilter AlignCenter JustifyCenter">
+            {{ form_widget(form.minPrice, {'attr': {'class': 'filterBubble', 'placeholder': 'Min €'}}) }}
+        </article>
+        <article class="containerFilter AlignCenter JustifyCenter">
+            {{ form_widget(form.maxPrice, {'attr': {'class': 'filterBubble', 'placeholder': 'Max €'}}) }}
+        </article>
+        <button type="submit" class="filterButton">Filtrer</button>
+    {{ form_end(form) }}
+</section>
+{# END filtre #}
+{# INCLUDE _Card #}
+<section class="">
+    {% for restaurantData in restaurants %}
+        {% set restaurant = restaurantData.restaurant %}
+        {% set minPrice = restaurantData.minPrice %}
+        {% set maxPrice = restaurantData.maxPrice %}
+        {% include'/_partials/listingRestaurant/_cardPublic.html.twig' %}
+    {% endfor %}
+</section>
+{# ENd _Card #}
+
+
+{% endblock %}

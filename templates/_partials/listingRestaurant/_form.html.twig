@@ -1,0 +1,35 @@
+
+{% block content %}
+    <h2>Créer ou Mettre à Jour votre Annonce</h2>
+    
+    <div class="form-container">
+        {{ form_start(form) }}
+        
+        <div class="form-group">
+            <label>{{ form_label(form.title) }}</label>
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.title) }}
+        </div>
+        
+        <div class="form-group">
+            <label>{{ form_label(form.description) }}</label>
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.description) }}
+        </div>
+        
+        <div class="form-group">
+            <label>{{ form_label(form.image) }}</label>
+            {{ form_widget(form.image, {'attr': {'class': 'form-control-file'}}) }}
+            {{ form_errors(form.image) }}
+        </div>
+        
+        <div class="form-group">
+            <label>{{ form_label(form.products) }}</label>
+            {{ form_widget(form.products, {'attr': {'class': 'form-control-checkbox'}}) }}
+            {{ form_errors(form.products) }}
+        </div>
+        
+        <button class="btn" type="submit">Enregistrer l'Annonce</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

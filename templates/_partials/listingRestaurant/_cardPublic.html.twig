@@ -1,0 +1,43 @@
+
+{# Annonces STYLE#}
+<section class="containerListings">
+    <article class="Listings">
+        <div class="containerPicture">
+            <img src="{{ vich_uploader_asset(restaurant.image) }}" alt="{{ restaurant.title }}">
+        </div>
+        <h2>{{ restaurant.title }}</h2>
+        {# <article class="tag">
+            <div class="containerTagOne"></div>
+            <div class="containerTagTwo"></div>
+        </article> #}
+        <article class="info AlignCenter FlexRow">
+            <div class="location FlexAround AlignCenter FlexRow">
+                <img class="" alt="more" src="{{ asset('/images/restaurant/location.svg') }}">
+                <div>{{restaurant.city}}</div>
+            </div>
+            <div class="notation FlexAround AlignCenter FlexRow">
+                <img class="" alt="more" src="{{ asset('/images/restaurant/star.svg') }}">
+                <div>5.0<span>(876+)</span></div>
+            </div>
+            <div class="price AlignCenter">
+                <div>• €{{minPrice}}-{{maxPrice}}</div>
+            </div>
+        </article>
+        {# Product #}
+        <section class="FlexRow">
+            {% set products = restaurant.products|slice(0, 2) %}
+            {% for product in products %}
+                <article class="containerBoxProduct FlexRow">
+                    <article class="containerPictureProduct">
+                        <img src="{{ vich_uploader_asset(product.image) }}" alt="{{ product.name }}">
+                    </article>
+                    <article class="AlignCenter FlexCol JustifyCenter containerInfoProduct">
+                        <p>{{ product.name }}</p>
+                        <p>{{ product.price }}€</p>
+                    </article>
+                </article>
+            {% endfor %}
+        </section>
+    </article>
+</section>
+{# END Annonces #}

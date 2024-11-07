@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[Vich\Uploadable]
 class Image
@@ -22,22 +23,23 @@ class Image
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    // Nouveau champ pour stocker le fichier image
+    // Champ pour stocker l'image de produit
     #[Vich\UploadableField(mapping: 'product_images', fileNameProperty: 'name')]
-    private ?File $imageFile = null;
+    private ?File $productImageFile = null;
 
-    // Relation OneToOne avec Product
+    // Champ pour stocker l'image de restaurant
+    #[Vich\UploadableField(mapping: 'restaurant_images', fileNameProperty: 'name')]
+    private ?File $restaurantImageFile = null;
+
     #[ORM\OneToOne(inversedBy: 'image', targetEntity: Product::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true)]
     private ?Product $product = null;
 
-    // Relation OneToOne avec Restaurant
     #[ORM\OneToOne(inversedBy: 'image', targetEntity: Restaurant::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true)]
     private ?Restaurant $restaurant = null;
 
     public function getId(): ?int
-    
     {
         return $this->id;
     }
@@ -64,16 +66,32 @@ class Image
         return $this;
     }
 
-    public function getImageFile(): ?File
+    public function getProductImageFile(): ?File
     {
-        return $this->imageFile;
+        return $this->productImageFile;
     }
 
-    public function setImageFile(?File $imageFile = null): static
+    public function setProductImageFile(?File $productImageFile = null): static
     {
-        $this->imageFile = $imageFile;
+        $this->productImageFile = $productImageFile;
 
-        if ($imageFile) {
+        if ($productImageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    public function getRestaurantImageFile(): ?File
+    {
+        return $this->restaurantImageFile;
+    }
+
+    public function setRestaurantImageFile(?File $restaurantImageFile = null): static
+    {
+        $this->restaurantImageFile = $restaurantImageFile;
+
+        if ($restaurantImageFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
 
@@ -101,4 +119,9 @@ class Image
         $this->restaurant = $restaurant;
         return $this;
     }
+    // public function __sleep()
+    // {
+    //     // Exclure `imageFile` pour éviter la sérialisation de l'objet File
+    //     return ['id', 'name', 'updatedAt', 'product', 'restaurant'];
+    // }
 }

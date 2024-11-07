@@ -29,13 +29,54 @@ h2{
         width: 100%;
 
     }
-    .containerFilter{
+    /* .containerFilter{
         background-color:white;
         width: 60px;
         height: 30px;
         border-radius: 15px;
+    } */
+    /* .containerFilter {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: 'Mono', sans-serif;
+        font-size: 14px;
     }
-
+    
+    .filterSelect {
+        background-color: transparent;
+        border: none;
+        font-family: 'Mono', sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    
+    .filterSelect:focus {
+        outline: none;
+        border-bottom: 2px solid var(--main-color);
+    } */
+    .filterBubble {
+        background-color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        text-align: center;
+        margin: 0 5px;
+    }
+    
+    .filterButton {
+        background-color: #EB8072;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+    
+    .filterButton:hover {
+        background-color: #FF866F;
+    }
     /************* ANNONCES ********/
     .containerListings{
         width: 100%;
@@ -82,12 +123,12 @@ h2{
             
             
         }
-        .containerTagOne{
+        /* .containerTagOne{
             background-color:rgb(62, 83, 115) ;
         }
         .containerTagTwo{
             background-color:rgb(75, 118, 98) ;
-        }
+        } */
         /* INFO */
         .info{
             width: 100%;
@@ -124,7 +165,8 @@ h2{
             height: 100%;
             width: 50%;
             position: relative;
-            overflow: hidden;                 border-radius: 10px; 
+            overflow: hidden;                 
+            border-radius: 10px; 
         }
             
         .containerPictureProduct > img {

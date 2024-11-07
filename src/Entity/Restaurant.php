@@ -6,6 +6,7 @@ use App\Repository\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use App\Entity\Image;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -79,6 +80,12 @@ class Restaurant
     #[ORM\OneToOne(mappedBy: 'restaurant', cascade: ['persist', 'remove'])]
     private ?Image $image = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $hasListing = false; 
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $isVerified = false; 
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -86,11 +93,33 @@ class Restaurant
         $this->tags = new ArrayCollection();
     }
 
-    // Getters and setters for all fields
+    // Getters and setters
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function hasListing(): bool
+    {
+        return $this->hasListing;
+    }
+
+    public function setHasListing(bool $hasListing): self
+    {
+        $this->hasListing = $hasListing;
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setisVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+        return $this;
     }
 
     public function getFirstname(): ?string

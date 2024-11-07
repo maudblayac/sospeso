@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le produit{% endblock %}
+
+{% block body %}
+    <h1>Modification du produit</h1>
+
+    {{ include('_partials/listingRestaurant/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_restaurant_index') }}">Retourner a votre liste</a>
+
+    {{ include('restaurant/_delete_form.html.twig') }}
+{% endblock %}

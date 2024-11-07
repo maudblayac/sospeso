@@ -36,7 +36,7 @@ class ProductType extends AbstractType
             ])
             ->add('image', ImageType::class,[
                 'label' => 'Image du produit',
-
+                'is_product' => true,
             ])
 
 
