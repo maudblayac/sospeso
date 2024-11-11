@@ -46,6 +46,12 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('r');
 
+        // Exclure les restaurants en pause
+        $qb->andWhere('r.hasListing = :hasListing')
+           ->andWhere('r.isPaused = :isPaused')
+           ->setParameter('hasListing', true)
+           ->setParameter('isPaused', false);
+
         $this->applyFilters($qb, $searchDto);
 
         return $qb->getQuery()->getResult();
@@ -78,5 +84,21 @@ class RestaurantRepository extends ServiceEntityRepository
             $qb->andWhere('r.maxPrice <= :maxPrice')
                ->setParameter('maxPrice', $searchDto->getMaxPrice());
         }
+    }
+
+    /**
+     * Récupère les restaurants publics actifs (non en pause)
+     *
+     * @return Restaurant[]
+     */
+    public function findPublicActiveRestaurants(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.hasListing = :hasListing')
+            ->andWhere('r.isPaused = :isPaused')
+            ->setParameter('hasListing', true)
+            ->setParameter('isPaused', false)
+            ->getQuery()
+            ->getResult();
     }
 }

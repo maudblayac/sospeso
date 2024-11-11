@@ -83,6 +83,10 @@ class Restaurant
     #[ORM\Column(type: 'boolean')]
     private bool $hasListing = false; 
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isPaused = false;
+
+
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: FeaturedProduct::class, cascade: ['persist', 'remove'])]
     private Collection $featuredProducts;
 
@@ -395,5 +399,16 @@ class Restaurant
         }
         return $this;
     }
+    public function isPaused(): bool
+    {
+        return $this->isPaused;
+    }
+
+    public function setIsPaused(bool $isPaused): self
+    {
+        $this->isPaused = $isPaused;
+        return $this;
+    }
+
 
 }

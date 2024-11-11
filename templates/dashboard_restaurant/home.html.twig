@@ -6,6 +6,11 @@
     {# <h1>Bonjour {{ restaurant.firstname }} {{ restaurant.lastname }},</h1> #}
     <h1>Bonjour,</h1>
     <p>Bienvenue dans votre espace Dashboard Restaurateur !</p>
+    {% if user.restaurant.isPaused %}
+        <div class="">
+            Votre annonce est actuellement en pause et n'apparaît pas sur le site public.
+        </div>
+    {% endif %}
     <div class="welcomeImage">
         <img src="{{ asset('images/dashboardRestaurant/mainHome.svg') }}" alt="Dashboard Accueil">
     </div>

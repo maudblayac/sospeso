@@ -30,10 +30,11 @@ class RestaurantController extends AbstractController
         $form = $this->createForm(RestaurantSearchType::class, $searchDto, ['method' => 'GET']);
         $form->handleRequest($request);
 
-        $restaurants = $form->isSubmitted() && $form->isValid()
-            ? $restaurantRepository->searchByCriteria($searchDto)
-            : $restaurantRepository->findBy(['hasListing' => true]);
-
+        if ($form->isSubmitted() && $form->isValid()) {
+            $restaurants = $restaurantRepository->searchByCriteria($searchDto);
+        } else {
+            $restaurants = $restaurantRepository->findPublicActiveRestaurants();
+        }
         $restaurantData = $this->getRestaurantData($restaurants);
 
         return $this->render('restaurant/public_index.html.twig', [

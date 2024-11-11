@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Restaurant;
 use App\Entity\User;
 use App\Entity\Product;
+use App\Form\AccountSettingsType;
 use App\Form\RestaurantProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,6 +27,62 @@ class DashboardRestaurantController extends AbstractController
             'user' => $this->getUser(),
         ]);
     }
+   // Page des paramètres du compte
+   #[Route('/account-settings', name: 'account_settings')]
+   public function accountSettings(Request $request, EntityManagerInterface $entityManager): Response
+   {
+       /** @var User $user */
+       $user = $this->getUser();
+       $restaurant = $user->getRestaurant();
+
+        // Vérifiez que le restaurant existe
+        if (!$restaurant) {
+            $this->addFlash('error', 'Vous n\'avez pas de restaurant associé à votre compte.');
+            return $this->redirectToRoute('app_dashboard_restaurant_home');
+        }
+
+        // Créer le formulaire
+        $form = $this->createForm(AccountSettingsType::class, $restaurant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($restaurant);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Paramètres du compte mis à jour avec succès.');
+            return $this->redirectToRoute('app_dashboard_restaurant_account_settings');
+        }
+
+       return $this->render('dashboard_restaurant/accountSettings.html.twig', [
+           'user' => $user,
+           'form' => $form->createView(),
+       ]);
+    }
+
+   // Méthode pour supprimer le compte utilisateur
+   #[Route('/account/delete', name: 'account_delete', methods: ['POST'])]
+   public function deleteAccount(Request $request, EntityManagerInterface $entityManager): Response
+   {
+       /** @var User $user */
+       $user = $this->getUser();
+
+       if ($this->isCsrfTokenValid('delete_account', $request->request->get('_token'))) {
+           // Déconnecter l'utilisateur
+           $this->container->get('security.token_storage')->setToken(null);
+           $request->getSession()->invalidate();
+
+           // Supprimer l'utilisateur
+           $entityManager->remove($user);
+           $entityManager->flush();
+
+           $this->addFlash('success', 'Votre compte a été supprimé avec succès.');
+
+           return $this->redirectToRoute('app_home'); // Redirigez vers la page d'accueil ou une autre page
+       }
+
+       $this->addFlash('error', 'Jeton CSRF invalide.');
+       return $this->redirectToRoute('app_dashboard_restaurant_account_settings');
+   }
 
     // Gestion des produits
     #[Route('/products', name: 'products')]
