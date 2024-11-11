@@ -2,5 +2,60 @@
 
 {% block content %}
 <h2>Mon Restaurant</h2>
-<p>Informations sur le restaurant, CRUD des annonces...</p>
+
+{% if restaurant.hasListing %}
+    <div class="restaurantPreview">
+        <div class="restaurantImage">
+            <img src="{{ vich_uploader_asset(restaurant.image) }}" alt="{{ restaurant.title }}">
+        </div>
+        <div class="restaurantInfo">
+            <h3>{{ restaurant.title }}</h3>
+            <div class="restaurantDetails">
+                <span class="location">
+                    <img src="{{ asset('/images/restaurant/location.svg') }}" alt="locationIcon">
+                    {{ restaurant.city }}
+                </span>
+                <span class="rating">
+                    <img src="{{ asset('/images/restaurant/star.svg') }}" alt="note">
+                    5.0 <span>(876+)</span>
+                </span>
+            </div>
+            <p>{{ restaurant.description }}</p>
+            <a href="{{ path('app_restaurant_edit', { 'id': restaurant.id }) }}" class="btn">Modifier</a>
+        </div>
+        <div class="associatedProducts">
+            <h4>Produits associés :</h4>
+            <div class="productsGrid">
+                {% for featuredProduct in restaurant.featuredProducts %}
+                    <div class="productCard">
+                        <img src="{{ vich_uploader_asset(featuredProduct.product.image) }}" alt="{{ featuredProduct.product.name }}">
+                        <p class="productName">{{ featuredProduct.product.name }}</p>
+                        <p class="productPrice">{{ featuredProduct.product.price }}€</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <h3>Créer votre annonce</h3>
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.featuredProducts) }}
+        {{ form_widget(form.featuredProducts) }}
+    </div>
+    <button type="submit" class="btn">Créer l'annonce</button>
+    {{ form_end(form) }}
+{% endif %}
 {% endblock %}

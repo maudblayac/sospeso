@@ -1,8 +1,8 @@
-{# _card_restaurant.html.twig #}
+{# _card_restaurant.html.twig
 <section class="containerListings">
     <article class="Listings">
         <div class="containerPicture">
-            {% if restaurant.image %}
+            {% if restaurant.image is not empty %}
                 <img src="{{ vich_uploader_asset(restaurant.image) }}" alt="{{ restaurant.title }}">
             {% else %}
                 <img src="{{ asset('/images/default-placeholder.png') }}" alt="Image par défaut">
@@ -20,24 +20,17 @@
                 <img alt="location" src="{{ asset('/images/restaurant/location.svg') }}">
                 <div>{{ restaurant.city }}</div>
             </div>
-            {# <div class="notation FlexAround AlignCenter FlexRow">
-                <img alt="notation" src="{{ asset('/images/restaurant/star.svg') }}">
-                <div>5.0<span>(876+)</span></div>
-            </div>
-            <div class="price AlignCenter">
-                <div>• €{{ minPrice }} - €{{ maxPrice }}</div>
-            </div> #}
         </article>
 
         {# Section des produits pour prévisualisation #}
-        <h3 class="previewTitle">Produits associés</h3>
+        {# <h3 class="previewTitle">Produits associés</h3>
         {% if restaurant.products|length > 0 %}
             <section class="FlexRow productPreview">
                 {% set products = restaurant.products|slice(0, 2) %}
                 {% for product in products %}
                     <article class="containerBoxProduct FlexRow">
                         <div class="containerPictureProduct">
-                            {% if product.image %}
+                            {% if product.image is not empty %}
                                 <img src="{{ vich_uploader_asset(product.image) }}" alt="{{ product.name }}">
                             {% else %}
                                 <img src="{{ asset('/images/product-placeholder.png') }}" alt="Image produit par défaut">
@@ -55,4 +48,4 @@
             <div class="alert">Aucun produit associé. <a href="{{ path('app_dashboard_restaurant_products') }}">Ajoutez des produits</a></div>
         {% endif %}
     </article>
-</section>
+</section>  #}

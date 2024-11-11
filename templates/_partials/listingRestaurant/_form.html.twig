@@ -24,10 +24,11 @@
         </div>
         
         <div class="form-group">
-            <label>{{ form_label(form.products) }}</label>
-            {{ form_widget(form.products, {'attr': {'class': 'form-control-checkbox'}}) }}
-            {{ form_errors(form.products) }}
+            <label>{{ form_label(form.featuredProducts) }}</label>
+            {{ form_widget(form.featuredProducts, {'attr': {'class': 'form-control-checkbox'}}) }}
+            {{ form_errors(form.featuredProducts) }}
         </div>
+
         
         <button class="btn" type="submit">Enregistrer l'Annonce</button>
         {{ form_end(form) }}

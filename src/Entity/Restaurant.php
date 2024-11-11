@@ -59,7 +59,7 @@ class Restaurant
     /**
      * @var Collection<int, Product>
      */
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'restaurant')]
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Product::class, cascade: ['persist', 'remove'])]
     private Collection $products;
 
     /**
@@ -83,14 +83,19 @@ class Restaurant
     #[ORM\Column(type: 'boolean')]
     private bool $hasListing = false; 
 
-    #[ORM\Column(type: 'boolean')]
-    private bool $isVerified = false; 
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: FeaturedProduct::class, cascade: ['persist', 'remove'])]
+    private Collection $featuredProducts;
+
+
+    // #[ORM\Column(type: 'boolean')]
+    // private bool $isVerified = false; 
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->favorites = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->featuredProducts = new ArrayCollection();
     }
 
     // Getters and setters
@@ -111,16 +116,16 @@ class Restaurant
         return $this;
     }
 
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
+    // public function isVerified(): bool
+    // {
+    //     return $this->isVerified;
+    // }
 
-    public function setisVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-        return $this;
-    }
+    // public function setisVerified(bool $isVerified): self
+    // {
+    //     $this->isVerified = $isVerified;
+    //     return $this;
+    // }
 
     public function getFirstname(): ?string
     {
@@ -367,4 +372,28 @@ class Restaurant
 
         return $this;
     }
+    public function getFeaturedProducts(): Collection
+    {
+        return $this->featuredProducts;
+    }
+
+    public function addFeaturedProduct(FeaturedProduct $featuredProduct): self
+    {
+        if (!$this->featuredProducts->contains($featuredProduct)) {
+            $this->featuredProducts->add($featuredProduct);
+            $featuredProduct->setRestaurant($this);
+        }
+        return $this;
+    }
+
+    public function removeFeaturedProduct(FeaturedProduct $featuredProduct): self
+    {
+        if ($this->featuredProducts->removeElement($featuredProduct)) {
+            if ($featuredProduct->getRestaurant() === $this) {
+                $featuredProduct->setRestaurant(null);
+            }
+        }
+        return $this;
+    }
+
 }

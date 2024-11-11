@@ -1,4 +1,4 @@
-{% extends 'dashboard_restaurant/layout.html.twig' %}
+{# {% extends 'dashboard_restaurant/layout.html.twig' %}
 
 {% block content %}
     <h2>Profil du Restaurant</h2>
@@ -57,4 +57,35 @@
         
         <button type="submit" class="btn">Mettre à jour</button>
     {{ form_end(form) }}
+{% endblock %} #}
+{# templates/dashboard_restaurant/profile.html.twig #}
+{% extends 'dashboard_restaurant/layout.html.twig' %}
+
+{% block content %}
+<h2>Profil du Restaurant</h2>
+<p>Complétez les informations de votre profil restaurateur.</p>
+
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.firstname) }}
+        {{ form_widget(form.firstname) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.lastname) }}
+        {{ form_widget(form.lastname) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.phoneNumber) }}
+        {{ form_widget(form.phoneNumber) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.address) }}
+        {{ form_widget(form.address) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.city) }}
+        {{ form_widget(form.city) }}
+    </div>
+    <button type="submit" class="btn">Mettre à jour</button>
+{{ form_end(form) }}
 {% endblock %}

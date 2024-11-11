@@ -354,3 +354,186 @@ h2 {
         padding: 18px;
     }
 }
+.dashboardWelcome {
+    text-align: center;
+}
+
+.welcomeImage img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.productGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.productCard {
+    width: 220px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productImage img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+}
+
+.restaurantPreview, .associatedProducts {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+:root {
+    --background-color: #333;
+    --accent-color: #EB8072;
+    --primary-text-color: #000000;
+    --secondary-text-color: #CCCCCC;
+    --border-radius: 10px;
+}
+
+.restaurantPreview {
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    color: var(--primary-text-color);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+ /* PICTURE */
+ .restaurantImage {
+    height: 250px;
+    width: 100%;
+    position: relative;
+    overflow: hidden; 
+    border-radius: 10px; 
+}
+
+.restaurantImage > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit; 
+}
+
+/* .restaurantImage img {
+    width: 100%;
+    border-radius: var(--border-radius);
+} */
+
+.restaurantInfo h3 {
+    font-size: 24px;
+    color: var(--primary-text-color);
+    margin: 10px 0;
+}
+
+.restaurantDetails {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.restaurantDetails span {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    color: var(--secondary-text-color);
+}
+
+.restaurantDetails img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.restaurantDetails .price {
+    font-weight: bold;
+    color: var(--primary-text-color);
+}
+
+.associatedProducts h4 {
+    font-size: 18px;
+    margin-top: 20px;
+    color: var(--primary-text-color);
+}
+
+.productsGrid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.productCard {
+    background-color: #FFF;
+    border-radius: 8px;
+    width: 120px;
+    padding: 10px;
+    text-align: center;
+    color: var(--background-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productCard img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.productName {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.productPrice {
+    font-size: 14px;
+    color: var(--accent-color);
+}
+
+.btn {
+    background-color: var(--accent-color);
+    color: #FFF;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #FF866F;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .restaurantPreview {
+        padding: 15px;
+    }
+
+    .productsGrid {
+        justify-content: space-around;
+    }
+}

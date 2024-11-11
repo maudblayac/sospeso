@@ -24,16 +24,17 @@
             </div>
         </article>
         {# Product #}
+        {# cardPublic.twig #}
         <section class="FlexRow">
-            {% set products = restaurant.products|slice(0, 2) %}
-            {% for product in products %}
+            {% set products = restaurant.featuredProducts %}
+            {% for featuredProduct in products %}
                 <article class="containerBoxProduct FlexRow">
                     <article class="containerPictureProduct">
-                        <img src="{{ vich_uploader_asset(product.image) }}" alt="{{ product.name }}">
+                        <img src="{{ vich_uploader_asset(featuredProduct.product.image) }}" alt="{{ featuredProduct.product.name }}">
                     </article>
                     <article class="AlignCenter FlexCol JustifyCenter containerInfoProduct">
-                        <p>{{ product.name }}</p>
-                        <p>{{ product.price }}€</p>
+                        <p>{{ featuredProduct.product.name }}</p>
+                        <p>{{ featuredProduct.product.price }}€</p>
                     </article>
                 </article>
             {% endfor %}

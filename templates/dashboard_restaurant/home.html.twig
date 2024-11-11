@@ -1,9 +1,13 @@
+{# templates/dashboard_restaurant/home.html.twig #}
 {% extends 'dashboard_restaurant/layout.html.twig' %}
 
 {% block content %}
 <div class="dashboardWelcome">
-    {# <h1>Bonjour, {{ user.firstname }}</h1> #}
+    {# <h1>Bonjour {{ restaurant.firstname }} {{ restaurant.lastname }},</h1> #}
     <h1>Bonjour,</h1>
-    <p>Bienvenue dans votre dashboard !</p>
+    <p>Bienvenue dans votre espace Dashboard Restaurateur !</p>
+    <div class="welcomeImage">
+        <img src="{{ asset('images/dashboardRestaurant/mainHome.svg') }}" alt="Dashboard Accueil">
+    </div>
 </div>
 {% endblock %}

@@ -6,7 +6,6 @@ use App\Entity\Restaurant;
 use App\Entity\User;
 use App\Entity\Product;
 use App\Form\RestaurantProfileType;
-// use App\Form\RestaurantListingType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +18,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
 class DashboardRestaurantController extends AbstractController
 {
+    // Page d'accueil du Dashboard
     #[Route('/', name: 'home')]
     public function home(): Response
     {
@@ -27,20 +27,43 @@ class DashboardRestaurantController extends AbstractController
         ]);
     }
 
-    // Gestion du profil du restaurant
-    #[Route('/profile', name: 'profile', methods: ['GET', 'POST'])]
+    // Gestion des produits
+    #[Route('/products', name: 'products')]
+    public function products(EntityManagerInterface $em): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $products = $em->getRepository(Product::class)->findBy(['restaurant' => $user->getRestaurant()]);
+
+        return $this->render('dashboard_restaurant/products.html.twig', [
+            'products' => $products,
+        ]);
+    }
+
+    // Page pour gérer l'annonce de restaurant
+    #[Route('/restaurant', name: 'restaurant')]
+    public function restaurant(Request $request, EntityManagerInterface $entityManager): Response
+    {   
+         /** @var User $user */
+        $user = $this->getUser();
+        $restaurant = $user->getRestaurant();
+
+        if (!$restaurant) {
+            return $this->redirectToRoute('app_restaurant_new');
+        }
+
+        return $this->render('dashboard_restaurant/restaurant.html.twig', [
+            'restaurant' => $restaurant,
+        ]);
+    }
+
+    // Page de profil
+    #[Route('/profile', name: 'profile')]
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
         $user = $this->getUser();
         $restaurant = $user->getRestaurant();
-
-        if (!$restaurant) {
-            $restaurant = new Restaurant();
-            $restaurant->setUser($user);
-            $entityManager->persist($restaurant);
-            $entityManager->flush();
-        }
 
         $form = $this->createForm(RestaurantProfileType::class, $restaurant);
         $form->handleRequest($request);
@@ -54,25 +77,5 @@ class DashboardRestaurantController extends AbstractController
             'form' => $form->createView(),
             'restaurant' => $restaurant,
         ]);
-    }
-
-    //gestion des produits par le restaurateur 
-    #[Route('/products', name: 'products')]
-    public function products(EntityManagerInterface $em): Response
-    {                
-        /** @var User $user */
-        $user = $this->getUser();
-        // Récupérer les produits du restaurant du user connecté
-        $products = $em->getRepository(Product::class)->findBy(['restaurant' => $user->getRestaurant()]);
-
-        return $this->render('dashboard_restaurant/products.html.twig', [
-            'products' => $products,
-        ]);
-    }
-
-    #[Route('/restaurant', name: 'restaurant')]
-    public function restaurant(): Response
-    {
-        return $this->render('dashboard_restaurant/restaurant.html.twig');
     }
 }

@@ -77,7 +77,8 @@ class RestaurantFixtures extends Fixture implements DependentFixtureInterface
                 ->setPostalCode($data['postalCode'])
                 ->setEmail($data['email'])
                 ->setPhoneNumber($data['phoneNumber'])
-                ->setWebsite($data['website']);
+                ->setWebsite($data['website'])
+                ->setHasListing(true);
 
             // Créez une nouvelle instance d'image unique meme si visuellement cest la meme pour chaque restaurant
             $image = new Image();

@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Validator\Constraints\Count;
 
 class RestaurantListingType extends AbstractType
 {
@@ -36,18 +36,28 @@ class RestaurantListingType extends AbstractType
                 'label' => 'Restaurant Image',
                 'required' => false,
             ])
-            ->add('products', EntityType::class, [
+            ->add('featuredProducts', EntityType::class, [
                 'class' => Product::class,
                 'choice_label' => 'name',
-                'label' => 'Products',
+                'label' => 'Sélectionner un ou deux produits pour mettre en avant sur votre annonce',
                 'multiple' => true,
                 'expanded' => true,
                 'query_builder' => function (ProductRepository $repository) use ($restaurant) {
                     return $repository->createQueryBuilder('p')
                         ->where('p.restaurant = :restaurant')
                         ->setParameter('restaurant', $restaurant);
-                },
+                }, 
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                        'minMessage' => 'Vous devez sélectionner au moins un produit pour créer votre annonce.',
+                        'max' => 2,
+                        'maxMessage' => 'Vous pouvez sélectionner jusqu\'à deux produits pour mettre en avant.',
+                    ]),            
+                ],
+                'mapped' => false,
             ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

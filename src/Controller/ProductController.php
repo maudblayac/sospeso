@@ -66,7 +66,7 @@ class ProductController extends AbstractController
                     'message' => "Votre produit a été créé avec succès !",
                 ]);
 
-                return $this->redirectToRoute('app_product_index');            
+                return $this->redirectToRoute('app_dashboard_restaurant_products');            
             } catch (\Exception $e) {
                 // Gestion des erreurs à revoir 
                 $this->addFlash('error', 'Une erreur est survenue: ' . $e->getMessage());
@@ -106,7 +106,7 @@ class ProductController extends AbstractController
                 'message' => "Votre produit a été mis à jour avec succès !",
             ]);
 
-            return $this->redirectToRoute('app_product_index');
+            return $this->redirectToRoute('app_dashboard_restaurant_products');
         }
 
         return $this->render('product/update.html.twig', [
@@ -145,6 +145,6 @@ class ProductController extends AbstractController
             $this->addFlash('success', 'Produit supprimé avec succès!');
         }
 
-        return $this->redirectToRoute('app_product_index');
+        return $this->redirectToRoute('app_dashboard_restaurant_products');
     }
 }

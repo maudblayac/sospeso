@@ -32,11 +32,11 @@ class Image
     private ?File $restaurantImageFile = null;
 
     #[ORM\OneToOne(inversedBy: 'image', targetEntity: Product::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
     private ?Product $product = null;
-
+    
     #[ORM\OneToOne(inversedBy: 'image', targetEntity: Restaurant::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
     private ?Restaurant $restaurant = null;
 
     public function getId(): ?int
@@ -119,9 +119,9 @@ class Image
         $this->restaurant = $restaurant;
         return $this;
     }
-    // public function __sleep()
-    // {
-    //     // Exclure `imageFile` pour éviter la sérialisation de l'objet File
-    //     return ['id', 'name', 'updatedAt', 'product', 'restaurant'];
-    // }
+    public function __sleep()
+    {
+        // Exclure `imageFile` pour éviter la sérialisation de l'objet File
+        return ['id', 'name', 'updatedAt', 'product', 'restaurant'];
+    }
 }

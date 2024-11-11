@@ -52,9 +52,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                 ->setDescription($data['description'])
                 ->setPrice($data['price'])
                 ->setCategories($this->getReference($data['categories']))
-                ->setRestaurant($this->getReference('restaurant_' . rand(0, 3))); 
+                ->setRestaurant($this->getReference('restaurant_' . ($i % 4))); // Associe les produits aux restaurants en boucle
 
-            // Associer une image au produit
+            // Associer une image unique à chaque produit
             $originalImage = $this->getReference($data['image']);
             $image = new Image();
             $image->setName($originalImage->getName());
@@ -63,7 +63,9 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
 
             $product->setImage($image);
 
+            // Ajouter une référence unique pour chaque produit
             $this->addReference('product_' . $i, $product);
+
             $manager->persist($image);
             $manager->persist($product);
         }

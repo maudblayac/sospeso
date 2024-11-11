@@ -24,14 +24,7 @@
         {{ form_widget(form.price) }}
         {{ form_errors(form.price) }}
     </div>
-    {# <div>
-        <label>Image actuelle :</label>
-        {% if currentPicture %}
-            <img src="{{ asset('uploads/images/' ~ currentPicture) }}" alt="Image actuelle" width="150">
-        {% else %}
-            <p>Aucune image actuelle</p>
-        {% endif %}
-    </div> #}
+
     <div>
         {{ form_label(form.image) }}
         {{ form_widget(form.image) }}
