@@ -10,6 +10,7 @@ use App\Form\RestaurantProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\RestaurantListingType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +30,7 @@ class DashboardRestaurantController extends AbstractController
     }
    // Page des paramètres du compte
    #[Route('/account-settings', name: 'account_settings')]
+   #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
    public function accountSettings(Request $request, EntityManagerInterface $entityManager): Response
    {
        /** @var User $user */
@@ -61,6 +63,7 @@ class DashboardRestaurantController extends AbstractController
 
    // Méthode pour supprimer le compte utilisateur
    #[Route('/account/delete', name: 'account_delete', methods: ['POST'])]
+   #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
    public function deleteAccount(Request $request, EntityManagerInterface $entityManager): Response
    {
        /** @var User $user */
@@ -86,6 +89,7 @@ class DashboardRestaurantController extends AbstractController
 
     // Gestion des produits
     #[Route('/products', name: 'products')]
+    #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
     public function products(EntityManagerInterface $em): Response
     {
         /** @var User $user */
@@ -99,23 +103,53 @@ class DashboardRestaurantController extends AbstractController
 
     // Page pour gérer l'annonce de restaurant
     #[Route('/restaurant', name: 'restaurant')]
+    #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
     public function restaurant(Request $request, EntityManagerInterface $entityManager): Response
     {   
-         /** @var User $user */
+        /** @var User $user */
         $user = $this->getUser();
         $restaurant = $user->getRestaurant();
 
+        // Si l'utilisateur n'a pas encore de restaurant, redirection vers la création
         if (!$restaurant) {
             return $this->redirectToRoute('app_restaurant_new');
         }
 
+        // S'il y a déjà une annonce
+        if ($restaurant->hasListing()) {
+            return $this->render('dashboard_restaurant/restaurant.html.twig', [
+                'restaurant' => $restaurant,
+            ]);
+        }
+
+        // Vérifie si le restaurant a au moins un produit**
+        // if ($restaurant->getProducts()->isEmpty()) {
+        //     $this->addFlash('error', 'Vous devez créer au moins un produit avant de pouvoir publier votre annonce.');
+        //     return $this->redirectToRoute('app_dashboard_restaurant_products');
+    
+
+        // Si aucune annonce n'existe, affiche le formulaire de création
+        $form = $this->createForm(RestaurantListingType::class, $restaurant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $restaurant->setHasListing(true);
+            $entityManager->persist($restaurant);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Annonce créée avec succès !');
+            return $this->redirectToRoute('app_dashboard_restaurant_restaurant');
+        }
+
         return $this->render('dashboard_restaurant/restaurant.html.twig', [
+            'form' => $form->createView(),
             'restaurant' => $restaurant,
         ]);
     }
 
     // Page de profil
     #[Route('/profile', name: 'profile')]
+    #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */

@@ -51,20 +51,36 @@ class UserProfileController extends AbstractController
     }
 
     //DELETE
-    #[Route('/delete', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-        $userProfile = $user->getUserProfile();
+   // DELETE
+#[Route('/delete', name: 'delete', methods: ['POST'])]
+public function delete(Request $request, EntityManagerInterface $entityManager): Response
+{
+    /** @var User $user */
+    $user = $this->getUser();
+    $userProfile = $user->getUserProfile();
 
-        if ($userProfile && $this->isCsrfTokenValid('delete-profile', $request->request->get('_token'))) {
+    if ($this->isCsrfTokenValid('delete-profile', $request->request->get('_token'))) {
+        // Supprime le profil utilisateur s'il existe
+        if ($userProfile) {
             $entityManager->remove($userProfile);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Votre profil a été supprimé avec succès.');
         }
 
-        return $this->redirectToRoute('app_home'); 
+        // Supprime l'utilisateur
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Votre compte et profil ont été supprimés avec succès.');
+
+        // Déconnecte l'utilisateur et invalide la session
+        $this->container->get('security.token_storage')->setToken(null);
+        $request->getSession()->invalidate();
+
+        // Redirige vers la page d'accueil
+        return $this->redirectToRoute('app_home');
     }
+
+    $this->addFlash('error', 'La suppression du compte a échoué.');
+    return $this->redirectToRoute('app_user_profile_index');
+}
+
 }

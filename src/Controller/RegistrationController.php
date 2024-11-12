@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Restaurant;
 use App\Entity\UserProfile;
+use App\Enum\UserStatus;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationRestaurantFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,6 +26,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRoles(['ROLE_USER']);
+            $user->setStatus(UserStatus::VERIFIE);
             
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -58,6 +60,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRoles(['ROLE_RESTAURANT']);
+            $user->setStatus(UserStatus::EN_ATTENTE);
 
             $user->setPassword(
                 $userPasswordHasher->hashPassword(

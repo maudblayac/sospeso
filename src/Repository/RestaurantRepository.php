@@ -97,6 +97,7 @@ class RestaurantRepository extends ServiceEntityRepository
             ->where('r.hasListing = :hasListing')
             ->andWhere('r.isPaused = :isPaused')
             ->setParameter('hasListing', true)
+            ->setParameter('isApproved', true)
             ->setParameter('isPaused', false)
             ->getQuery()
             ->getResult();

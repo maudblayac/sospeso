@@ -5,6 +5,7 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use App\Enum\UserStatus;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
@@ -35,7 +36,9 @@ class UserFixtures extends Fixture
             ))
             ->setCreatedAt(new \DateTimeImmutable())
             ->setIsActive(true)
-            ->setIsVerified(true);
+            ->setIsVerified(true)
+            ->setStatus(UserStatus::VERIFIE); 
+
 
         $this->addReference('admin_user', $admin);
 
@@ -58,7 +61,9 @@ class UserFixtures extends Fixture
                 ))
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setIsActive(true)
-                ->setIsVerified(true);
+                ->setIsVerified(true)
+                ->setStatus(UserStatus::VERIFIE); 
+
 
             $this->addReference('restaurant_user_' . $i, $restaurant);
 
@@ -80,7 +85,8 @@ class UserFixtures extends Fixture
             ))
             ->setCreatedAt(new \DateTimeImmutable('2020-10-20'))
             ->setIsActive(true)
-            ->setIsVerified(false);
+            ->setIsVerified(false)
+            ->setStatus(UserStatus::VERIFIE);
 
         $this->addReference('specific_user', $user);
         $manager->persist($user);
@@ -96,7 +102,8 @@ class UserFixtures extends Fixture
                 ))
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setIsActive(true)
-                ->setIsVerified(false);
+                ->setIsVerified(false)
+                ->setStatus(UserStatus::VERIFIE);
 
             $this->addReference('user_' . $i, $additionalUser);
             $manager->persist($additionalUser);

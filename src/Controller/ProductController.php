@@ -119,6 +119,7 @@ class ProductController extends AbstractController
     //Méthode Show
 
     #[Route("/show/{id}", name: 'show', methods: ['GET'])]
+    #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
     public function show(Product $product): Response
     {
         return $this->render('product/show.html.twig', [

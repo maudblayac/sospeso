@@ -6,12 +6,14 @@
     --accent-color: #EB8072;
     --accent-hover-color: #FF866F;
     --primary-text-color: #282F4B;
+    --secondary-text-color: #3b3b3b;
     --border-color: #ccc;
+    --border-radius: 10px;
 }
 
 /* Style général */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Mono';
     background-color: var(--background-color);
     margin: 0;
 }
@@ -224,7 +226,7 @@ h1 {
 
 h2 {
     font-family: 'rowdies';
-    color: white;
+    color: var(--primary-text-color);
     font-size: 25px;
 }
 
@@ -404,14 +406,6 @@ h2 {
     cursor: pointer;
 }
 
-:root {
-    --background-color: #333;
-    --accent-color: #EB8072;
-    --primary-text-color: #000000;
-    --secondary-text-color: #CCCCCC;
-    --border-radius: 10px;
-}
-
 .restaurantPreview {
     background-color: var(--background-color);
     border-radius: var(--border-radius);
@@ -491,7 +485,7 @@ h2 {
     width: 120px;
     padding: 10px;
     text-align: center;
-    color: var(--background-color);
+    color: var(--primary-text-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 

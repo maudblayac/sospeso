@@ -16,10 +16,10 @@
 
 /* ---------------------------------Variables----------------------------------- */
 :root {
-    --main-color: #444444;
+    --main-color: #ffffff;
     --footerBgColor: #F6EDD2;
     --footerBottomBg: #ffffff;
-    --footerTextColor: #444444;
+    --footerTextColor: #3a3939;
     --footerBorderColor: #b6b5b9;
 }
 

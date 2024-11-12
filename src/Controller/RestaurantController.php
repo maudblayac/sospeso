@@ -113,6 +113,7 @@ class RestaurantController extends AbstractController
 
     // Afficher les détails d'un restaurant
     #[Route('/{id}', name: 'show', methods: ['GET'])]
+    #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
     public function show(Restaurant $restaurant): Response
     {
         return $this->render('restaurant/show.html.twig', [

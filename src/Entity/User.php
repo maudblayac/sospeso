@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\UserStatus;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -55,6 +56,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $isVerified = null;
+
+    #[ORM\Column(type: 'string', enumType: UserStatus::class, nullable: false)]
+    private UserStatus $status;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?UserProfile $userProfile = null;
@@ -280,6 +284,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->restaurant = $restaurant;
 
         return $this;
+        }
+        public function getStatus(): UserStatus
+        {
+            return $this->status;
+        }
+
+        public function setStatus(UserStatus $status): self
+        {
+            $this->status = $status;
+
+            return $this;
+        }
     }
 
-}

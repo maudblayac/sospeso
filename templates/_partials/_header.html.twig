@@ -36,12 +36,17 @@
             <!-- Compte et panier en flex row en desktop -->
             <div class="accountCart FlexRow JustifyAround FlexAround">
                 {% if is_granted("ROLE_ADMIN") %}
-                    <a href="{{ path('app_admin') }}" class="account FlexRow AlignCenter">
+                    <a href="{{ path('admin_dashboard') }}" class="account FlexRow AlignCenter">
                         <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="admin">
                         <span class="desktopOnly">Admin</span>
                     </a>
                 {% elseif is_granted("ROLE_RESTAURANT") %}
                     <a href="{{ path('app_dashboard_restaurant_home') }}" class="account FlexRow AlignCenter">
+                        <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="restaurant">
+                        <span class="desktopOnly">Dashboard</span>
+                    </a>
+                    {% elseif is_granted("ROLE_USER") %}
+                    <a href="{{ path('app_user_profile_index') }}" class="account FlexRow AlignCenter">
                         <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="restaurant">
                         <span class="desktopOnly">Dashboard</span>
                     </a>

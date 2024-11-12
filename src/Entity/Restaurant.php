@@ -82,6 +82,10 @@ class Restaurant
 
     #[ORM\Column(type: 'boolean')]
     private bool $hasListing = false; 
+    
+    #[ORM\Column(type: 'boolean')]
+    private bool $isApproved = false;
+
 
     #[ORM\Column(type: 'boolean')]
     private bool $isPaused = false;
@@ -119,17 +123,6 @@ class Restaurant
         $this->hasListing = $hasListing;
         return $this;
     }
-
-    // public function isVerified(): bool
-    // {
-    //     return $this->isVerified;
-    // }
-
-    // public function setisVerified(bool $isVerified): self
-    // {
-    //     $this->isVerified = $isVerified;
-    //     return $this;
-    // }
 
     public function getFirstname(): ?string
     {
@@ -407,6 +400,17 @@ class Restaurant
     public function setIsPaused(bool $isPaused): self
     {
         $this->isPaused = $isPaused;
+        return $this;
+    }
+    public function isApproved(): bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setIsApproved(bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
+
         return $this;
     }
 
