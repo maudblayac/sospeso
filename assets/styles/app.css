@@ -117,7 +117,12 @@ h3 {
     .mobileOnly {
         display: block;
     }
-
+    .iconeLeft{
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+        gap: 15px;
+    }
     section {
         padding: 10px;
         box-sizing: border-box;
@@ -200,8 +205,8 @@ h3 {
     }
 
     footer {
-        background-color: var(--footerBgColor);
-        padding: 40px 60px;
+        background-color: var(--footerBottomBg);
+        /* padding: 40px 60px; */
     }
 
     /* Première Ligne : Titres des catégories */
@@ -222,7 +227,12 @@ h3 {
         justify-content: space-between;
         padding: 20px 0;
     }
-
+    .footerLink{
+        font-weight: bold;
+    }
+    .footerContact{
+        font-weight: bold;
+    }
     .footerBlock {
         flex: 1;
         display: flex;
@@ -240,7 +250,7 @@ h3 {
     .serviceClient p, .sospesoCenter p, .followUs p {
         font-size: 14px;
         color: var(--footerTextColor);
-        margin: 5px 0;
+        margin: 5px 15px;
     }
 
     .sospesoCenter img {
@@ -261,7 +271,7 @@ h3 {
 
     /* Troisième Ligne : Bas de page */
     .footerBottom {
-        background-color: var(--footerBottomBg);
+        background-color: var(--footerBgColor);
         padding: 20px 0;
         text-align: center;
         font-size: 12px;
@@ -293,7 +303,6 @@ h3 {
 
 .menuText {
     font-size: 14px;
-    font-weight: bold;
     color: var(--footerTextColor);
 }
 
@@ -328,7 +337,7 @@ h3 {
 
 .logo {
     max-height: 80px;
-    max-width: 100px;
+    max-width: 135px;
     object-fit: contain;
 }
 
@@ -342,7 +351,7 @@ h3 {
 .topLinks {
     display: flex;
     gap: 40px;
-    font-size: 14px;
+    font-size: 9px;
     color: var(--footerTextColor);
 }
 
@@ -369,4 +378,128 @@ h3 {
     height: 24px;
 }
 
+}
+/* MENU BURGER */
+.burger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.burger-icon span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--footerTextColor);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#burger-toggle {
+    display: none;
+}
+
+#burger-toggle:checked + .burger-icon span:nth-child(1) {
+    transform: rotate(-45deg) translateY(11px);
+}
+
+#burger-toggle:checked + .burger-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+#burger-toggle:checked + .burger-icon span:nth-child(3) {
+    transform: rotate(45deg) translateY(-11px);
+}
+#burger-toggle:checked + .burger-icon {
+    display: none;
+}
+
+/* Fullscreen Overlay */
+.burger-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--footerBgColor);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 20px;
+    z-index: 9;
+    transition: opacity 0.3s;
+}
+
+#burger-toggle:checked ~ .burger-menu-overlay {
+    display: flex;
+    opacity: 1;
+}
+
+.burger-menu-content {
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+    padding: 20px;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    color: var(--footerTextColor);
+    margin-bottom: 20px;
+}
+
+.menu-header .close-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.burger-menu-content ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.burger-menu-content a {
+    color: var(--footerTextColor);
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.burger-menu-content a:hover {
+    color: var(--accent-color);
+}
+
+.menu-footer {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-footer a {
+    display: flex;
+    align-items: center;
+    color: var(--footerTextColor);
+    text-decoration: none;
+}
+
+.menu-footer a img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.menu-footer a:hover {
+    color: var(--accent-color);
 }

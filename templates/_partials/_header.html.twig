@@ -3,9 +3,36 @@
         <!-- Nav Left -->
         <article class="navLeft">
             <!-- Mobile Only -->
-            <div class="mobileOnly">
-                <img class="menuIcon" alt="menu" src="{{ asset('/images/navbar/filtre.svg') }}">
+            <div class="mobileOnly iconeLeft FlexRow AlignCenter FlexAround">
+                <input type="checkbox" id="burger-toggle">
+                <label for="burger-toggle" class="burger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
                 <img class="searchIcon" alt="search" src="{{ asset('/images/navbar/search.svg') }}">
+                <div class="burger-menu-overlay">
+                    <div class="burger-menu-content">
+                        <div class="menu-header FlexBetween">
+                            <span>Menu</span>
+                            <label for="burger-toggle" class="close-icon">×</label>
+                        </div>
+                        <ul>
+                            <li><a href="#">Conditions générales</a></li>
+                            <li><a href="#">Faire un don</a></li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li><a href="#">A propos de Sospeso</a></li>
+                        </ul>
+                        <div class="menu-footer">
+                            <a href="#"><img src="{{ asset('/images/navbar/location.svg') }}" alt="icon"> Trouver un magasin</a>
+                            <a href="{{ path('app_login') }}"><img src="{{ asset('/images/navbar/profile.svg') }}" alt="icon"> Compte</a>
+                            <a href="#contact"><img src="{{ asset('/images/navbar/message.svg') }}" alt="icon"> Nous contacter</a>
+                        </div>
+                    </div>
+                </div>
+                {# <img class="searchIcon" alt="search" src="{{ asset('/images/navbar/search.svg') }}"> #}
             </div>
             <!-- Desktop Only -->
             <div class="desktopOnly FlexRow AlignCenter FlexBetween navLeftDesktop">
@@ -36,7 +63,7 @@
                 <a href="#">Nous contacter</a>
             </div>
             <!-- Compte et Panier -->
-            <div class="accountCart FlexRow AlignCenter">
+            <div class="accountCart iconeLeft FlexRow AlignCenter">
                 {% if is_granted("ROLE_ADMIN") %}
                     <a href="{{ path('admin_dashboard') }}" class="account FlexRow AlignCenter">
                         <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="admin">
