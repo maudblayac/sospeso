@@ -1,0 +1,48 @@
+.responsiveTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+.responsiveTable thead tr {
+    background-color: var(--main-color);
+    color: white;
+    text-align: left;
+}
+
+.responsiveTable th, .responsiveTable td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+.responsiveTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.responsiveTable tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.btn {
+    background-color: #EB8072;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #FF866F;
+}
+
+.btn-danger {
+    background-color: red;
+}
+
+.btn-danger:hover {
+    background-color: darkred;
+}

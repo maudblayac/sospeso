@@ -1,0 +1,60 @@
+{% extends 'dashboard_restaurant/layout.html.twig' %}
+
+{% block content %}
+    <h2 class="formTitle">Profil du Restaurant</h2>
+    <p class="formSubtitle">Complétez les informations de votre profil restaurateur.</p>
+
+    {{ form_start(form, {'attr': {'class': 'restaurantForm'}}) }}
+        <div class="formGroup">
+            {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.firstname, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <div class="formGroup">
+            {{ form_label(form.lastname, 'Nom', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.lastname, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <div class="formGroup">
+            {{ form_label(form.phoneNumber, 'Numéro de téléphone', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.phoneNumber, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <div class="formGroup">
+            {{ form_label(form.address, 'Adresse', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.address, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <div class="formGroup">
+            {{ form_label(form.city, 'Ville', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.city, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <div class="formGroup">
+            {{ form_label(form.country, 'Pays', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.country, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <div class="formGroup">
+            {{ form_label(form.postalCode, 'Code postal', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.postalCode, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <div class="formGroup">
+            {{ form_label(form.dateOfBirth, 'Date de naissance', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.dateOfBirth, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <div class="formGroup">
+            {{ form_label(form.email, 'Email', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <div class="formGroup">
+            {{ form_label(form.website, 'Site Web', {'label_attr': {'class': 'formLabel'}}) }}
+            {{ form_widget(form.website, {'attr': {'class': 'inputField'}}) }}
+        </div>
+        
+        <button type="submit" class="submitBtn">Mettre à jour</button>
+    {{ form_end(form) }}
+{% endblock %}

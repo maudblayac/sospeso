@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="bgLight flexCenter fullHeight">
+    <div class="formContainer shadowBox">
+        <form method="post" class="form FlexCol gapMd">
+            {% if error %}
+                <div class="alertDanger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="alertSuccess">
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }},
+                    <a href="{{ path('app_logout') }}" class="textLink">Déconnexion</a>
+                </div>
+            {% endif %}
+
+            <h1 class="formTitle">Connexion</h1>
+
+            <div class="formGroup">
+                <label for="username" class="formLabel">Adresse email</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus
+                       class="formInput">
+            </div>
+
+            <div class="formGroup">
+                <label for="password" class="formLabel">Mot de passe</label>
+                <input type="password" name="_password" id="password" autocomplete="current-password" required
+                       class="formInput">
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="FlexBetween gapSm">
+                <button type="submit" class="btnPrimary">Se connecter</button>
+                <a href="{{ path('app_home') }}" class="btnSecondary">Retour</a>
+            </div>
+
+            <p class="textCenter textSecondary">
+                Vous n'êtes pas encore inscrit ? <a href="{{ path('app_register') }}" class="textLink">Accédez à la page d'inscription</a>.
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Gestion des restaurateurs{% endblock %}
+
+{% block content %}
+<h1>Gestion des restaurateurs</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Nom</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for restaurateur in restaurateurs %}
+            <tr>
+                <td>{{ restaurateur.id }}</td>
+                <td>{{ restaurateur.email }}</td>
+                <td>
+                    {% if restaurateur.restaurant %}
+                        {{ restaurateur.restaurant.firstname }} {{ restaurateur.restaurant.lastname }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>{{ restaurateur.status.value }}</td>
+                <td>
+                    <a href="{{ path('admin_restaurateur_show', {'id': restaurateur.id}) }}">Voir</a>
+                    <a href="{{ path('admin_restaurateur_edit', {'id': restaurateur.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

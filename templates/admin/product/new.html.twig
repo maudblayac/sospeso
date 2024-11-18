@@ -1,0 +1,12 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Créer un nouveau produit{% endblock %}
+
+{% block content %}
+<h1>Créer un nouveau produit</h1>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Enregistrer</button>
+{{ form_end(form) }}
+{% endblock %}

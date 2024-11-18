@@ -1,0 +1,37 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Produits en attente d'approbation{% endblock %}
+
+{% block content %}
+<h1>Produits en attente d'approbation</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Restaurant</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.restaurant.title }}</td>
+                <td>
+                    <form action="{{ path('admin_product_approve', {'id': product.id}) }}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token('approve-product' ~ product.id) }}">
+                        <button type="submit">Approuver</button>
+                    </form>
+                    <form action="{{ path('admin_product_archive', {'id': product.id}) }}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token('archive-product' ~ product.id) }}">
+                        <button type="submit">Archiver</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,678 @@
+/* Variables de couleurs */
+:root {
+    --background-color: #FFFFFF;
+    --btn-color: #FFFFFF;
+    --sidebar-bg-color: #FAF3E0;
+    --sidebar-text-color: #333;
+    --accent-color: #E48B53;
+    --accent-hover-color: #E48B53;
+    --primary-text-color: #282F4B;
+    --secondary-text-color: #3b3b3b;
+    --border-color: #ccc;
+    --border-radius: 10px;
+}
+ul li{
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+/* Style général */
+body {
+    font-family: 'Mono';
+    background-color: var(--background-color);
+    margin: 0;
+}
+
+/* Sidebar du dashboard */
+.dashboardSidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg-color);
+    height: 100vh;
+    position: fixed;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: width 0.3s ease;
+}
+
+.dashboardSidebar .logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboardSidebar .logo img {
+    width: 100px;
+    height: auto;
+}
+
+.dashboardSidebar ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.dashboardSidebar ul li {
+    margin: 15px 0;
+}
+
+/* Style des liens de la sidebar */
+.dashboardSidebar ul li a {
+    text-decoration: none;
+    color: var(--sidebar-text-color);
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+/* Hover et lien actif */
+.dashboardSidebar ul li a:hover,
+.dashboardSidebar ul li a.active {
+    color: var(--accent-color);
+}
+
+/* Dashboard spécifique */
+.dashboardSidebar ul li a.dashboard-link {
+    color: var(--sidebar-text-color); 
+}
+
+.dashboardSidebar ul li a.dashboard-link.active {
+    color: var(--accent-color); 
+}
+
+/* Icônes de la sidebar */
+.dashboardSidebar ul li a .icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    fill: var(--sidebar-text-color);
+}
+
+.dashboardSidebar ul li a.active .icon {
+    fill: var(--accent-color);
+}
+
+/* Contenu du dashboard */
+.dashboardContent {
+    margin-left: 260px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+.dashboardSidebar ul li {
+    margin: 15px 0;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 10px;
+    border-radius: var(--border-radius); 
+    transition: background-color 0.3s ease; 
+}
+
+.dashboardSidebar ul li a {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    text-decoration: none;
+    color: var(--sidebar-text-color);
+    font-weight: bold;
+    padding: 5px 10px;
+    width: 100%; 
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.dashboardSidebar ul li a .icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 15px; 
+    fill: var(--sidebar-text-color);
+}
+
+.dashboardSidebar ul li a.active,
+.dashboardSidebar ul li a:hover {
+    background-color: transparent;
+    border: 2px solid var(--accent-color); 
+    color: var(--accent-color); 
+    border-radius: var(--border-radius); 
+}
+
+.dashboardSidebar ul li a.active .icon,
+.dashboardSidebar ul li a:hover .icon {
+    fill: #fff; 
+}
+
+/* Accueil du dashboard */
+.dashboardWelcome h1 {
+    color: var(--accent-color);
+}
+
+.dashboardWelcome p {
+    color: var(--primary-text-color);
+}
+
+/* Liste des produits */
+.productList {
+    list-style: none;
+    padding: 0;
+}
+
+.productList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.productList li a {
+    margin-left: 10px;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.productList li a:hover {
+    text-decoration: underline;
+}
+
+/* Boutons */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: var(--accent-color);
+    color: var(--btn-color);
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* Formulaire du restaurant */
+.restaurantForm {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    font-family: 'Mono';
+    font-size: 16px;
+    color: var(--primary-text-color);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.inputField {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: var(--btn-color);
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+
+/* Titres */
+h1 {
+    font-family: 'rowdies';
+    font-size: 40px;
+    color: var(--main-color);
+}
+
+h2 {
+    font-family: 'rowdies';
+    color: var(--primary-text-color);
+    font-size: 25px;
+}
+
+/* FORMULAIRE */
+.formContainer {
+    width: 90%;
+    max-width: 800px;
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+.formTitle {
+    font-family: 'rowdies';
+    color: var(--accent-color);
+    font-size: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    font-weight: bold;
+    color: var(--primary-text-color);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="url"],
+.formGroup input[type="date"],
+.formGroup select,
+.formGroup textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--main-color);
+    font-family: 'Mono';
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.formGroup input[type="text"]:focus,
+.formGroup input[type="email"]:focus,
+.formGroup input[type="url"]:focus,
+.formGroup input[type="date"]:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+/* Boutons */
+.submitBtn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-color);
+    color: var(--btn-color);
+    font-size: 16px;
+    font-family: 'rowdies';
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+.submitBtn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* Style des produits en sélection */
+.productsSection {
+    margin-top: 20px;
+}
+
+.productChoice {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: var(--light-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.productChoice img {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.productChoice label {
+    flex: 1;
+    font-weight: normal;
+    color: var(--primary-text-color);
+    font-size: 16px;
+}
+
+
+.dashboardWelcome {
+    text-align: center;
+}
+
+.welcomeImage img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.productGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.productCard {
+    width: 220px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productImage img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+}
+
+.restaurantPreview, .associatedProducts {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.restaurantPreview {
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    color: var(--primary-text-color);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+ /* PICTURE */
+ .restaurantImage {
+    height: 250px;
+    width: 100%;
+    position: relative;
+    overflow: hidden; 
+    border-radius: 10px; 
+}
+
+.restaurantImage > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit; 
+}
+
+/* .restaurantImage img {
+    width: 100%;
+    border-radius: var(--border-radius);
+} */
+
+.restaurantInfo h3 {
+    font-size: 24px;
+    color: var(--primary-text-color);
+    margin: 10px 0;
+}
+
+.restaurantDetails {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.restaurantDetails span {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    color: var(--secondary-text-color);
+}
+
+.restaurantDetails img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.restaurantDetails .price {
+    font-weight: bold;
+    color: var(--primary-text-color);
+}
+
+.associatedProducts h4 {
+    font-size: 18px;
+    margin-top: 20px;
+    color: var(--primary-text-color);
+}
+
+.productsGrid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.productCard {
+    background-color: #FFF;
+    border-radius: 8px;
+    width: 120px;
+    padding: 10px;
+    text-align: center;
+    color: var(--primary-text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productCard img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.productName {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.productPrice {
+    font-size: 14px;
+    color: var(--accent-color);
+}
+
+.btn {
+    background-color: var(--accent-color);
+    color: #FFF;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* Formulaire */
+.formContainer {
+    width: 90%;
+    max-width: 800px;
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+.formTitle {
+    font-family: 'rowdies', sans-serif;
+    color: var(--accent-color);
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.formSubtitle {
+    text-align: center;
+    color: var(--secondary-text-color);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    font-weight: bold;
+    color: var(--primary-text-color);
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--primary-text-color);
+    transition: border-color 0.3s ease;
+    background-color: #FAFAFA;
+}
+
+.formGroup input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+.submitBtn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-color);
+    color: var(--btn-color);
+    font-size: 16px;
+    font-family: 'rowdies', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+.submitBtn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* Responsive Sidebar - Format téléphone */
+@media (max-width: 767px) {
+    .dashboardSidebar {
+        width: 80px;
+        padding-top: 10px;
+    }
+
+    .dashboardSidebar ul li a {
+        font-size: 0;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dashboardSidebar ul li a .icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 0;
+    }
+    .formContainer {
+        width: 95%;
+        padding: 15px;
+    }
+    .restaurantPreview {
+        padding: 15px;
+    }
+
+    .productsGrid {
+        justify-content: space-around;
+    }
+
+    .submitBtn {
+        font-size: 14px;
+        padding: 10px;
+    }
+        .dashboardContent {
+            margin-left: 90px;
+        }
+        .dashboardSidebar ul li a {
+            justify-content: center; 
+            font-size: 0; 
+            padding: 10px;
+        }
+    
+        .dashboardSidebar ul li a .icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 0; 
+        }
+        .formContainer {
+            width: 95%;
+            padding: 15px;
+        }
+    
+        .formTitle {
+            font-size: 24px;
+        }
+    
+        .submitBtn {
+            font-size: 14px;
+            padding: 10px;
+        }
+    
+}
+
+/* responsive deskstop */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .formContainer {
+        width: 80%;
+        padding: 18px;
+    }
+    .formContainer {
+        width: 80%;
+        padding: 18px;
+    }
+
+    .submitBtn {
+        font-size: 15px;
+    }
+}

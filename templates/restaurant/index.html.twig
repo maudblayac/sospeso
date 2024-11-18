@@ -1,0 +1,25 @@
+{# {% extends 'dashboard_restaurant/layout.html.twig' %}
+
+{% block title %}Restaurant index{% endblock %}
+
+{% block body %}
+    <h1>Restaurant index</h1>
+
+    <table class="table">
+        <tbody>
+            {% for restaurant in restaurants %}
+                {% include'/_partials/listingRestaurant/_card.html.twig' with { 'restaurant': restaurant } %}
+                <td>
+                    <a href="{{ path('app_restaurant_show', {'id': restaurant.id}) }}">voir</a>
+                    <a href="{{ path('app_restaurant_edit', {'id': restaurant.id}) }}">modifier</a>
+                </td>
+            {% else %}
+                <tr>
+                    <td colspan="6">Vous n'avez pas d'annonce pour votre restaurant</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_restaurant_new') }}">Créez votre annonce</a>
+{% endblock %} #}

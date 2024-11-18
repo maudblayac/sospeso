@@ -1,0 +1,103 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Profil du restaurateur{% endblock %}
+
+{% block content %}
+<h1>Profil du restaurateur</h1>
+
+
+<h2>Compléter le profil du restaurateur</h2>
+{{ form_start(profileForm) }}
+    {{ form_widget(profileForm) }}
+    <button type="submit">Enregistrer le profil</button>
+{{ form_end(profileForm) }}
+
+
+<h2>Produits du restaurant</h2>
+
+    <p>Ajouts des produits </p>
+
+    <a href="{{ path('admin_product_new', { 'id': restaurant.id }) }}" class="btn">Ajouter un produit</a>
+
+    <div class="productGrid">
+        {% for product in restaurant.products %}
+            <div class="productCard">
+                <div class="productImage">
+                    {% if product.image %}
+                        <img src="{{ vich_uploader_asset(product.image) }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{{ asset('images/defaut.png') }}" alt="Image par défaut">
+                    {% endif %}
+                </div>
+                <div class="productInfo">
+                    <p class="productName">{{ product.name }}</p>
+                    <p class="productPrice">{{ product.price }}€</p>
+                    <a href="{{ path('admin_product_edit', { id: product.id }) }}" class="btn btn-secondary">Modifier</a>
+                    <form action="{{ path('admin_product_delete', { id: product.id }) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete-product' ~ product.id) }}">
+                        <button type="submit" class="btn-delete">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun produit ajouté ! Ajoutez votre premier produit</p>
+        {% endfor %}
+    </div>
+<h2>Annonce du restaurant</h2>
+
+{% if restaurant.hasListing %}
+    <div class="restaurantPreview">
+        <div class="restaurantImage">
+            <img src="{{ vich_uploader_asset(restaurant.image) }}" alt="{{ restaurant.title }}">
+        </div>
+        <div class="restaurantInfo">
+            <h3>{{ restaurant.title }}</h3>
+            <div class="restaurantDetails">
+                <span class="location">
+                    <img src="{{ asset('/images/restaurant/location.svg') }}" alt="locationIcon">
+                    {{ restaurant.city }}
+                </span>
+                <span class="rating">
+                    <img src="{{ asset('/images/restaurant/star.svg') }}" alt="note">
+                    5.0 <span>(876+)</span>
+                </span>
+            </div>
+            <p>{{ restaurant.description }}</p>
+        <a href="{{ path('admin_restaurant_edit', { 'id': restaurant.id }) }}" class="btn">Modifier</a>
+        </div>
+        <div class="associatedProducts">
+            <h4>Produits associés :</h4>
+            <div class="productsGrid">
+                {% for featuredProduct in restaurant.featuredProducts %}
+                    <div class="productCard">
+                        <img src="{{ vich_uploader_asset(featuredProduct.product.image) }}" alt="{{ featuredProduct.product.name }}">
+                        <p class="productName">{{ featuredProduct.product.name }}</p>
+                        <p class="productPrice">{{ featuredProduct.product.price }}€</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <h3>Créer votre annonce</h3>
+    {{ form_start(listingForm) }}
+    <div class="form-group">
+        {{ form_label(listingForm.title) }}
+        {{ form_widget(listingForm.title) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(listingForm.description) }}
+        {{ form_widget(listingForm.description) }}
+    </div>
+     <div class="form-group">
+        {{ form_label(listingForm.image) }}
+        {{ form_widget(listingForm.image) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(listingForm.featuredProducts) }}
+        {{ form_widget(listingForm.featuredProducts) }}
+    </div>
+    <button type="submit" class="btn">Créer l'annonce</button>
+    {{ form_end(listingForm) }}
+{% endif %}
+{% endblock %}

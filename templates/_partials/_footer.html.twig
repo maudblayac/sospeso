@@ -1,0 +1,92 @@
+<!-- Footer -->
+<footer class="footer">
+
+    <!-- Design Mobile -->
+    <div class="mobileOnly">
+        <section class="containerFooterOne">
+            <h3 class="toggleTitle">Service Clients <img class="toggleIcon" alt="more" src="{{ asset('/images/footer/more.svg') }}"></h3>
+            <div class="content">
+                <p>Pour tout contact direct voici les coordonnées en cas de demande spécifique veuillez remplir le formulaire de contact</p>
+                <p>+33 (0)1 44 23 10 34</p>
+                <p>Envoyer un e-mail</p>
+            </div>
+        </section>
+        <section class="containerFooterTwo">
+            <h3 class="toggleTitle">Services <img class="toggleIcon" alt="more" src="{{ asset('/images/footer/more.svg') }}"></h3>
+            <div class="content">
+                <p>Nous contacter</p>
+                <p>Questions fréquentes</p>
+                <p>Trouver un magasin</p>
+            </div>
+        </section>
+        <section class="containerFooterThree">
+            <h3 class="toggleTitle">Donations <img class="toggleIcon" alt="more" src="{{ asset('/images/footer/more.svg') }}"></h3>
+            <div class="content">
+                <p>Faire un don suspendu</p>
+                <p>Nos projets</p>
+            </div>
+        </section>
+        <section class="containerFooterFour">
+            <h3 class="toggleTitle">Mentions légales <img class="toggleIcon" alt="more" src="{{ asset('/images/footer/more.svg') }}"></h3>
+            <div class="content">
+                <p>Conditions générales de vente</p>
+                <p>Conditions générales d'utilisation</p>
+                <p>Mentions légales</p>
+            </div>
+        </section> 
+        <section class="containerFooterSix FlexCol">
+            <h3>SUIVEZ-NOUS</h3>
+            <div class="socialIcons FlexAround FlexRow">
+                <img src="{{ asset('/images/footer/fb.svg') }}" alt="Facebook">
+                <img src="{{ asset('/images/footer/ytb.svg') }}" alt="YouTube">
+                <img src="{{ asset('/images/footer/x.svg') }}" alt="X">
+                <img src="{{ asset('/images/footer/insta.svg') }}" alt="Instagram">
+            </div>
+        </section>
+        <section class="containerFooterSeven FlexCol AlignCenter JustifyCenter">
+            <img class="footerLogo" alt="logo" src="{{ asset('/images/navbar/logo.svg') }}">
+            <p>© Sopeso 2024. Tous droits réservés</p>
+        </section>
+    </div>
+
+    <!-- VERSION Tablette et Desktop -->
+    <div class="desktopOnly">
+        <!-- PREMIER BLOCK -->
+        <div class="footerCategories FlexBetween">
+            <span>SERVICES <img class="toggleIcon" alt="more" src="{{ asset('/images/footer/more.svg') }}"></span>
+            <span>DONATION <img class="toggleIcon" alt="more" src="{{ asset('/images/footer/more.svg') }}"></span>
+            <span>SOSPESO <img class="toggleIcon" alt="more" src="{{ asset('/images/footer/more.svg') }}"></span>
+            <span>MENTIONS LÉGALES <img class="toggleIcon" alt="more" src="{{ asset('/images/footer/more.svg') }}"></span>
+        </div>
+
+        <!-- DEUXIEME BLOCK -->
+        <div class="footerContent FlexBetween">
+            <div class="footerBlock serviceClient FlexCol">
+                <h3 id="contact" class="footerTitle">SERVICE CLIENTS</h3>
+                <p>Pour tout contact direct voici les coordonnées en cas de demande spécifique veuillez remplir le formulaire de contact</p>
+                <p class="footerContact">+33 (0)1 44 23 10 34</p>
+                <p class="footerLink">Envoyer un e-mail</p>
+            </div>
+
+            <div class="footerBlock sospesoCenter FlexCol">
+                <img src="{{ asset('/images/navbar/logo.svg') }}" alt="Sospeso Logo">
+                <p>Donner n'a jamais été aussi simple, où que vous soyez.</p>
+            </div>
+
+            <div class="footerBlock followUs FlexCol">
+                <h3 class="footerTitle">SUIVEZ-NOUS</h3>
+                <div class="socialIcons FlexRow">
+                    <img src="{{ asset('/images/footer/fb.svg') }}" alt="Facebook">
+                    <img src="{{ asset('/images/footer/ytb.svg') }}" alt="YouTube">
+                    <img src="{{ asset('/images/footer/x.svg') }}" alt="X">
+                    <img src="{{ asset('/images/footer/insta.svg') }}" alt="Instagram">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dernier block -->
+        <div class="footerBottom">
+            <p>© Sopeso 2024. Tous droits réservés</p>
+        </div>
+    </div>
+</footer>

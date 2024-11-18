@@ -1,0 +1,22 @@
+<h2 class="formTitle">Inscription Utilisateur</h2>
+{{ form_start(registrationForm) }}
+    <div class="formGroup">
+        {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'formLabel'}}) }}
+        {{ form_widget(registrationForm.email, {'attr': {'class': 'formInput'}}) }}
+    </div>
+    <div class="formGroup">
+        {{ form_label(registrationForm.password.first, null, {'label_attr': {'class': 'formLabel'}}) }}
+        {{ form_widget(registrationForm.password.first, {'attr': {'class': 'formInput'}}) }}
+    </div>
+    <div class="formGroup">
+        {{ form_label(registrationForm.password.second, null, {'label_attr': {'class': 'formLabel'}}) }}
+        {{ form_widget(registrationForm.password.second, {'attr': {'class': 'formInput'}}) }}
+    </div>
+    <div class="formGroup">
+        {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'formCheckbox'}}) }}
+    </div>
+    <div class="FlexBetween">
+        <button type="submit" class="btnPrimary">S'inscrire</button>
+        <a href="{{ path('app_home') }}" class="btnSecondary">Retour</a>
+    </div>
+{{ form_end(registrationForm) }}

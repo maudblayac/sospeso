@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HOME{% endblock %}
+
+{% block importmap %}{{ importmap('app') }}{% endblock %}
+
+{% block body %}
+
+<!-- Section d'introduction avec titre et sous-titre -->
+<section class="introSection flexCol justifyCenter alignCenter">
+    <article class="titleContainer">    
+        <h3 class="title">Découvrir Sospeso</h3>
+        <p class="subtitle">Donner n'a jamais été aussi simple, où que vous soyez.</p>
+    </article>
+    <article class="arrowContainer">            
+        <!-- Ajout de l'ancre pour faire défiler vers la section infoSection -->
+        <a href="#infoSection">
+            <img class="downArrow" alt="downArrow" src="{{ asset('/images/home/downArrowHome.svg') }}">
+        </a>
+    </article>
+</section>
+
+<!-- Image principale de la page -->
+<div class="imageContainer">
+    <img class="mainImage" alt="sospeso-main" src="{{ asset('/images/home/main.webp') }}">
+</div>
+
+<!-- Section principale -->
+<section class="mainSection">
+    <!-- Articles numérotés -->
+    <div id="infoSection" class="infoSection">
+        <!-- Bloc 1 -->
+        <article class="infoBlock flexRow alignCenter">
+            <div class="infoImage">
+                <img src="{{ asset('/images/home/persoun.svg') }}" alt="info-image-1">
+            </div>
+            <div class="infoText">
+                <h4 class="infoNumber">01.</h4>
+                <p class="infoDescription">Donner n'a jamais été aussi simple, où que vous soyez. Donner n'a jamais été aussi simple, où que vous soyez.</p>
+                <p>Donner n'a jamais été aussi simple, où que vous soyez. Donner n'a jamais été aussi simple, où que vous soyez.</p>
+                <a href="#" class="infoLink">CONTACTEZ-NOUS →</a>
+            </div>
+        </article>
+        
+        <!-- Bloc 2 -->
+        <article class="infoBlock flexRow alignCenter">
+            <div class="infoText">
+                <h4 class="infoNumber">02.</h4>
+                <p class="infoDescription">Donner n'a jamais été aussi simple, où que vous soyez. Donner n'a jamais été aussi simple, où que vous soyez.</p>
+                <p>Donner n'a jamais été aussi simple, où que vous soyez. Donner n'a jamais été aussi simple, où que vous soyez.</p>
+                <a href="{{ path('app_restaurant_public_index') }}" class="infoLink">FAIRE UN DON SUSPENDU →</a>
+            </div>
+            <div class="infoImage">
+                <img src="{{ asset('/images/home/persodeux.png') }}" alt="info-image-2">
+            </div>
+        </article>
+
+        <!-- Bloc 3 -->
+        <article class="infoBlock flexRow alignCenter">
+            <div class="infoImage">
+                <img src="{{ asset('/images/home/persotrois.png') }}" alt="info-image-3">
+            </div>
+            <div class="infoText">
+                <h4 class="infoNumber">03.</h4>
+                <p class="infoDescription">Donner n'a jamais été aussi simple, où que vous soyez. Donner n'a jamais été aussi simple, où que vous soyez.</p>
+                <p>Donner n'a jamais été aussi simple, où que vous soyez. Donner n'a jamais été aussi simple, où que vous soyez.</p>
+                <a href="#" class="infoLink">OÙ TROUVER LES RESTAURANTS →</a>
+            </div>
+        </article>
+    </div>
+</section>
+
+{% endblock %}

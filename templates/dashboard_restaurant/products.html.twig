@@ -1,0 +1,54 @@
+{# {% extends 'dashboard_restaurant/layout.html.twig' %}
+
+{% block content %}
+<h2>Mes Produits</h2>
+
+{% if products is empty %}
+    <p>Vous n'avez encore aucun produit. <a href="{{ path('app_product_new') }}">Créez un produit</a> pour votre restaurant !</p>
+{% else %}
+    <a href="{{ path('app_product_new') }}" class="btn">Ajouter un produit</a>
+    <ul class="productList">
+        {% for product in products %}
+            <li>
+                {{ product.name }} - {{ product.price }}€
+                <a href="{{ path('app_product_update', { id: product.id }) }}">Modifier</a>
+                <a href="{{ path('app_product_delete', { id: product.id }) }}" 
+                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %} #}
+{# templates/dashboard_restaurant/products.html.twig #}
+{% extends 'dashboard_restaurant/layout.html.twig' %}
+
+{% block content %}
+<h2>Mes Produits</h2>
+<p>Ajouter vos produits : Créez et publiez les produits que vous souhaitez proposer, directement accessibles aux visiteurs de notre site.</p>
+
+<a href="{{ path('app_product_new') }}" class="btn">Ajouter un produit</a>
+
+<div class="productGrid">
+    {% for product in products %}
+        <div class="productCard">
+            <div class="productImage">
+                {% if product.image %}
+                    <img src="{{ vich_uploader_asset(product.image) }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{{ asset('images/defaut.png') }}" alt="Image par défaut">
+                {% endif %}
+            </div>
+            <div class="productInfo">
+                <p>{{ product.name }}</p>
+                <p>{{ product.price }}€</p>
+                 <a href="{{ path('app_product_update', { id: product.id }) }}" class="btn">Modifier</a>
+                <form action="{{ path('app_product_delete', { id: product.id }) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete-product' ~ product.id) }}">
+                    <button type="submit" class="btn-delete">Supprimer</button>
+                </form>
+            </div>
+        </div>
+        {# <a href="{{ path('app_product_update', { id: product.id }) }}" class="btn">Modifier</a> #}
+    {% endfor %}
+</div>
+{% endblock %}

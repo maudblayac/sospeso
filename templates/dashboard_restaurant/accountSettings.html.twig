@@ -1,0 +1,17 @@
+{% extends 'dashboard_restaurant/layout.html.twig' %}
+
+{% block content %}
+    <h1>Paramètres du compte</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn">Enregistrer les modifications</button>
+    {{ form_end(form) }}
+
+    <hr>
+
+    <form action="{{ path('app_dashboard_restaurant_account_delete') }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete_account') }}">
+        <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+    </form>
+{% endblock %}

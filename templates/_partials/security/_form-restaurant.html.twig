@@ -1,0 +1,47 @@
+<h2 class="formTitle">Inscription Restaurateur</h2>
+{{ form_start(registrationFormRestaurant, {'attr': {'class': 'formContainer'}}) }}
+    <div class="formGroup">
+        {{ form_label(registrationFormRestaurant.restaurant.firstname, 'Prénom', {'label_attr': {'class': 'formLabel'}}) }}
+        {{ form_widget(registrationFormRestaurant.restaurant.firstname, {'attr': {'class': 'formInput'}}) }}
+    </div>
+    <div class="formGroup">
+        {{ form_label(registrationFormRestaurant.restaurant.lastname, 'Nom', {'label_attr': {'class': 'formLabel'}}) }}
+        {{ form_widget(registrationFormRestaurant.restaurant.lastname, {'attr': {'class': 'formInput'}}) }}
+    </div>
+    <div class="formGroup">
+        {{ form_label(registrationFormRestaurant.restaurant.siren, 'SIREN', {'label_attr': {'class': 'formLabel'}}) }}
+        {{ form_widget(registrationFormRestaurant.restaurant.siren, {'attr': {'class': 'formInput'}}) }}
+    </div>
+    <div class="formGroup">
+        {{ form_label(registrationFormRestaurant.email, null, {'label_attr': {'class': 'formLabel'}}) }}
+        {{ form_widget(registrationFormRestaurant.email, {'attr': {'class': 'formInput'}}) }}
+    </div>
+    <div class="formGroup">
+        <label for="passwordInput" class="formLabel">Mot de passe</label>
+        <div class="passwordWrapper">
+            {{ form_widget(registrationFormRestaurant.password.first, {'attr': {'class': 'formInput', 'id': 'passwordInput'}}) }}
+            <button type="button" class="togglePassword" onclick="togglePasswordVisibility()">
+                <img src="{{ asset('images/connexion/lookeyes.svg') }}" alt="Afficher/Masquer">
+            </button>
+        </div>
+        <div id="passwordHints" class="passwordHints">
+            <p>• Minimum 8 caractères</p>
+            <p>• Au moins une majuscule</p>
+            <p>• Au moins un caractère spécial</p>
+        </div>
+    </div>
+    <div class="formGroup">
+        {{ form_label(registrationFormRestaurant.password.second, 'Confirmer le mot de passe', {'label_attr': {'class': 'formLabel'}}) }}
+        {{ form_widget(registrationFormRestaurant.password.second, {'attr': {'class': 'formInput'}}) }}
+    </div>
+    <div class="formGroup">
+        {{ form_row(registrationFormRestaurant.agreeTerms, {'attr': {'class': 'formCheckbox'}}) }}
+        <small class="termsText">
+            En sélectionnant "Créer un compte professionnel", vous acceptez nos <a href="/conditions" class="textLink">Conditions d'utilisation</a>.
+        </small>
+    </div>
+    <div class="flexBetween btnContainer">
+        <button type="submit" class="btnPrimary">S'inscrire</button>
+        <a href="{{ path('app_home') }}" class="btnSecondary">Retour</a>
+    </div>
+{{ form_end(registrationFormRestaurant) }}
