@@ -6,7 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Enum\UserStatus;
+use App\Enum\Status;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -57,13 +57,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isVerified = null;
 
-    #[ORM\Column(type: 'string', enumType: UserStatus::class, nullable: false)]
-    private UserStatus $status;
+    #[ORM\Column(type: 'string', enumType: Status::class)]
+    private Status $status = Status::VERIFIE;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist'])]
     private ?UserProfile $userProfile = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist'])]
     private ?Restaurant $restaurant = null;
 
     public function __construct()
@@ -285,16 +285,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
         }
-        public function getStatus(): UserStatus
+
+        public function getStatus(): Status
         {
             return $this->status;
         }
-
-        public function setStatus(UserStatus $status): self
+        
+        public function setStatus(Status $status): self
         {
             $this->status = $status;
-
             return $this;
         }
+
+
+   
     }
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\UserProfile;
 use App\Entity\User;
+use App\Enum\Status;
 use App\Form\UserProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 
 #[Route('/userProfile', name: 'app_user_profile_')]
 #[IsGranted(new Expression('is_granted("ROLE_USER") or is_granted("ROLE_ADMIN")'))]
@@ -50,37 +53,35 @@ class UserProfileController extends AbstractController
         ]);
     }
 
-    //DELETE
    // DELETE
-#[Route('/delete', name: 'delete', methods: ['POST'])]
-public function delete(Request $request, EntityManagerInterface $entityManager): Response
-{
-    /** @var User $user */
-    $user = $this->getUser();
-    $userProfile = $user->getUserProfile();
+   #[Route('/delete', name: 'delete', methods: ['POST'])]
+    public function archiveAccount(Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage): Response
+    {
+        // dd('Méthode archiveAccount appelée');
+        /** @var User $user */
+        $user = $this->getUser();
 
-    if ($this->isCsrfTokenValid('delete-profile', $request->request->get('_token'))) {
-        // Supprime le profil utilisateur s'il existe
-        if ($userProfile) {
-            $entityManager->remove($userProfile);
+        if ($this->isCsrfTokenValid('archive-account', $request->request->get('_token'))) {
+            // Marquer l'utilisateur comme archivé en changeant son statut
+            $user->setStatus(Status::ARCHIVE);
+
+            // Marquer le profil utilisateur comme archivé si nécessaire
+            if ($user->getUserProfile()) {
+
+            }
+
+            // Invalider la session et déconnecter l'utilisateur
+            $tokenStorage->setToken(null);
+            $request->getSession()->invalidate();
+
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre compte a été archivé avec succès.');
+
+            return $this->redirectToRoute('app_home');
         }
 
-        // Supprime l'utilisateur
-        $entityManager->remove($user);
-        $entityManager->flush();
-
-        $this->addFlash('success', 'Votre compte et profil ont été supprimés avec succès.');
-
-        // Déconnecte l'utilisateur et invalide la session
-        $this->container->get('security.token_storage')->setToken(null);
-        $request->getSession()->invalidate();
-
-        // Redirige vers la page d'accueil
-        return $this->redirectToRoute('app_home');
+        $this->addFlash('error', 'L’archivage du compte a échoué.');
+        return $this->redirectToRoute('app_user_profile_index');
     }
-
-    $this->addFlash('error', 'La suppression du compte a échoué.');
-    return $this->redirectToRoute('app_user_profile_index');
-}
 
 }

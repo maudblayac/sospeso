@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Restaurant;
+use App\Entity\Categories;
 use App\Entity\FeaturedProduct;
 use App\Entity\Product;
 use App\Entity\User;
@@ -42,6 +43,37 @@ class RestaurantController extends AbstractController
             'restaurants' => $restaurantData,
         ]);
     }
+ 
+    #[Route('/public/show/{id}', name: 'public_show', methods: ['GET'])]
+public function publicShow(Restaurant $restaurant): Response
+{
+    // Calcul des prix minimum et maximum
+    $prices = $restaurant->getProducts()->isEmpty() ? ['minPrice' => null, 'maxPrice' => null] : [
+        'minPrice' => $restaurant->getProducts()->first()->getPrice(),
+        'maxPrice' => $restaurant->getProducts()->first()->getPrice(),
+    ];
+    foreach ($restaurant->getProducts() as $product) {
+        $prices['minPrice'] = min($prices['minPrice'], $product->getPrice());
+        $prices['maxPrice'] = max($prices['maxPrice'], $product->getPrice());
+    }
+
+    // Groupement des produits par catégorie
+    $groupedProducts = [];
+    foreach ($restaurant->getProducts() as $product) {
+        $categoryName = $product->getCategories()->getName(); // Chaque produit a une catégorie
+        $groupedProducts[$categoryName][] = $product;
+    }
+
+    return $this->render('restaurant/public_show.html.twig', [
+        'restaurant' => $restaurant,
+        'minPrice' => $prices['minPrice'],
+        'maxPrice' => $prices['maxPrice'],
+        'groupedProducts' => $groupedProducts,
+    ]);
+}
+
+
+
 
     // Route pour les utilisateurs autorisés
     #[Route('/index', name: 'index', methods: ['GET'])]
@@ -136,10 +168,7 @@ class RestaurantController extends AbstractController
         return $this->redirectToRoute('app_restaurant_index');
     }
 
-   // Gérer les produits en vedette
-  // src/Controller/RestaurantController.php
-
-// ... (autres use statements)
+ 
 
 private function handleFeaturedProducts($form, Restaurant $restaurant, EntityManagerInterface $entityManager): void
 {

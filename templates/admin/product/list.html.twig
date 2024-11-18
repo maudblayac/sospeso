@@ -1,0 +1,38 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Gestion des produits{% endblock %}
+
+{% block content %}
+<h1>Gestion des produits</h1>
+
+<a href="{{ path('admin_product_new') }}">Créer un nouveau produit</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Restaurant</th>
+            <th>Prix</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.restaurant.title }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <a href="{{ path('admin_product_edit', {'id': product.id}) }}">Modifier</a>
+                    <form action="{{ path('admin_product_delete', {'id': product.id}) }}" method="POST" style="display:inline-block;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete-product' ~ product.id) }}">
+                        <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

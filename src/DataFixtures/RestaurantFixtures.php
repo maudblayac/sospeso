@@ -6,6 +6,7 @@ use App\Entity\Image;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use app\enum\Status;
 
 class RestaurantFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -78,7 +79,9 @@ class RestaurantFixtures extends Fixture implements DependentFixtureInterface
                 ->setEmail($data['email'])
                 ->setPhoneNumber($data['phoneNumber'])
                 ->setWebsite($data['website'])
-                ->setHasListing(true);
+                ->setHasListing(true)
+                ->setStatus(Status::VERIFIE)
+                ->setIsApproved(true);
 
             // Créez une nouvelle instance d'image unique meme si visuellement cest la meme pour chaque restaurant
             $image = new Image();

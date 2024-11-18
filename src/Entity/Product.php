@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\DBAL\Types\Types;
 use App\Entity\Image;
+use App\Enum\Status;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -48,9 +49,15 @@ class Product
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
-    
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $isApproved = false;
+
     #[ORM\OneToOne(mappedBy: 'product', cascade: ['persist', 'remove'])]
     private ?Image $image = null;
+
+    #[ORM\Column(type: 'string', enumType: Status::class)]
+    private Status $status = Status::VERIFIE;
 
   
     public function __construct()
@@ -196,6 +203,28 @@ class Product
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+    
+        public function getStatus(): Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): self
+    {
+        $this->status = $status;
+        return $this;
+    }
+    public function isApproved(): bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setIsApproved(bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
 
         return $this;
     }

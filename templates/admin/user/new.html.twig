@@ -1,0 +1,28 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Créer un nouvel utilisateur{% endblock %}
+
+{% block content %}
+<h1>Créer un nouvel utilisateur</h1>
+
+{{ form_start(form) }}
+
+{{ form_errors(form) }}
+
+<div>
+    {{ form_label(form.email) }}
+    {{ form_widget(form.email) }}
+    {{ form_errors(form.email) }}
+</div>
+
+<div>
+    {{ form_label(form.password) }}
+    {{ form_widget(form.password) }}
+    {{ form_errors(form.password) }}
+</div>
+
+
+<button type="submit">Créer</button>
+
+{{ form_end(form) }}
+{% endblock %}

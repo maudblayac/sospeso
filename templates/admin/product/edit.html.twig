@@ -1,0 +1,15 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Modifier le produit : {{ product.name }}{% endblock %}
+
+{% block content %}
+<h1>Modifier le produit : {{ product.name }}</h1>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Enregistrer les modifications</button>
+{{ form_end(form) }}
+
+<a href="{{ path('admin_restaurateur_show', {'id': product.restaurant.user.id}) }}">Retour au profil du restaurateur</a>
+
+{% endblock %}

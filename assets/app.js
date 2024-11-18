@@ -16,5 +16,14 @@ import './styles/restaurant.css';
 // style home
 import './styles/home.css';
 
+// style form connexion
+import './styles/connexion.css';
+
+// style dashboardAdmin
+import './styles/dashboardAdmin.css';
+// style dashboardRstaurant
+import './styles/dashboardRestaurant.css';
+
+
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

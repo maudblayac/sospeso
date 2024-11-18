@@ -1,0 +1,37 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Restaurants en attente d'approbation{% endblock %}
+
+{% block content %}
+<h1>Restaurants en attente d'approbation</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Propriétaire</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for restaurant in restaurants %}
+            <tr>
+                <td>{{ restaurant.id }}</td>
+                <td>{{ restaurant.title }}</td>
+                <td>{{ restaurant.user.email }}</td>
+                <td>
+                    <form action="{{ path('admin_restaurant_approve', {'id': restaurant.id}) }}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token('approve-restaurant' ~ restaurant.id) }}">
+                        <button type="submit">Approuver</button>
+                    </form>
+                    <form action="{{ path('admin_restaurant_archive', {'id': restaurant.id}) }}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token('archive-restaurant' ~ restaurant.id) }}">
+                        <button type="submit">Archiver</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

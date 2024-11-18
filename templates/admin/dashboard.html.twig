@@ -1,46 +1,7 @@
-{# templates/admin/dashboard.html.twig #}
-
 {% extends 'admin/layout.html.twig' %}
 
-{% block title %}Tableau de bord Admin{% endblock %}
+{% block title %}Dashboard Admin{% endblock %}
 
 {% block content %}
-<h1>Tableau de bord Administrateur</h1>
-
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Rôle</th>
-            <th>Statut</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in users %}
-            {# Vérifier que l'utilisateur a le rôle ROLE_RESTAURANT #}
-            {% if 'ROLE_RESTAURANT' in user.roles %}
-                <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.roles | join(', ') }}</td>
-                    <td>{{ user.status ? user.status.value : 'N/A' }}</td>
-                    <td>
-                        <form action="{{ path('admin_user_change_status', {'id': user.id}) }}" method="POST">
-                            <select name="status">
-                                {% for status in userStatusValues %}
-                                    <option value="{{ status.value }}" {% if status == user.status %}selected{% endif %}>
-                                        {{ status.value }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                            <button type="submit">Changer le statut</button>
-                        </form>
-                    </td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    </tbody>
-</table>
+<h1>Bonjour, vous êtes sur votre dashboardAdmin</h1>
 {% endblock %}

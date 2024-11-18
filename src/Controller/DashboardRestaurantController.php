@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Restaurant;
 use App\Entity\User;
+use App\Enum\Status;
 use App\Entity\Product;
 use App\Form\AccountSettingsType;
 use App\Form\RestaurantProfileType;
@@ -65,27 +66,39 @@ class DashboardRestaurantController extends AbstractController
    #[Route('/account/delete', name: 'account_delete', methods: ['POST'])]
    #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
    public function deleteAccount(Request $request, EntityManagerInterface $entityManager): Response
-   {
-       /** @var User $user */
-       $user = $this->getUser();
+{
+    /** @var User $user */
+    $user = $this->getUser();
+    $restaurant = $user->getRestaurant();
 
-       if ($this->isCsrfTokenValid('delete_account', $request->request->get('_token'))) {
-           // Déconnecter l'utilisateur
-           $this->container->get('security.token_storage')->setToken(null);
-           $request->getSession()->invalidate();
+    if ($this->isCsrfTokenValid('delete_account', $request->request->get('_token'))) {
+        // Marquer l'utilisateur comme archivé
+        $user->setStatus(Status::ARCHIVE);
 
-           // Supprimer l'utilisateur
-           $entityManager->remove($user);
-           $entityManager->flush();
+        // Marquer le restaurant comme archivé
+        if ($restaurant) {
+            $restaurant->setStatus(Status::ARCHIVE);
 
-           $this->addFlash('success', 'Votre compte a été supprimé avec succès.');
+            // Marquer les produits du restaurant comme archivés
+            foreach ($restaurant->getProducts() as $product) {
+                $product->setStatus(Status::ARCHIVE);
+            }
+        }
 
-           return $this->redirectToRoute('app_home'); // Redirigez vers la page d'accueil ou une autre page
-       }
+        // Déconnecter l'utilisateur et invalider la session
+        $this->container->get('security.token_storage')->setToken(null);
+        $request->getSession()->invalidate();
 
-       $this->addFlash('error', 'Jeton CSRF invalide.');
-       return $this->redirectToRoute('app_dashboard_restaurant_account_settings');
-   }
+        // Enregistrer les modifications
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Votre compte a été archivé avec succès.');
+        return $this->redirectToRoute('app_home');
+    }
+
+    $this->addFlash('error', 'Jeton CSRF invalide.');
+    return $this->redirectToRoute('app_dashboard_restaurant_account_settings');
+}
 
     // Gestion des produits
     #[Route('/products', name: 'products')]
@@ -101,6 +114,7 @@ class DashboardRestaurantController extends AbstractController
         ]);
     }
 
+    
     // Page pour gérer l'annonce de restaurant
     #[Route('/restaurant', name: 'restaurant')]
     #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
@@ -134,10 +148,11 @@ class DashboardRestaurantController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $restaurant->setHasListing(true);
+            $restaurant->setIsApproved(false);
             $entityManager->persist($restaurant);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Annonce créée avec succès !');
+            $this->addFlash('success', 'Votre annonce a été créée et est en attente d\'approbation.');
             return $this->redirectToRoute('app_dashboard_restaurant_restaurant');
         }
 

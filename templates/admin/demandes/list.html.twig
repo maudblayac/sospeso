@@ -1,0 +1,88 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Demandes en attente{% endblock %}
+
+{% block content %}
+<h1>Demandes en attente</h1>
+
+<h2>Utilisateurs en attente de validation</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Rôles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in pendingUsers %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles | join(', ') }}</td>
+                <td>
+                    <a href="{{ path('admin_users_show', {'id': user.id}) }}">Voir</a>
+                    <!-- Vous pouvez ajouter des actions pour valider l'utilisateur -->
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Restaurants en attente d'approbation</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Propriétaire</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for restaurant in pendingRestaurants %}
+            <tr>
+                <td>{{ restaurant.id }}</td>
+                <td>{{ restaurant.title }}</td>
+                <td>{{ restaurant.user.email }}</td>
+                <td>
+                    <a href="{{ path('admin_restaurateur_show', {'id': restaurant.user.id}) }}">Voir</a>
+                    <form action="{{ path('admin_restaurant_approve', {'id': restaurant.id}) }}" method="POST" style="display:inline-block;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('approve-restaurant' ~ restaurant.id) }}">
+                        <button type="submit">Approuver</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Produits en attente d'approbation</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Restaurant</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in pendingProducts %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.restaurant.title }}</td>
+                <td>
+                    <a href="{{ path('admin_restaurateur_show', {'id': product.restaurant.user.id}) }}">Voir</a>
+                    <form action="{{ path('admin_product_approve', {'id': product.id}) }}" method="POST" style="display:inline-block;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('approve-product' ~ product.id) }}">
+                        <button type="submit">Approuver</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Modifier le restaurant{% endblock %}
+
+{% block content %}
+<h1>Modifier le p restaurant</h1>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Enregistrer les modifications</button>
+{{ form_end(form) }}
+{% endblock %}

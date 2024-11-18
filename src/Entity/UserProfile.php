@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\UserProfileRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\Status;
+
 
 #[ORM\Entity(repositoryClass: UserProfileRepository::class)]
 class UserProfile
@@ -34,6 +36,9 @@ class UserProfile
 
     #[ORM\Column(length: 8,nullable: true)]
     private ?string $postalCode = null;
+    
+    #[ORM\Column(type: 'string', enumType: Status::class)]
+    private Status $status = Status::VERIFIE;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updateAt = null;
@@ -171,6 +176,16 @@ class UserProfile
     {
         $this->dateOfBirth = $dateOfBirth;
 
+        return $this;
+    }
+    public function getStatus(): Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): self
+    {
+        $this->status = $status;
         return $this;
     }
 }

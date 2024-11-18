@@ -1,16 +1,20 @@
-
-{# version propre #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Inscription{% endblock %}
-{% block header %}{% endblock %}
 
 {% block body %}
-    {% if app.current_route == 'app_register' %}
-        {% include '_partials/security/_form-user.html.twig' %}
-    {% else %}
-        {% include '_partials/security/_form-restaurant.html.twig' %}
-    {% endif %}
-{% endblock %}
+<div class="pageContainer">
+    <div class="formContainer shadowBox">
+        <div class="tabContainer">
+            <a href="{{ path('app_register') }}" class="tab {{ app.current_route == 'app_register' ? 'activeTab' : '' }}">Utilisateur</a>
+            <a href="{{ path('app_register_restaurant') }}" class="tab {{ app.current_route == 'app_register_restaurant' ? 'activeTab' : '' }}">Restaurateur</a>
+        </div>
 
-{% block footer %}{% endblock %}
+        {% if app.current_route == 'app_register' %}
+            {% include '_partials/security/_form-user.html.twig' %}
+        {% elseif app.current_route == 'app_register_restaurant' %}
+            {% include '_partials/security/_form-restaurant.html.twig' %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

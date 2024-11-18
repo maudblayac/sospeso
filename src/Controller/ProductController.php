@@ -38,10 +38,7 @@ class ProductController extends AbstractController
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     #[IsGranted(new Expression('is_granted("ROLE_RESTAURANT") or is_granted("ROLE_ADMIN")'))]
-    public function new(
-        Request $request,
-        EntityManagerInterface $entityManager
-    ): Response {
+    public function new(Request $request,EntityManagerInterface $entityManager): Response {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
 
@@ -55,16 +52,14 @@ class ProductController extends AbstractController
                 $user = $this->getUser();
                 $restaurant = $user->getRestaurant();
                 $product->setRestaurant($restaurant);
+                $product->setIsApproved(false);
 
                 // Persister le produit dans la base de donnée :)
                 $entityManager->persist($product);
                 $entityManager->flush();
 
                 // Message de succès
-                $this->addFlash('success', [
-                    'title' => 'Produit créé ',
-                    'message' => "Votre produit a été créé avec succès !",
-                ]);
+                $this->addFlash('success', 'Votre produit a été créé et est en attente d\'approbation.');
 
                 return $this->redirectToRoute('app_dashboard_restaurant_products');            
             } catch (\Exception $e) {

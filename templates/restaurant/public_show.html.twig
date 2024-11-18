@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="restaurantDetails">
+    <!-- Image et titre du restaurant -->
+    <article class="restaurantHeader">
+        <div class="headerImage">
+            <img src="{{ vich_uploader_asset(restaurant.image) }}" alt="{{ restaurant.title }}">
+            <h2 class="restaurantTitle">{{ restaurant.title }}</h2>
+        </div>
+        <p class="restaurantDescription">{{ restaurant.description }}</p>
+        <div class="restaurantInfo">
+            <div class="infoItem">
+                <img src="{{ asset('/images/restaurant/location.svg') }}" alt="Location">
+                <span>{{ restaurant.city }}</span>
+            </div>
+            <div class="infoItem">
+                <img src="{{ asset('/images/restaurant/star.svg') }}" alt="Rating">
+                <span>5.0 (876+)</span>
+            </div>
+            <div class="infoItem">
+                <span>€{{ minPrice }} - €{{ maxPrice }}</span>
+            </div>
+        </div>
+    </article>
+
+    <!-- Produits triés par catégorie -->
+    {% for categoryName, products in groupedProducts %}
+        <section class="categorySection">
+            <h3>{{ categoryName }}</h3>
+            <div class="productGrid">
+                {% for product in products %}
+                    <article class="productCard">
+                        <div class="containerPictureProduct">
+                            <img src="{{ vich_uploader_asset(product.image) }}" alt="{{ product.name }}">
+                        </div>
+                        <div class="productInfo">
+                            <p class="productName">{{ product.name }}</p>
+                            <p class="productPrice">{{ product.price }}€</p>
+                            <p class="productDescription">{{ product.description }}</p>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+    {% endfor %}
+</section>
+{% endblock %}

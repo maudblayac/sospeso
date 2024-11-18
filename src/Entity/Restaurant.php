@@ -6,6 +6,7 @@ use App\Repository\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use App\Enum\Status;
 use App\Entity\Image;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -28,6 +29,9 @@ class Restaurant
 
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $phoneNumber = null;
+
+    #[ORM\Column(length: 14, nullable: true, unique: true)]
+    private ?string $siren = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $address = null;
@@ -82,7 +86,7 @@ class Restaurant
 
     #[ORM\Column(type: 'boolean')]
     private bool $hasListing = false; 
-    
+
     #[ORM\Column(type: 'boolean')]
     private bool $isApproved = false;
 
@@ -90,6 +94,8 @@ class Restaurant
     #[ORM\Column(type: 'boolean')]
     private bool $isPaused = false;
 
+    #[ORM\Column(type: 'string', enumType: Status::class)]
+    private Status $status = Status::VERIFIE;
 
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: FeaturedProduct::class, cascade: ['persist', 'remove'])]
     private Collection $featuredProducts;
@@ -413,6 +419,26 @@ class Restaurant
 
         return $this;
     }
-
-
+    public function getStatus(): Status
+    {
+        return $this->status;
+    }
+    
+    public function setStatus(Status $status): self
+    {
+        $this->status = $status;
+        return $this;
+    }
+    public function getSiren(): ?string
+    {
+        return $this->siren;
+    }
+    
+    public function setSiren(?string $siren): static
+    {
+        $this->siren = $siren;
+    
+        return $this;
+    }
+  
 }

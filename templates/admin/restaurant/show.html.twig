@@ -1,0 +1,29 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Annonce du restaurant{% endblock %}
+
+{% block content %}
+<h1>{{ restaurant.title }}</h1>
+
+<p>{{ restaurant.description }}</p>
+
+<h2>Produits</h2>
+{% if restaurant.products | length > 0 %}
+    <ul>
+        {% for product in restaurant.products %}
+            <li>
+                {{ product.name }} - {{ product.price }}€
+                <a href="{{ path('admin_product_edit', {'id': product.id}) }}">Modifier</a>
+                <form action="{{ path('admin_product_delete', {'id': product.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete-product' ~ product.id) }}">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun produit.</p>
+{% endif %}
+
+<a href="{{ path('admin_restaurant_edit', {'id': restaurant.id}) }}">Modifier l'annonce</a>
+{% endblock %}

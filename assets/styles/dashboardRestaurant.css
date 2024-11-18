@@ -1,16 +1,22 @@
 /* Variables de couleurs */
 :root {
     --background-color: #FFFFFF;
+    --btn-color: #FFFFFF;
     --sidebar-bg-color: #FAF3E0;
     --sidebar-text-color: #333;
-    --accent-color: #EB8072;
-    --accent-hover-color: #FF866F;
+    --accent-color: #E48B53;
+    --accent-hover-color: #E48B53;
     --primary-text-color: #282F4B;
     --secondary-text-color: #3b3b3b;
     --border-color: #ccc;
     --border-radius: 10px;
 }
-
+ul li{
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
 /* Style général */
 body {
     font-family: 'Mono';
@@ -70,11 +76,11 @@ body {
 
 /* Dashboard spécifique */
 .dashboardSidebar ul li a.dashboard-link {
-    color: var(--sidebar-text-color); /* Couleur par défaut */
+    color: var(--sidebar-text-color); 
 }
 
 .dashboardSidebar ul li a.dashboard-link.active {
-    color: var(--accent-color); /* Orange uniquement si actif */
+    color: var(--accent-color); 
 }
 
 /* Icônes de la sidebar */
@@ -89,39 +95,52 @@ body {
     fill: var(--accent-color);
 }
 
-/* Responsive Sidebar - Format téléphone */
-@media (max-width: 768px) {
-    .dashboardSidebar {
-        width: 80px;
-        padding-top: 10px;
-    }
-
-    .dashboardSidebar ul li a {
-        font-size: 0;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .dashboardSidebar ul li a .icon {
-        width: 30px;
-        height: 30px;
-        margin-right: 0;
-    }
-}
-
 /* Contenu du dashboard */
 .dashboardContent {
     margin-left: 260px;
     padding: 20px;
     transition: margin-left 0.3s ease;
 }
+.dashboardSidebar ul li {
+    margin: 15px 0;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 10px;
+    border-radius: var(--border-radius); 
+    transition: background-color 0.3s ease; 
+}
 
-@media (max-width: 768px) {
-    .dashboardContent {
-        margin-left: 90px;
-    }
+.dashboardSidebar ul li a {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    text-decoration: none;
+    color: var(--sidebar-text-color);
+    font-weight: bold;
+    padding: 5px 10px;
+    width: 100%; 
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.dashboardSidebar ul li a .icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 15px; 
+    fill: var(--sidebar-text-color);
+}
+
+.dashboardSidebar ul li a.active,
+.dashboardSidebar ul li a:hover {
+    background-color: transparent;
+    border: 2px solid var(--accent-color); 
+    color: var(--accent-color); 
+    border-radius: var(--border-radius); 
+}
+
+.dashboardSidebar ul li a.active .icon,
+.dashboardSidebar ul li a:hover .icon {
+    fill: #fff; 
 }
 
 /* Accueil du dashboard */
@@ -162,7 +181,7 @@ body {
     display: inline-block;
     padding: 10px 15px;
     background-color: var(--accent-color);
-    color: white;
+    color: var(--btn-color);
     text-decoration: none;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -203,7 +222,7 @@ body {
     display: inline-block;
     padding: 10px 20px;
     background-color: var(--accent-color);
-    color: #fff;
+    color: var(--btn-color);
     font-weight: bold;
     text-align: center;
     border-radius: 5px;
@@ -216,7 +235,6 @@ body {
 }
 
 
-/*  */
 /* Titres */
 h1 {
     font-family: 'rowdies';
@@ -266,11 +284,11 @@ h2 {
 .formGroup input[type="date"],
 .formGroup select,
 .formGroup textarea {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    background-color: #F9F9F9;
+    background-color: var(--background-color);
     color: var(--main-color);
     font-family: 'Mono';
     font-size: 16px;
@@ -292,7 +310,7 @@ h2 {
     width: 100%;
     padding: 12px;
     background-color: var(--accent-color);
-    color: white;
+    color: var(--btn-color);
     font-size: 16px;
     font-family: 'rowdies';
     border: none;
@@ -337,25 +355,7 @@ h2 {
     font-size: 16px;
 }
 
-/* Responsive */
-@media (max-width: 767px) {
-    .formContainer {
-        width: 95%;
-        padding: 15px;
-    }
 
-    .submitBtn {
-        font-size: 14px;
-        padding: 10px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-    .formContainer {
-        width: 80%;
-        padding: 18px;
-    }
-}
 .dashboardWelcome {
     text-align: center;
 }
@@ -518,16 +518,161 @@ h2 {
 }
 
 .btn:hover {
-    background-color: #FF866F;
+    background-color: var(--accent-hover-color);
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
+/* Formulaire */
+.formContainer {
+    width: 90%;
+    max-width: 800px;
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+.formTitle {
+    font-family: 'rowdies', sans-serif;
+    color: var(--accent-color);
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.formSubtitle {
+    text-align: center;
+    color: var(--secondary-text-color);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    font-weight: bold;
+    color: var(--primary-text-color);
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--primary-text-color);
+    transition: border-color 0.3s ease;
+    background-color: #FAFAFA;
+}
+
+.formGroup input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+.submitBtn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-color);
+    color: var(--btn-color);
+    font-size: 16px;
+    font-family: 'rowdies', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+.submitBtn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* Responsive Sidebar - Format téléphone */
+@media (max-width: 767px) {
+    .dashboardSidebar {
+        width: 80px;
+        padding-top: 10px;
+    }
+
+    .dashboardSidebar ul li a {
+        font-size: 0;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dashboardSidebar ul li a .icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 0;
+    }
+    .formContainer {
+        width: 95%;
+        padding: 15px;
+    }
     .restaurantPreview {
         padding: 15px;
     }
 
     .productsGrid {
         justify-content: space-around;
+    }
+
+    .submitBtn {
+        font-size: 14px;
+        padding: 10px;
+    }
+        .dashboardContent {
+            margin-left: 90px;
+        }
+        .dashboardSidebar ul li a {
+            justify-content: center; 
+            font-size: 0; 
+            padding: 10px;
+        }
+    
+        .dashboardSidebar ul li a .icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 0; 
+        }
+        .formContainer {
+            width: 95%;
+            padding: 15px;
+        }
+    
+        .formTitle {
+            font-size: 24px;
+        }
+    
+        .submitBtn {
+            font-size: 14px;
+            padding: 10px;
+        }
+    
+}
+
+/* responsive deskstop */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .formContainer {
+        width: 80%;
+        padding: 18px;
+    }
+    .formContainer {
+        width: 80%;
+        padding: 18px;
+    }
+
+    .submitBtn {
+        font-size: 15px;
     }
 }

@@ -1,44 +1,34 @@
-
-{# Annonces STYLE#}
-<section class="containerListings">
+<a href="{{ path('app_restaurant_public_show', { id: restaurant.id }) }}" class="restaurantLink">
     <article class="Listings">
         <div class="containerPicture">
             <img src="{{ vich_uploader_asset(restaurant.image) }}" alt="{{ restaurant.title }}">
         </div>
         <h2>{{ restaurant.title }}</h2>
-        {# <article class="tag">
-            <div class="containerTagOne"></div>
-            <div class="containerTagTwo"></div>
-        </article> #}
         <article class="info AlignCenter FlexRow">
             <div class="location FlexAround AlignCenter FlexRow">
-                <img class="" alt="more" src="{{ asset('/images/restaurant/location.svg') }}">
-                <div>{{restaurant.city}}</div>
+                <img alt="location" src="{{ asset('/images/restaurant/location.svg') }}">
+                <div>{{ restaurant.city }}</div>
             </div>
             <div class="notation FlexAround AlignCenter FlexRow">
-                <img class="" alt="more" src="{{ asset('/images/restaurant/star.svg') }}">
+                <img alt="rating" src="{{ asset('/images/restaurant/star.svg') }}">
                 <div>5.0<span>(876+)</span></div>
             </div>
             <div class="price AlignCenter">
-                <div>• €{{minPrice}}-{{maxPrice}}</div>
+                <div>• €{{ minPrice }}-{{ maxPrice }}</div>
             </div>
         </article>
-        {# Product #}
-        {# cardPublic.twig #}
-        <section class="FlexRow">
-            {% set products = restaurant.featuredProducts %}
-            {% for featuredProduct in products %}
+        <section class="FlexRow FlexBetween">
+            {% for featuredProduct in restaurant.featuredProducts %}
                 <article class="containerBoxProduct FlexRow">
-                    <article class="containerPictureProduct">
+                    <div class="containerPictureProduct">
                         <img src="{{ vich_uploader_asset(featuredProduct.product.image) }}" alt="{{ featuredProduct.product.name }}">
-                    </article>
-                    <article class="AlignCenter FlexCol JustifyCenter containerInfoProduct">
-                        <p>{{ featuredProduct.product.name }}</p>
-                        <p>{{ featuredProduct.product.price }}€</p>
-                    </article>
+                    </div>
+                    <div class="AlignCenter FlexCol JustifyCenter containerInfoProduct">
+                        <p class="productName">{{ featuredProduct.product.name }}</p>
+                        <p class="productPrice">{{ featuredProduct.product.price }}€</p>
+                    </div>
                 </article>
             {% endfor %}
         </section>
     </article>
-</section>
-{# END Annonces #}
+</a>

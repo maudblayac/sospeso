@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Restaurant;
 use App\Entity\UserProfile;
-use App\Enum\UserStatus;
+use App\Enum\Status;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationRestaurantFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +26,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRoles(['ROLE_USER']);
-            $user->setStatus(UserStatus::VERIFIE);
+            $user->setStatus(Status::VERIFIE);
             
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -38,7 +38,6 @@ class RegistrationController extends AbstractController
             // Création d'un new UserPorfile qu'on associe directement à son utilisateur 
             $userProfile = new UserProfile();
             $userProfile->setUser($user);
-
             $entityManager->persist($user);
             $entityManager->persist($userProfile);
             $entityManager->flush();
@@ -55,12 +54,14 @@ class RegistrationController extends AbstractController
     public function registerRestaurant(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+        $restaurant = new Restaurant();
+        $user->setRestaurant($restaurant); 
         $form = $this->createForm(RegistrationRestaurantFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRoles(['ROLE_RESTAURANT']);
-            $user->setStatus(UserStatus::EN_ATTENTE);
+            $user->setStatus(Status::EN_ATTENTE);
 
             $user->setPassword(
                 $userPasswordHasher->hashPassword(

@@ -51,6 +51,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                 ->setName($data['name'])
                 ->setDescription($data['description'])
                 ->setPrice($data['price'])
+                ->setIsApproved(true)
                 ->setCategories($this->getReference($data['categories']))
                 ->setRestaurant($this->getReference('restaurant_' . ($i % 4))); // Associe les produits aux restaurants en boucle
 

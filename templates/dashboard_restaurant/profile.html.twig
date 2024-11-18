@@ -1,91 +1,60 @@
-{# {% extends 'dashboard_restaurant/layout.html.twig' %}
+{% extends 'dashboard_restaurant/layout.html.twig' %}
 
 {% block content %}
-    <h2>Profil du Restaurant</h2>
-    <p>Complétez les informations de votre profil restaurateur.</p>
+    <h2 class="formTitle">Profil du Restaurant</h2>
+    <p class="formSubtitle">Complétez les informations de votre profil restaurateur.</p>
 
     {{ form_start(form, {'attr': {'class': 'restaurantForm'}}) }}
         <div class="formGroup">
-            {{ form_label(form.firstname, 'Prénom') }}
+            {{ form_label(form.firstname, 'Prénom', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.firstname, {'attr': {'class': 'inputField'}}) }}
         </div>
         
         <div class="formGroup">
-            {{ form_label(form.lastname, 'Nom') }}
+            {{ form_label(form.lastname, 'Nom', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.lastname, {'attr': {'class': 'inputField'}}) }}
         </div>
         
         <div class="formGroup">
-            {{ form_label(form.phoneNumber, 'Numéro de téléphone') }}
+            {{ form_label(form.phoneNumber, 'Numéro de téléphone', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.phoneNumber, {'attr': {'class': 'inputField'}}) }}
         </div>
         
         <div class="formGroup">
-            {{ form_label(form.address, 'Adresse') }}
+            {{ form_label(form.address, 'Adresse', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.address, {'attr': {'class': 'inputField'}}) }}
         </div>
         
         <div class="formGroup">
-            {{ form_label(form.city, 'Ville') }}
+            {{ form_label(form.city, 'Ville', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.city, {'attr': {'class': 'inputField'}}) }}
         </div>
         
         <div class="formGroup">
-            {{ form_label(form.country, 'Pays') }}
+            {{ form_label(form.country, 'Pays', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.country, {'attr': {'class': 'inputField'}}) }}
         </div>
         
         <div class="formGroup">
-            {{ form_label(form.postalCode, 'Code postal') }}
+            {{ form_label(form.postalCode, 'Code postal', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.postalCode, {'attr': {'class': 'inputField'}}) }}
         </div>
         
         <div class="formGroup">
-            {{ form_label(form.dateOfBirth, 'Date de naissance') }}
+            {{ form_label(form.dateOfBirth, 'Date de naissance', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.dateOfBirth, {'attr': {'class': 'inputField'}}) }}
         </div>
         
         <div class="formGroup">
-            {{ form_label(form.email, 'Email') }}
+            {{ form_label(form.email, 'Email', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.email, {'attr': {'class': 'inputField'}}) }}
         </div>
         
         <div class="formGroup">
-            {{ form_label(form.website, 'Site Web') }}
+            {{ form_label(form.website, 'Site Web', {'label_attr': {'class': 'formLabel'}}) }}
             {{ form_widget(form.website, {'attr': {'class': 'inputField'}}) }}
         </div>
         
-        <button type="submit" class="btn">Mettre à jour</button>
+        <button type="submit" class="submitBtn">Mettre à jour</button>
     {{ form_end(form) }}
-{% endblock %} #}
-{# templates/dashboard_restaurant/profile.html.twig #}
-{% extends 'dashboard_restaurant/layout.html.twig' %}
-
-{% block content %}
-<h2>Profil du Restaurant</h2>
-<p>Complétez les informations de votre profil restaurateur.</p>
-
-{{ form_start(form) }}
-    <div class="form-group">
-        {{ form_label(form.firstname) }}
-        {{ form_widget(form.firstname) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.lastname) }}
-        {{ form_widget(form.lastname) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.phoneNumber) }}
-        {{ form_widget(form.phoneNumber) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.address) }}
-        {{ form_widget(form.address) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.city) }}
-        {{ form_widget(form.city) }}
-    </div>
-    <button type="submit" class="btn">Mettre à jour</button>
-{{ form_end(form) }}
 {% endblock %}

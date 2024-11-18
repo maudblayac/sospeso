@@ -1,0 +1,202 @@
+/* ---------------------------- Variables globales ---------------------------- */
+:root {
+    --primaryColor: #e48b53;
+    --secondaryColor: #333;
+    --textColor: #333;
+    --bgColor: #F6EDD2;
+    --white: #ffffff;
+    --inputBorderColor: #ddd;
+    --inputFocusColor: #e48b53;
+    --boxShadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --boxShadowHover: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------------------------- Styles globaux ---------------------------- */
+body {
+    font-family: 'Mono', sans-serif;
+    background-color: var(--bgColor);
+    margin: 0;
+    padding: 0;
+    color: var(--textColor);
+}
+h2{
+    color: var(--textColor);
+}
+.textLink{
+    color: var(--primaryColor);
+
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ---------------------------- Conteneurs principaux ---------------------------- */
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px); 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ---------------------------- Conteneur de formulaire ---------------------------- */
+.formContainer {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--boxShadow);
+    max-width: 500px;
+    width: 100%; 
+    margin: auto;
+    box-sizing: border-box; 
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; 
+}
+
+.formContainer:hover {
+    box-shadow: var(--boxShadowHover);
+}
+
+/* ---------------------------- Onglets (Tabs) ---------------------------- */
+.tabContainer {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.8rem;
+    background-color: #ddd;
+    color: var(--textColor);
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #ccc;
+}
+
+.activeTab {
+    background-color: var(--primaryColor);
+    color: var(--white);
+}
+
+/* ---------------------------- Champs de formulaire ---------------------------- */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formLabel {
+    font-size: 1rem;
+    color: var(--secondaryColor);
+}
+
+.formInput {
+    padding: 0.7rem;
+    border: 1px solid var(--inputBorderColor);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--textColor);
+    transition: border-color 0.3s;
+}
+
+.formInput:focus {
+    border-color: var(--inputFocusColor);
+    box-shadow: 0 0 5px rgba(235, 128, 114, 0.5);
+}
+
+/* ---------------------------- Mot de passe ---------------------------- */
+.passwordWrapper {
+    position: relative;
+}
+
+.togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.passwordHints {
+    font-size: 0.9rem;
+    color: var(--textColor);
+}
+
+.passwordHints .valid {
+    color: var(--primaryColor);
+}
+
+.passwordHints .invalid {
+    color: red;
+}
+
+/* ---------------------------- Boutons ---------------------------- */
+.btnContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.btnPrimary {
+    background-color: var(--primaryColor);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btnPrimary:hover {
+    background-color: #e27262;
+}
+
+.btnSecondary {
+    background-color: var(--secondaryColor);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btnSecondary:hover {
+    background-color: #1f283d;
+}
+
+/* ---------------------------- Responsive ---------------------------- */
+@media (max-width: 767px) {
+    .formContainer {
+        padding: 1.5rem;
+        max-width: 95%; 
+    }
+
+    .tab {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    .btnContainer {
+        flex-direction: column; 
+    }
+
+ 
+}

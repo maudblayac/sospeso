@@ -7,6 +7,7 @@ use App\DTO\RestaurantSearchDto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use App\Enum\Status;
 
 /**
  * @extends ServiceEntityRepository<Restaurant>
@@ -95,8 +96,11 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('r')
             ->where('r.hasListing = :hasListing')
+            ->andWhere('r.status = :status')
+            ->andWhere('r.isApproved = :isApproved')
             ->andWhere('r.isPaused = :isPaused')
             ->setParameter('hasListing', true)
+            ->setParameter('status', Status::VERIFIE)
             ->setParameter('isApproved', true)
             ->setParameter('isPaused', false)
             ->getQuery()

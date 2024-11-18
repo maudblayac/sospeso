@@ -18,6 +18,7 @@
 :root {
     --main-color: #ffffff;
     --footerBgColor: #F6EDD2;
+    --BgColorRestaurant: #3a3939;
     --footerBottomBg: #ffffff;
     --footerTextColor: #3a3939;
     --footerBorderColor: #b6b5b9;
@@ -32,6 +33,10 @@
 .FlexRow {
     display: flex;
     flex-direction: row;
+}
+.FlexEnd{
+    display: flex;
+    justify-content: end;
 }
 
 .FlexBetween {
@@ -60,7 +65,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Mono';
-    font-size: 16px;
+    font-size: 14px;
     color: var(--main-color);
 }
 
@@ -78,7 +83,9 @@ h3 {
     padding-left: 10px;
     font-size: 0.9em;
 }
-
+.topLinks{
+    font-size: 8px;
+}
 .footer .toggleTitle {
     display: flex;
     align-items: center;
