@@ -267,4 +267,106 @@ h3 {
         font-size: 12px;
         margin-top: 20px;
     }
+    /* ---------------------------- Header Styles ----------------------------- */
+.headerNav {
+    background-color: var(--footerBgColor);
+    padding: 20px 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navLeftDesktop {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.menuContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menuIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.menuText {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--footerTextColor);
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--footerBorderColor);
+    border-radius: 5px;
+    padding: 5px 10px;
+    gap: 10px;
+}
+
+.searchContainer img {
+    width: 20px;
+    height: 20px;
+}
+
+.searchInput {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: var(--footerTextColor);
+    background: none;
+    width: 200px;
+}
+
+.navCenter a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    max-height: 80px;
+    max-width: 100px;
+    object-fit: contain;
+}
+
+.navRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.topLinks {
+    display: flex;
+    gap: 40px;
+    font-size: 14px;
+    color: var(--footerTextColor);
+}
+
+.accountCart {
+    display: flex;
+    gap: 20px;
+}
+
+.accountCart a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--footerTextColor);
+    font-size: 14px;
+    gap: 10px;
+}
+
+.accountCart a:hover {
+    color: var(--accent-color);
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
 }

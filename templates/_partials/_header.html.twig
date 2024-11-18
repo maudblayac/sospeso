@@ -1,16 +1,18 @@
 <header class="headerNav">
     <nav class="FlexRow AlignCenter FlexBetween">
-        
-        <!-- Bloc gauche : Menu et recherche -->
-        <article class="navLeft ">
-            <!-- Mobile Only: Icônes menu et recherche -->
-            <div class="FlexAround mobileOnly FlexRow AlignCenter">
+        <!-- Nav Left -->
+        <article class="navLeft">
+            <!-- Mobile Only -->
+            <div class="mobileOnly">
                 <img class="menuIcon" alt="menu" src="{{ asset('/images/navbar/filtre.svg') }}">
                 <img class="searchIcon" alt="search" src="{{ asset('/images/navbar/search.svg') }}">
             </div>
-            <!-- Desktop Only: Texte "Menu" et barre de recherche -->
-            <div class="desktopOnly FlexRow AlignCenter">
-                <span class="menuText">Menu</span>
+            <!-- Desktop Only -->
+            <div class="desktopOnly FlexRow AlignCenter FlexBetween navLeftDesktop">
+                <div class="menuContainer FlexRow AlignCenter">
+                    <img class="menuIcon" alt="menu" src="{{ asset('/images/navbar/filtre.svg') }}">
+                    <span class="menuText">Menu</span>
+                </div>
                 <form class="searchContainer FlexRow AlignCenter">
                     <img class="searchIcon" alt="search" src="{{ asset('/images/navbar/search.svg') }}">
                     <input type="text" class="searchInput" placeholder="recherche">
@@ -18,23 +20,23 @@
             </div>
         </article>
 
-        <!-- Bloc central : Logo -->
+        <!-- Nav Center -->
         <article class="navCenter">
             <a href="{{ path('app_home') }}">
                 <img class="logo" alt="logo" src="{{ asset('/images/navbar/logo.svg') }}">
             </a>
         </article>
 
-        <!-- Bloc droit : Liens et icônes de compte/panier -->
-        <article class="navRight FlexCol">
-            <!-- Desktop Only: Liens supplémentaires -->
-            <div class="desktopOnly topLinks FlexRow JustifyCenter">
+        <!-- Nav Right -->
+        <article class="navRight">
+            <!-- Desktop Only -->
+            <div class="desktopOnly topLinks FlexRow AlignCenter FlexBetween">
                 <a href="#">Trouver un restaurant</a>
                 <a href="#">Faire un don</a>
                 <a href="#">Nous contacter</a>
             </div>
-            <!-- Compte et panier en flex row en desktop -->
-            <div class="accountCart FlexRow JustifyAround FlexAround">
+            <!-- Compte et Panier -->
+            <div class="accountCart FlexRow AlignCenter">
                 {% if is_granted("ROLE_ADMIN") %}
                     <a href="{{ path('admin_dashboard') }}" class="account FlexRow AlignCenter">
                         <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="admin">
@@ -45,10 +47,10 @@
                         <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="restaurant">
                         <span class="desktopOnly">Dashboard</span>
                     </a>
-                    {% elseif is_granted("ROLE_USER") %}
+                {% elseif is_granted("ROLE_USER") %}
                     <a href="{{ path('app_user_profile_index') }}" class="account FlexRow AlignCenter">
-                        <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="restaurant">
-                        <span class="desktopOnly">Dashboard</span>
+                        <img src="{{ asset('/images/navbar/profile.svg') }}" class="icon" alt="user">
+                        <span class="desktopOnly">Profil</span>
                     </a>
                 {% else %}
                     <a href="{{ path('app_login') }}" class="account FlexRow AlignCenter">
@@ -56,12 +58,11 @@
                         <span class="desktopOnly">Compte</span>
                     </a>
                 {% endif %}
-                <a href="" class="cart FlexRow AlignCenter">
+                <a href="">
                     <img src="{{ asset('/images/navbar/cart.svg') }}" class="icon" alt="cart">
                     <span class="desktopOnly">Panier</span>
                 </a>
             </div>
         </article>
-        
     </nav>
 </header>
