@@ -46,3 +46,181 @@
 .btn-danger:hover {
     background-color: darkred;
 }
+:root {
+    --main-color: #282F4B;
+    --accent-color: #EB8072;
+    --accent-hover-color: #FF866F;
+    --background-color: #FFFFFF;
+    --secondary-bg-color: #FAF3E0;
+    --neutral-color: #F3F3F3;
+    --text-color: #3B3B3B;
+    --success-color: #4CAF50;
+    --warning-color: #FFC107;
+    --danger-color: #F44336;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Global Styles */
+body {
+    font-family: 'Mono', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* Dashboard Header */
+.dashboardWelcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.dashboardWelcome h1 {
+    font-size: 24px;
+    color: var(--main-color);
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.btnPrimary {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+.btnPrimary:hover {
+    background-color: var(--accent-hover-color);
+}
+
+.btnInfo {
+    background-color: var(--main-color);
+    color: var(--background-color);
+}
+
+.btnInfo:hover {
+    background-color: var(--accent-color);
+}
+
+/* Responsive Table */
+.responsiveTableContainer {
+    overflow-x: auto;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.responsiveTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+}
+
+.responsiveTable th,
+.responsiveTable td {
+    padding: 15px;
+    border: 1px solid var(--neutral-color);
+}
+
+.responsiveTable thead th {
+    background-color: var(--main-color);
+    color: var(--background-color);
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.responsiveTable tbody tr:nth-child(even) {
+    background-color: var(--neutral-color);
+}
+
+.responsiveTable tbody tr:hover {
+    background-color: var(--secondary-bg-color);
+}
+
+.actionButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.inlineForm {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.selectField {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid var(--neutral-color);
+    border-radius: var(--border-radius);
+}
+
+/* Badges */
+.badge {
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.badgeSuccess {
+    background-color: var(--success-color);
+    color: var(--background-color);
+}
+
+.badgeWarning {
+    background-color: var(--warning-color);
+    color: var(--background-color);
+}
+
+.badgeDanger {
+    background-color: var(--danger-color);
+    color: var(--background-color);
+}
+
+.badgeNeutral {
+    background-color: var(--neutral-color);
+    color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboardWelcome {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    .responsiveTable th,
+    .responsiveTable td {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .actionButtons {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+

@@ -181,7 +181,12 @@ a {
 .btnSecondary:hover {
     background-color: #1f283d;
 }
-
+#registration_restaurant_form_password_first{
+    width: 95%;
+}
+#registration_restaurant_form_password_second{
+    width: 95%;
+}
 /* ---------------------------- Responsive ---------------------------- */
 @media (max-width: 767px) {
     .formContainer {
@@ -199,4 +204,238 @@ a {
     }
 
  
+}
+/* Mise en page globale */
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+
+/* Conteneur principal pour le formulaire et l'image */
+.formImageContainer {
+    display: flex;
+    flex-wrap: wrap; /* Pour permettre une disposition responsive */
+    max-width: 1200px;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Formulaire */
+.formContainer {
+    flex: 1;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--boxShadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Image */
+.imageContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerImage {
+    max-width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Responsive (Mobile) */
+@media (max-width: 768px) {
+    .formImageContainer {
+        flex-direction: column;
+    }
+
+    .formContainer,
+    .imageContainer {
+        flex: none;
+        width: 100%;
+    }
+
+    .registerImage {
+        width: 100%;
+    }
+}
+
+/* ---------------------------- Variables globales ---------------------------- */
+:root {
+    --primaryColor: #e48b53;
+    --secondaryColor: #333;
+    --textColor: #333;
+    --bgColor: #F6EDD2;
+    --white: #ffffff;
+    --inputBorderColor: #ddd;
+    --inputFocusColor: #e48b53;
+    --boxShadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --boxShadowHover: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------------------------- Page globale ---------------------------- */
+body {
+    font-family: 'Mono', sans-serif;
+    background-color: var(--bgColor);
+    margin: 0;
+    padding: 0;
+    color: var(--textColor);
+}
+
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Conteneur principal pour le formulaire et l'image */
+.formImageContainer {
+    display: flex;
+    flex-wrap: wrap; /* Responsive */
+    max-width: 1200px;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Conteneur du formulaire */
+.formContainer {
+    flex: 1;
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--boxShadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formContainer:hover {
+    box-shadow: var(--boxShadowHover);
+}
+
+/* Champs du formulaire */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formLabel {
+    font-size: 1rem;
+    color: var(--secondaryColor);
+}
+
+.formInput {
+    padding: 0.7rem;
+    border: 1px solid var(--inputBorderColor);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.formInput:focus {
+    border-color: var(--inputFocusColor);
+    box-shadow: 0 0 5px rgba(235, 128, 114, 0.5);
+}
+
+/* Checkbox */
+.checkboxWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.formCheckbox {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primaryColor);
+}
+
+.textLink {
+    color: var(--primaryColor);
+    text-decoration: none;
+}
+
+.textLink:hover {
+    text-decoration: underline;
+}
+
+/* Boutons */
+.btnContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.btnPrimary {
+    background-color: var(--primaryColor);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btnPrimary:hover {
+    background-color: #e27262;
+}
+
+.btnSecondary {
+    background-color: var(--secondaryColor);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btnSecondary:hover {
+    background-color: #1f283d;
+}
+
+/* Conteneur de l'image */
+.imageContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerImage {
+    max-width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* ---------------------------- Responsive ---------------------------- */
+@media (max-width: 768px) {
+    .formImageContainer {
+        flex-direction: column;
+    }
+
+    .formContainer,
+    .imageContainer {
+        width: 100%;
+    }
+
+    .registerImage {
+        width: 100%;
+    }
 }

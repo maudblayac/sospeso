@@ -20,9 +20,9 @@
         <label for="passwordInput" class="formLabel">Mot de passe</label>
         <div class="passwordWrapper">
             {{ form_widget(registrationFormRestaurant.password.first, {'attr': {'class': 'formInput', 'id': 'passwordInput'}}) }}
-            <button type="button" class="togglePassword" onclick="togglePasswordVisibility()">
+            {# <button type="button" class="togglePassword" onclick="togglePasswordVisibility()">
                 <img src="{{ asset('images/connexion/lookeyes.svg') }}" alt="Afficher/Masquer">
-            </button>
+            </button> #}
         </div>
         <div id="passwordHints" class="passwordHints">
             <p>• Minimum 8 caractères</p>
@@ -37,7 +37,7 @@
     <div class="formGroup">
         {{ form_row(registrationFormRestaurant.agreeTerms, {'attr': {'class': 'formCheckbox'}}) }}
         <small class="termsText">
-            En sélectionnant "Créer un compte professionnel", vous acceptez nos <a href="/conditions" class="textLink">Conditions d'utilisation</a>.
+            {# En sélectionnant "Créer un compte professionnel", vous acceptez nos <a href="/conditions" class="textLink">Conditions d'utilisation</a>. #}
         </small>
     </div>
     <div class="flexBetween btnContainer">

@@ -31,7 +31,7 @@ class RegistrationRestaurantFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-                'label' => 'En sélectionnant  "Créer un compte professionnel", vous acceptez nos </a>.',
+                'label'=>"En sélectionnant Créer un compte professionnel , vous acceptez nos conditions Conditions d'utilisation",
                 'label_html' => true,
                 'constraints' => [
                     new IsTrue([

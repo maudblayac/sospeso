@@ -2,7 +2,7 @@
 :root {
     --main-color: #ffffff;
     --BgColorRestaurant: #ffffff;
-    --text-color: #fff9f9;
+    --text-color: #ffffff;
     --card-bg-color: #3a3939;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --hover-shadow-color: rgba(0, 0, 0, 0.2);
@@ -16,17 +16,22 @@ body {
     font-family: 'Mono', sans-serif;
     font-size: 14px;
 }
-
+.restaurant{
+    background-color: antiquewhite;
+    padding: 0;
+    margin: 0;
+}
 h1 {
     font-family: 'Rowdies';
     color: var(--main-color);
     margin: 10px 0;
     text-align: center;
 }
-h2 {
+
+.h2Restaurant {
     font-size: 20px;
     font-weight: bold;
-    color: var(--text-color);
+    color: white;
     margin: 15px 0;
     text-align: center;
 }
@@ -34,7 +39,7 @@ h2 {
 /* ---------------------------- Filtres ---------------------------- */
 .Filter {
     background-color: antiquewhite;
-    width: 100%;
+    /* width: 100%; */
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -72,8 +77,10 @@ h2 {
 .containerListings {
     display: grid;
     gap: 20px;
-    padding: 20px;
+    /* padding: 20px; */
     margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
     width: 100%;
     justify-content: center;
     background-color: var(--card-bg-color);
@@ -90,6 +97,18 @@ h2 {
         margin: 0 auto;
         height: auto; 
     }
+    .headerImage {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .headerImage img {
+        width: 100%;
+        /* height: 600px; */
+        border-radius: 15px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -100,6 +119,18 @@ h2 {
         width: 80%;
         height: auto;
     }
+    .headerImage {
+        position: relative;
+        width: 100%;
+        /* max-width: 800px; */
+        margin: 0 auto;
+    }
+    
+    .headerImage img {
+        width: 100%;
+        height: 600px;
+        border-radius: 15px;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -108,8 +139,20 @@ h2 {
         width: 100%;
         gap: 30px;
     }
-    .Listings {
+    .headerImage {
+        position: relative;
         width: 100%;
+        /* max-width: 800px; */
+        margin: 0 auto;
+    }
+    
+    .headerImage img {
+        width: 100%;
+        height: 600px;
+        border-radius: 15px;
+    }
+    .Listings {
+        /* width: 100%; */
         /* max-width: 300px; */
         height: auto; 
     }
@@ -157,7 +200,7 @@ h2 {
     align-items: center;
     padding: 10px 15px;
     font-size: 14px;
-    color: var(--text-color);
+    color: white;
 }
 
 .info div {
@@ -256,26 +299,15 @@ body {
     margin-bottom: 30px;
 }
 
-.headerImage {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-}
 
-.headerImage img {
-    width: 100%;
-    border-radius: 15px;
-}
 
-.restaurantTitle {
+.restaurantTitles {
     position: absolute;
     bottom: 10px;
     left: 20px;
-    color: var(--main-color);
+    color: var(--card-bg-color);
     font-family: 'Rowdies', sans-serif;
     font-size: 32px;
-    background: rgba(0, 0, 0, 0.6);
     padding: 5px 10px;
     border-radius: 5px;
 }
@@ -285,7 +317,9 @@ body {
     margin-top: 15px;
     color: var(--BgColorRestaurant);
 }
-
+.restaurantDetailss{
+    padding: 30px;
+}
 .restaurantInfo {
     display: flex;
     justify-content: center;

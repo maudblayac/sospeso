@@ -18,12 +18,14 @@
                             <label for="burger-toggle" class="close-icon">×</label>
                         </div>
                         <ul>
-                            <li><a href="#">Conditions générales</a></li>
-                            <li><a href="#">Faire un don</a></li>
-                        </ul>
+                                <li><a href="{{ path('app_privacy_policy') }}">Politique de Confidentialité</a></li>
+                                <li><a href="{{ path('app_legal_mentions') }}">Mentions légales</a></li>
+                                <li><a href="{{ path('app_terms_of_use') }}">Conditions Générales d'Utilisation</a></li>
+                                <li><a href="{{ path('app_terms_of_sale') }}">Conditions Générales de Vente</a></li>
+                            </ul>
                         <hr>
                         <ul>
-                            <li><a href="#">A propos de Sospeso</a></li>
+                            <li><a href="{{ path('app_about_us') }}">A propos de Sospeso</a></li>
                         </ul>
                         <div class="menu-footer">
                             <a href="#"><img src="{{ asset('/images/navbar/location.svg') }}" alt="icon"> Trouver un magasin</a>
@@ -85,10 +87,10 @@
                         <span class="desktopOnly">Compte</span>
                     </a>
                 {% endif %}
-                <a href="">
-                    <img src="{{ asset('/images/navbar/cart.svg') }}" class="icon" alt="cart">
-                    <span class="desktopOnly">Panier</span>
-                </a>
+                    <a href="" class"AlignCenter test">
+                        <img src="{{ asset('/images/navbar/cart.svg') }}" class="icon" alt="cart">
+                        <span class="desktopOnly">Panier</span>
+                    </a>
             </div>
         </article>
     </nav>
